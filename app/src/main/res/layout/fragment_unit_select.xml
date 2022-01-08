@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".presentation.inventory.add.addmedicine.AddProductSubMedicineFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/imgTop"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImgId"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/ic_inventory"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <ImageView
+                android:id="@+id/linTakenPhoto"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/circle_shape"
+                android:padding="5dp"
+                android:src="@drawable/ic_camera"
+                app:layout_constraintBottom_toBottomOf="@+id/profileImgId"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/productDetailsMenufactureName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="16dp"
+            android:text="DAR/MR Number"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgTop" />
+
+        <EditText
+            android:id="@+id/dar_mr_NumberET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="5134-0000-0876"
+            app:layout_constraintEnd_toEndOf="@+id/productDetailsMenufactureName"
+            app:layout_constraintStart_toStartOf="@+id/productDetailsMenufactureName"
+            app:layout_constraintTop_toBottomOf="@+id/productDetailsMenufactureName" />
+
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/productDetailsCompanyName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Brand Name"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dar_mr_NumberET" />
+
+        <EditText
+            android:id="@+id/brand_nameET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/productDetailsCompanyName"
+            app:layout_constraintStart_toStartOf="@+id/productDetailsCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/productDetailsCompanyName" />
+
+
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/tv3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Manufacturer"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/brand_nameET" />
+
+        <EditText
+            android:id="@+id/manufactureET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/tv3"
+            app:layout_constraintStart_toStartOf="@+id/tv3"
+            app:layout_constraintTop_toBottomOf="@+id/tv3" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Generic Name"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintEnd_toStartOf="@+id/tv5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manufactureET" />
+
+        <EditText
+            android:id="@+id/genericET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/tv4"
+            app:layout_constraintStart_toStartOf="@+id/tv4"
+            app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Kind"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="@+id/tv4"
+            app:layout_constraintEnd_toStartOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/tv4"
+            app:layout_constraintTop_toTopOf="@+id/tv4"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_circle_down_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/tv5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv5" />
+
+
+        <EditText
+            android:id="@+id/kindET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/genericET"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/genericET"
+            app:layout_constraintTop_toBottomOf="@+id/tv4" />
+
+
+        <TextView
+            android:id="@+id/tv6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Form"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintEnd_toStartOf="@+id/img2"
+            app:layout_constraintStart_toStartOf="@+id/genericET"
+            app:layout_constraintTop_toBottomOf="@+id/genericET" />
+
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_circle_down_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/tv6"
+            app:layout_constraintEnd_toStartOf="@+id/tv7"
+            app:layout_constraintStart_toEndOf="@+id/tv6"
+            app:layout_constraintTop_toTopOf="@+id/tv6" />
+
+        <TextView
+            android:id="@+id/tv7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Strength"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="@+id/img2"
+            app:layout_constraintEnd_toEndOf="@+id/kindET"
+            app:layout_constraintStart_toEndOf="@+id/img2"
+            app:layout_constraintTop_toTopOf="@+id/img2" />
+
+        <EditText
+            android:id="@+id/formET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/strengthET"
+            app:layout_constraintStart_toStartOf="@+id/tv6"
+            app:layout_constraintTop_toBottomOf="@+id/tv6" />
+
+        <EditText
+            android:id="@+id/strengthET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/formET"
+            app:layout_constraintTop_toBottomOf="@+id/tv7" />
+
+
+        <TextView
+            android:id="@+id/tv8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Base Purchases Unit"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/strengthET"
+            app:layout_constraintStart_toEndOf="@+id/tv9"
+            app:layout_constraintTop_toBottomOf="@+id/strengthET" />
+
+        <TextView
+            android:id="@+id/tv9"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:textSize="12sp"
+            android:text="Base Unit of Measurement"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintEnd_toStartOf="@+id/tv8"
+            app:layout_constraintStart_toStartOf="@+id/formET"
+            app:layout_constraintTop_toBottomOf="@+id/formET" />
+
+
+        <Spinner
+            android:id="@+id/salesUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toStartOf="@+id/symtomORPurchasesUnit"
+            app:layout_constraintStart_toStartOf="@+id/tv9"
+            app:layout_constraintTop_toBottomOf="@+id/tv9" />
+
+        <Spinner
+            android:id="@+id/symtomORPurchasesUnit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/tv8"
+            app:layout_constraintStart_toEndOf="@+id/salesUnit"
+            app:layout_constraintTop_toBottomOf="@+id/tv8" />
+
+        <ImageView
+            android:id="@+id/img3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintStart_toStartOf="@+id/salesUnit"
+            app:layout_constraintTop_toBottomOf="@+id/salesUnit" />
+
+
+        <TextView
+            android:id="@+id/tv10"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="6 pcs =  a page"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="@+id/img3"
+            app:layout_constraintStart_toEndOf="@+id/img3"
+            app:layout_constraintTop_toTopOf="@+id/img3" />
+
+
+        <TextView
+            android:id="@+id/tv11"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:text="Minimum Stock"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="@+id/tv10"
+            app:layout_constraintEnd_toEndOf="@+id/symtomORPurchasesUnit"
+            app:layout_constraintStart_toStartOf="@+id/symtomORPurchasesUnit"
+            app:layout_constraintTop_toTopOf="@+id/tv10" />
+
+
+        <ImageView
+            android:id="@+id/addNewMeasureUnit"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_floating"
+            app:layout_constraintEnd_toEndOf="@+id/img3"
+            app:layout_constraintStart_toStartOf="@+id/img3"
+            app:layout_constraintTop_toBottomOf="@+id/tv10" />
+
+
+        <TextView
+            android:id="@+id/tv12"
+            android:layout_width="0dp"
+            android:layout_height="19dp"
+            android:layout_marginStart="8dp"
+            android:textSize="12sp"
+            android:text="Add new unit of measure"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintBottom_toBottomOf="@+id/addNewMeasureUnit"
+            app:layout_constraintStart_toEndOf="@+id/addNewMeasureUnit" />
+
+
+        <TextView
+            android:id="@+id/minimumStockDecrementTV"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/blue_shape_round_outline"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="−"
+            android:textColor="@color/speech_red"
+            app:layout_constraintBottom_toBottomOf="@+id/tv12"
+            app:layout_constraintStart_toStartOf="@+id/tv11"
+            app:layout_constraintTop_toTopOf="@+id/tv12" />
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/minimumStockCount"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginStart="8dp"
+            android:gravity="fill"
+            android:hint="100"
+            android:text="1"
+            android:imeOptions="actionDone"
+            android:background="@drawable/blue_shape_round_outline"
+            android:inputType="number"
+            android:maxLength="3"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/minimumStockDecrementTV"
+            app:layout_constraintStart_toEndOf="@+id/minimumStockDecrementTV"
+            app:layout_constraintTop_toTopOf="@+id/minimumStockDecrementTV"
+            app:layout_constraintVertical_bias="0.428" />
+
+
+        <TextView
+            android:id="@+id/minimumStockIncrementTV"
+            android:layout_width="wrap_content"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/blue_shape_round_outline"
+            android:gravity="fill"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="+"
+            android:textColor="#18BA0D"
+            app:layout_constraintBottom_toBottomOf="@+id/minimumStockCount"
+            app:layout_constraintStart_toEndOf="@+id/minimumStockCount"
+            app:layout_constraintTop_toTopOf="@+id/minimumStockCount" />
+
+        <TextView
+            android:id="@+id/tv16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:text="Unit"
+            app:layout_constraintBottom_toBottomOf="@+id/minimumStockIncrementTV"
+            app:layout_constraintStart_toEndOf="@+id/minimumStockIncrementTV"
+            app:layout_constraintTop_toTopOf="@+id/minimumStockIncrementTV" />
+
+
+        <TextView
+            android:id="@+id/tv17"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="MRP"
+            android:textSize="12sp"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintEnd_toStartOf="@+id/tv18"
+            app:layout_constraintStart_toStartOf="@+id/addNewMeasureUnit"
+            app:layout_constraintTop_toTopOf="@+id/tv18" />
+
+        <TextView
+            android:id="@+id/tv18"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:text="Purchase Price"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv17"
+            app:layout_constraintTop_toBottomOf="@+id/minimumStockCount" />
+
+
+        <EditText
+            android:id="@+id/mrpET"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:inputType="numberDecimal|numberSigned"
+            app:layout_constraintEnd_toStartOf="@+id/purchases_price"
+            app:layout_constraintStart_toStartOf="@+id/tv17"
+            app:layout_constraintTop_toBottomOf="@+id/tv17" />
+
+        <EditText
+            android:id="@+id/purchases_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal|numberSigned"
+            app:layout_constraintBottom_toBottomOf="@+id/mrpET"
+            app:layout_constraintEnd_toEndOf="@+id/tv18"
+            app:layout_constraintStart_toEndOf="@+id/mrpET"
+            app:layout_constraintTop_toTopOf="@+id/mrpET" />
+
+
+        <Button
+            android:id="@+id/addMedicineCancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="@color/colorPrimaryVariant"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/mrpET"
+            app:layout_constraintTop_toBottomOf="@+id/mrpET" />
+
+        <Button
+            android:id="@+id/addMedicineAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:backgroundTint="@color/colorPrimaryVariant"
+            android:text="Add"
+            android:textAllCaps="false"
+            app:layout_constraintBottom_toBottomOf="@+id/addMedicineCancel"
+            app:layout_constraintEnd_toEndOf="@+id/purchases_price"
+            app:layout_constraintTop_toTopOf="@+id/addMedicineCancel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
+
+
+
+
+<!--
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.inventory.add.addmedicine.UnitSelectFragment">
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileImgId"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_inventory"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            />
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="DAR/MR Number"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/dar_mr_NumberET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Brand Name"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/brand_nameET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Manufacturer"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/manufactureET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Generic Name"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/genericET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Kind"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/kindET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Form"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/formET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Strength"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/strengthET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="MRP"
+                android:layout_weight="1"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/mrpET"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Purchases Price"
+                android:layout_weight="1"
+                android:textColorHint="@color/colorPrimaryVariant"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/purchases_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+
+
+            <TextView
+                android:id="@+id/salesUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Sales Unit"
+                android:gravity="center"
+                android:drawableEnd="@drawable/ic_polygon"
+                android:layout_weight="1"
+                />
+
+            <TextView
+                android:id="@+id/symtomORPurchasesUnit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="41dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:hint="Purchases Unit"
+                android:gravity="center"
+                android:drawableEnd="@drawable/ic_polygon"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Stock"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:layout_marginLeft="15dp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="5"
+                    android:layout_marginLeft="15dp"
+                    >
+                    <TextView
+                        android:id="@+id/minimumStockDecrementTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/blue_shape_round_outline"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:text="−"
+                        android:textColor="@color/speech_red"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/minimumStockCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:text="1"
+                        android:imeOptions="actionDone"
+                        android:background="@drawable/blue_shape_round_outline"
+                        android:inputType="numberDecimal"
+                        android:textColor="@color/black"
+                        android:textSize="15sp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="2"
+                        />
+
+
+
+
+                    <TextView
+                        android:id="@+id/minimumStockIncrementTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/blue_shape_round_outline"
+                        android:gravity="center"
+                        android:paddingStart="5dp"
+                        android:paddingEnd="5dp"
+                        android:text="+"
+                        android:textColor="#18BA0D"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="1"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pcs"
+                        android:layout_marginLeft="5dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorPrimaryVariant"
+                        android:layout_weight="1"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/addNewMeasureUnit"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                >
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_floating"
+                    />
+                <TextView
+                    android:id="@+id/tv12"
+                    android:layout_width="wrap_content"
+                    android:layout_height="19dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="12sp"
+                    android:text="Add new unit of measure"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/addMedicineUnitsRvId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            />
+
+    </LinearLayout>
+
+</ScrollView>-->

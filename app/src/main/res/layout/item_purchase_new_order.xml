@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/itemImgId"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/paracetamol" />
+
+        <TextView
+            android:id="@+id/itemNameTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Seclo"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/itemImgId"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/groupTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Square pharma"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintStart_toStartOf="@+id/itemNameTvId"
+            app:layout_constraintTop_toBottomOf="@+id/itemNameTvId" />
+
+
+        <TextView
+            android:id="@+id/stockTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Stock:1995"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/groupTvId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/groupTvId" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/groupTvId"
+            app:layout_constraintTop_toBottomOf="@+id/groupTvId">
+
+
+            <TextView
+                android:id="@+id/tv13"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:background="@drawable/circle_shape_gray1"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="−"
+                android:textColor="@color/speech_red" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt10"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/gray_shape_outline1"
+                android:gravity="fill"
+                android:hint="100"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:maxLength="3"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+
+
+            <TextView
+                android:id="@+id/tv15"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/circle_shape_gray1"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="+"
+                android:textColor="#18BA0D" />
+
+            <TextView
+                android:id="@+id/tv16"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Unit" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/gray_shape_outline1"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:drawablePadding="5dp"
+            android:padding="3dp"
+            android:text="Packs"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="৳ 20.00"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView10" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

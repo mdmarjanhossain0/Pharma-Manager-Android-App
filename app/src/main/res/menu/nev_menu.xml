@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:title="DASHBOARD" />
+        <item
+            android:id="@+id/nav_sales"
+            android:title="SALES" />
+        <item
+            android:id="@+id/nav_Inventory"
+            android:title="INVENTORY" />
+        <item
+            android:id="@+id/nav_short_list"
+            android:title="SHORT LIST" />
+
+        <item
+            android:id="@+id/nav_purchase"
+            android:title="PURCHASE" />
+
+
+    </group>
+
+    <item
+        android:title="CASH REGISTER">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_cash_receive"
+                    android:title="CASH RECEIVE" />
+                <item
+                    android:id="@+id/nav_cash_payment"
+                    android:title="CASH PAYMENT" />
+            </group>
+        </menu>
+    </item>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_setting"
+            android:title="SETTING" />
+        <item
+            android:id="@+id/nav_order"
+            android:title="ORDER" />
+        <item
+            android:id="@+id/nav_notifications"
+            android:title="NOTIFICATIONS" />
+        <item
+            android:id="@+id/nav_reports"
+            android:title="REPORTS" />
+
+        <item
+            android:id="@+id/nav_vendors"
+            android:title="VENDORS" />
+        <item
+            android:id="@+id/nav_customers"
+            android:title="CUSTOMERS" />
+
+
+    </group>
+
+</menu>

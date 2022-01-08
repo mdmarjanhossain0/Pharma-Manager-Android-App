@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".presentation.sales.card.SalesCartFragment">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/searchCardId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/searchViewId"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/search_shape"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:iconifiedByDefault="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="Search..."
+                android:paddingLeft="35dp"
+                android:gravity="center_vertical"
+                app:queryHint="Search..." />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/salesCardRvId"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardBottomId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchCardId"
+        tools:listitem="@layout/item_sales_cart" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBottomId"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="0dp"
+        android:background="#00000000"
+        android:backgroundTint="#00000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bottom_blue_shape">
+
+
+            <TextView
+                android:id="@+id/salesCartItemCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Items : 0"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/salesCartTotalAmount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/salesCartTotalAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Total : ৳0.00"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salesCartItemCount" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/salesCardGenerate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/colorPrimaryVariant"
+                android:text="Generate"
+                android:textAllCaps="false"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/salesCartTotalAmount"
+                app:layout_constraintEnd_toStartOf="@id/salesCardPay"
+                app:layout_constraintTop_toBottomOf="@+id/salesCartItemCount" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/salesCardPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:backgroundTint="@color/colorPrimaryVariant"
+                android:text="Pay"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_forward"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/salesCartTotalAmount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salesCartItemCount" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

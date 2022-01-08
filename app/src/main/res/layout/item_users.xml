@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/profileImgId"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_dofb"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/copyImgId"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_copy"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/nameTvId"
+            app:tint="@color/colorPrimary" />
+
+
+        <TextView
+            android:id="@+id/nameTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Sabuj"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/profileImgId"
+            app:layout_constraintTop_toTopOf="@+id/profileImgId" />
+
+
+        <TextView
+            android:id="@+id/typeTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SalesMan"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintStart_toStartOf="@+id/nameTvId"
+            app:layout_constraintTop_toBottomOf="@+id/nameTvId" />
+
+
+        <TextView
+            android:id="@+id/phoneTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="01790000000"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/typeTvId"
+            app:layout_constraintTop_toBottomOf="@+id/typeTvId" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

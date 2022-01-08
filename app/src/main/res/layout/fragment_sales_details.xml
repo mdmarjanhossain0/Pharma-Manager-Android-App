@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+
+
+
+
+
+    <LinearLayout
+        android:id="@+id/searchId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <TextView
+            android:id="@+id/orderDetailsId"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            app:iconifiedByDefault="false"
+            android:text="Order Id #"
+            android:gravity="center_vertical"
+            android:paddingStart="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="Walk-in customer" />
+
+        <TextView
+            android:id="@+id/salesPaymentSearchView"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="10dp"
+            app:iconifiedByDefault="false"
+            android:text="     Walk-in customer"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_person"
+            android:paddingStart="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:queryHint="Walk-in customer" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/gray"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:visibility="gone"
+            />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/totalItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="25dp"
+        android:text="Total Item :"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchId"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/salesPaymentRvId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/totalItem"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_sub_sales_list" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBottomId"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bottom_blue_shape">
+
+
+            <TextView
+                android:id="@+id/orderNo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:text="Order Number: 123123"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:visibility="invisible"
+                />
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/printButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@id/shareButton"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_printer"
+                app:layout_constraintCircleRadius="50dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FFFFFF"
+                android:layout_marginRight="10dp"
+                android:padding="1dp"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_share"
+                app:layout_constraintCircleRadius="50dp"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FFFFFF"
+                android:layout_marginRight="5dp"
+                />
+
+
+            <TextView
+                android:id="@+id/salesPaymentItemCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Items : "
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/salesPaymentTotal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orderNo" />
+
+
+            <TextView
+                android:id="@+id/salesPaymentTotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Total : ৳ 00.00"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salesPaymentItemCount" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createSalesOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/colorPrimaryVariant"
+                android:text="Pay"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_forward"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/salesPaymentTotal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salesPaymentItemCount"
+                android:visibility="gone"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createSalesOrderReturn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/colorPrimaryVariant"
+                android:text="Return"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_forward"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/salesPaymentTotal"
+                app:layout_constraintEnd_toStartOf="@id/createSalesOrder"
+                app:layout_constraintTop_toBottomOf="@+id/salesPaymentItemCount"
+                android:visibility="gone"
+                />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/salesOrderDelete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/colorPrimaryVariant"
+                android:text="Delete"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_delete"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/salesPaymentTotal"
+                app:layout_constraintEnd_toStartOf="@id/createSalesOrderReturn"
+                app:layout_constraintTop_toBottomOf="@+id/salesPaymentItemCount"
+                android:visibility="gone"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

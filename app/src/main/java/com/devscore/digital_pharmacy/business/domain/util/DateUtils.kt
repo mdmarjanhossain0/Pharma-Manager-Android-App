@@ -1,0 +1,41 @@
+package com.devscore.digital_pharmacy.business.domain.util
+
+import android.util.Log
+import java.text.SimpleDateFormat
+import java.util.*
+import com.devscore.digital_pharmacy.presentation.util.DateTime
+
+
+
+
+class DateUtils {
+
+    companion object{
+
+        private val TAG: String = "AppDebug"
+
+        // dates from server look like this: "2019-07-23T03:28:01.406944Z"
+        fun convertServerStringDateToLong(sd: String): Long{
+//            var stringDate = sd.removeRange(sd.indexOf("T") until sd.length)
+            val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ENGLISH)
+            try {
+                val time = sdf.parse(sd).time
+                return time
+            } catch (e: Exception) {
+                throw Exception(e)
+            }
+        }
+
+        fun convertLongToStringDate(longDate: Long): String{
+            val sdf = SimpleDateFormat("dd/MM/yyyy hh:mm:ss", Locale.ENGLISH)
+            try {
+                val date = sdf.format(Date(longDate))
+                return date
+            } catch (e: Exception) {
+                throw Exception(e)
+            }
+        }
+    }
+
+
+}

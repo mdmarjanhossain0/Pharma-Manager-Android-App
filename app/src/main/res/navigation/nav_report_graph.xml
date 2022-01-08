@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_report_graph"
+    app:startDestination="@id/salesReportFragment">
+
+    <fragment
+        android:id="@+id/salesReportFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.main.report.SalesReportFragment"
+        android:label="fragment_sales_report"
+        tools:layout="@layout/fragment_sales_report" />
+</navigation>

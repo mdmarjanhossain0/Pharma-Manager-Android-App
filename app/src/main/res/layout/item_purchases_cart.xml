@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/itemImgId"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/paracetamol" />
+
+        <TextView
+            android:id="@+id/salesCardItemBrandName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:text="Seclo"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/itemImgId"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/historyImgId"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_delete"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCardItemBrandName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/salesCardItemBrandName"
+            />
+
+
+        <ImageView
+            android:id="@+id/salesCartSuggetionIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_circle_right"
+            app:layout_constraintBottom_toBottomOf="@+id/stockTvId"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/stockTvId"
+            android:visibility="gone"
+            />
+
+        <TextView
+            android:id="@+id/groupTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Square pharma"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintStart_toStartOf="@+id/salesCardItemBrandName"
+            app:layout_constraintTop_toBottomOf="@+id/salesCardItemBrandName" />
+
+
+        <TextView
+            android:id="@+id/salesCurrentUnitPriceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="MRP : ৳ "
+            android:textColor="@color/speech_red"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/groupTvId"
+            app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/salesCurrentUnitPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="35dp"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="14"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@+id/salesCurrentUnitPriceTv"
+            app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
+
+        <TextView
+            android:id="@+id/salesCurrentUnitMRPPriceTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="number"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="MRP : ৳ "
+            android:textColor="@color/speech_red"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/salesCurrentUnitPrice"
+            app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
+
+
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/salesCurrentUnitMRPPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="35dp"
+            android:gravity="center"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:paddingStart="5dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="5dp"
+            android:paddingBottom="5dp"
+            android:text="14"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@+id/salesCurrentUnitMRPPriceTv"
+            app:layout_constraintTop_toBottomOf="@+id/groupTvId" />
+
+
+
+        <TextView
+            android:id="@+id/stockTvId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="10dp"
+            android:text="Stock:1995"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCurrentUnitPrice"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/salesCurrentUnitPrice"
+            app:layout_constraintVertical_bias="0.0" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/itemImgId"
+            app:layout_constraintTop_toBottomOf="@+id/salesCurrentUnitPrice">
+
+
+            <TextView
+                android:id="@+id/salesCartItemDecrease"
+                android:layout_width="25dp"
+                android:layout_height="22dp"
+                android:background="@drawable/circle_shape_gray1"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="−"
+                android:textColor="@color/speech_red" />
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/salesCartItemQuantityCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:minWidth="35dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/gray_shape_outline1"
+                android:gravity="center"
+                android:text="1"
+                android:layout_gravity="center"
+                android:imeOptions="actionDone"
+                android:inputType="number"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:paddingEnd="5dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+
+
+            <TextView
+                android:id="@+id/salesCardItemIncrease"
+                android:layout_width="25dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/circle_shape_gray1"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="+"
+                android:textColor="#18BA0D" />
+
+            <TextView
+                android:id="@+id/tv16"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:gravity="center"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                android:text="Unit"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:background="@drawable/gray_shape_outline1"
+            android:id="@+id/salesCardItemUnit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:drawablePadding="5dp"
+            android:text="Packs"
+            android:textSize="12sp"
+            android:padding="3dp"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            />
+
+        <Spinner
+            android:background="@drawable/gray_shape_outline1"
+            android:id="@+id/salesCardItemUnitSpinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawableEnd="@drawable/ic_polygon"
+            android:drawablePadding="5dp"
+            android:text="Packs"
+            android:textSize="12sp"
+            android:padding="3dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="@+id/linearLayout"
+            />
+
+
+        <ImageView
+            android:id="@+id/unitSwith"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_circle_right"
+            app:layout_constraintTop_toTopOf="@id/salesCardItemUnit"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCardItemUnit"
+            app:layout_constraintLeft_toRightOf="@id/salesCardItemUnit"
+            android:visibility="invisible"
+            />
+
+
+        <TextView
+            android:id="@+id/salesCartSubTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Sub Total: ৳ 20.00"
+            android:textColor="@color/colorPrimaryVariant"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/salesCardItemUnit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/salesCardItemUnit" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

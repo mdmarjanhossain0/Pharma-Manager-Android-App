@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_supplier_graph"
+    app:startDestination="@id/supplierListFragment">
+
+    <fragment
+        android:id="@+id/supplierListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierListFragment"
+        android:label="fragment_supplier_list"
+        tools:layout="@layout/fragment_supplier_list" >
+        <action
+            android:id="@+id/action_supplierListFragment_to_createSupplierFragment"
+            app:destination="@id/createSupplierFragment" />
+        <action
+            android:id="@+id/action_supplierListFragment_to_supplierPreviousOrdersFragment"
+            app:destination="@id/supplierPreviousOrdersFragment" />
+        <action
+            android:id="@+id/action_supplierListFragment_to_updateSupplierFragment"
+            app:destination="@id/updateSupplierFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createSupplierFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.createsupplier.CreateSupplierFragment"
+        android:label="fragment_create_supplier"
+        tools:layout="@layout/fragment_create_supplier" />
+    <fragment
+        android:id="@+id/supplierPreviousOrdersFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.details.SupplierPreviousOrdersFragment"
+        android:label="fragment_supplier_previous_orders"
+        tools:layout="@layout/fragment_supplier_previous_orders" />
+    <fragment
+        android:id="@+id/updateSupplierFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.update.UpdateSupplierFragment"
+        android:label="UpdateSupplierFragment" />
+</navigation>

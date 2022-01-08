@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="10dp"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="4dp"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/supplierCompanyName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Square Pharma "
+            android:textColor="@color/colorPrimaryVariant"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/editSupplier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_edit"
+            android:padding="8dp"
+            />
+
+        <TextView
+            android:id="@+id/supplierName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Ashish Kumar Biswas"
+            android:textColor="@color/colorPrimaryVariant"
+            app:layout_constraintStart_toStartOf="@+id/supplierCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/supplierCompanyName" />
+
+        <TextView
+            android:id="@+id/supplierTotalBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="Balance: 0000"
+            app:layout_constraintBottom_toBottomOf="@+id/supplierName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/supplierName" />
+
+
+        <View
+            android:id="@+id/view4"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/gray"
+            app:layout_constraintEnd_toEndOf="@+id/supplierTotalBalance"
+            app:layout_constraintStart_toStartOf="@+id/supplierName"
+            app:layout_constraintTop_toBottomOf="@+id/supplierName" />
+
+
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/view4"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            >
+            <LinearLayout
+                android:id="@+id/addressLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:weightSum="15"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_home"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/addressId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="Dhaka"
+                    app:layout_constraintStart_toStartOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    android:layout_weight="14"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimaryVariant"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/phoneLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:weightSum="15"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_phone"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/phoneId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="01777777777777"
+                    app:layout_constraintStart_toStartOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    android:layout_weight="14"
+                    android:textColor="@color/colorPrimaryVariant"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/emailLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:weightSum="15"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_email"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/emailId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="abc@gmail.com"
+                    app:layout_constraintStart_toStartOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    android:layout_weight="14"
+                    android:textColor="@color/colorPrimaryVariant"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/facebookLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:weightSum="15"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_facebook"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/facebookId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="abc"
+                    app:layout_constraintStart_toStartOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    android:layout_weight="14"
+                    android:textColor="@color/colorPrimaryVariant"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/whatsappLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:weightSum="15"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_whatsapp"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/whatsappId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="01777777777777"
+                    app:layout_constraintStart_toStartOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    android:layout_weight="14"
+                    android:textColor="@color/colorPrimaryVariant"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/imoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="15dp"
+                android:weightSum="15"
+                android:layout_marginRight="15dp"
+                android:visibility="gone"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="10dp"
+                    app:srcCompat="@drawable/ic_imo"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    />
+                <TextView
+                    android:id="@+id/imoId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="01777777777777"
+                    app:layout_constraintStart_toStartOf="@+id/customerName"
+                    app:layout_constraintTop_toBottomOf="@+id/customerName"
+                    android:layout_weight="14"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="@color/colorPrimaryVariant"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

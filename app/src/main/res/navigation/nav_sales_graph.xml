@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_sales_graph"
+    app:startDestination="@id/salesFragment">
+
+    <fragment
+        android:id="@+id/salesFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.SalesFragment"
+        android:label="fragment_sales"
+        tools:layout="@layout/fragment_sales" >
+
+        <action
+            android:id="@+id/action_salesFragment_to_salesInventoryFragment"
+            app:destination="@id/salesInventoryFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_salesReturnFragment"
+            app:destination="@id/salesReturnFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_salesDetailsFragment"
+            app:destination="@id/salesDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesOrdersFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.orderlist.SalesOrdersFragment"
+        android:label="fragment_sales_orders"
+        tools:layout="@layout/fragment_sales_orders" />
+    <fragment
+        android:id="@+id/salesCompletedFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.odercompleted.SalesCompletedFragment"
+        android:label="fragment_sales_completed"
+        tools:layout="@layout/fragment_sales_completed" />
+    <fragment
+        android:id="@+id/salesCartFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.card.SalesCartFragment"
+        android:label="fragment_sales_cart"
+        tools:layout="@layout/fragment_sales_cart" >
+        <action
+            android:id="@+id/action_salesCartFragment_to_salesPayNowFragment"
+            app:destination="@id/salesPayNowFragment" />
+        <action
+            android:id="@+id/action_salesCartFragment_to_salesFragment"
+            app:destination="@id/salesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_sales_graph"
+            app:popUpToInclusive="true" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/salesPayNowFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayNowFragment"
+        android:label="fragment_sales_pay_now"
+        tools:layout="@layout/fragment_sales_pay_now" >
+        <action
+            android:id="@+id/action_salesPayNowFragment_to_addCustomerFragment2"
+            app:destination="@id/addCustomerFragment2" />
+        <action
+            android:id="@+id/action_salesPayNowFragment_to_salesCustomerListFragment"
+            app:destination="@id/salesCustomerListFragment" />
+        <action
+            android:id="@+id/action_salesPayNowFragment_to_salesFragment"
+            app:destination="@id/salesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_sales_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesInventoryFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.salesinventory.SalesInventoryFragment"
+        android:label="SalesInventoryFragment" >
+        <action
+            android:id="@+id/action_salesInventoryFragment_to_salesCartFragment"
+            app:destination="@id/salesCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCustomerFragment2"
+        android:name="com.devscore.digital_pharmacy.presentation.customer.createcustomer.AddCustomerFragment"
+        android:label="fragment_add_customer"
+        tools:layout="@layout/fragment_add_customer" />
+    <fragment
+        android:id="@+id/salesCustomerListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.customerlist.SalesCustomerListFragment"
+        android:label="SalesCustomerListFragment" >
+        <action
+            android:id="@+id/action_salesCustomerListFragment_to_addCustomerFragment2"
+            app:destination="@id/addCustomerFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesReturnFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnFragment"
+        android:label="fragment_sales_return"
+        tools:layout="@layout/fragment_sales_return" >
+        <action
+            android:id="@+id/action_salesReturnFragment_to_salesReturnPayFragment"
+            app:destination="@id/salesReturnPayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesReturnPayFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.returnpayment.SalesReturnPayFragment"
+        android:label="SalesReturnPayFragment" >
+        <action
+            android:id="@+id/action_salesReturnPayFragment_to_salesFragment"
+            app:destination="@id/salesFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_sales_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesDetailsFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.sales.details.SalesDetailsFragment"
+        android:label="fragment_sales_details"
+        tools:layout="@layout/fragment_sales_details" >
+        <action
+            android:id="@+id/action_salesDetailsFragment_to_salesCartFragment"
+            app:destination="@id/salesCartFragment" />
+        <action
+            android:id="@+id/action_salesDetailsFragment_to_salesReturnFragment"
+            app:destination="@id/salesReturnFragment" />
+        <action
+            android:id="@+id/action_salesDetailsFragment_to_salesPayNowFragment"
+            app:destination="@id/salesPayNowFragment" />
+    </fragment>
+</navigation>

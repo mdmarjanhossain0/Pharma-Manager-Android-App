@@ -1,0 +1,133 @@
+package com.devscore.digital_pharmacy.business.interactors.inventory.local
+
+import android.content.Context
+import android.util.Log
+import androidx.work.*
+import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
+import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
+import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
+import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.toLocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.AddMedicine
+import com.devscore.digital_pharmacy.business.domain.models.AuthToken
+import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.toLocalMedicine
+import com.devscore.digital_pharmacy.business.domain.util.*
+import com.google.gson.Gson
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+
+class UpdateMedicineInteractor(
+    private val service: InventoryApiService,
+    private val cache: LocalMedicineDao,
+    private val context: Context
+) {
+
+    private val TAG: String = "AppDebug"
+
+    fun execute(
+        authToken: AuthToken?,
+        id : Int,
+        medicine: AddMedicine,
+        image : String?
+    ): Flow<DataState<LocalMedicine>> = flow {
+
+        emit(DataState.loading<LocalMedicine>())
+        if(authToken == null){
+            throw Exception(ErrorHandling.ERROR_AUTH_TOKEN_INVALID)
+        }
+
+        val json = Gson()
+        val gson = json.toJson(medicine.units)
+        val units = RequestBody.create(
+            MediaType.parse("application/json"),
+            gson
+        )
+        var multipartBody: MultipartBody.Part? = null
+        if (image != null) {
+            val imageFile = java.io.File(image)
+            if(imageFile.exists()) {
+                val requestBody =
+                    RequestBody.create(
+                        MediaType.parse("image/jpeg"),
+                        imageFile
+                    )
+                multipartBody = MultipartBody.Part.createFormData(
+                    "image",
+                    imageFile.name,
+                    requestBody
+                )
+            }
+        }
+
+
+        try{ // catch network exception
+            Log.d(TAG, "Call Api Section")
+            val medicineResponse = service.updateMedicine(
+                authorization = "Token ${authToken.token}",
+                id = id,
+                brand_name = RequestBody.create(MediaType.parse("text/plain"), medicine.brand_name.toString()),
+                sku = RequestBody.create(MediaType.parse("text/plain"), medicine.sku.toString()),
+                dar_number = RequestBody.create(MediaType.parse("text/plain"), medicine.dar_number.toString()),
+                mr_number = RequestBody.create(MediaType.parse("text/plain"), medicine.mr_number.toString()),
+                generic = RequestBody.create(MediaType.parse("text/plain"), medicine.generic.toString()),
+                indication = RequestBody.create(MediaType.parse("text/plain"), medicine.indication.toString()),
+                symptom = RequestBody.create(MediaType.parse("text/plain"), medicine.symptom.toString()),
+                strength = RequestBody.create(MediaType.parse("text/plain"), medicine.strength.toString()),
+                description = RequestBody.create(MediaType.parse("text/plain"), medicine.description.toString()),
+                mrp = RequestBody.create(MediaType.parse("text/plain"), medicine.mrp.toString()),
+                purchase_price = RequestBody.create(MediaType.parse("text/plain"), medicine.purchases_price.toString()),
+                discount = RequestBody.create(MediaType.parse("text/plain"), medicine.discount.toString()),
+                is_percent_discount = RequestBody.create(MediaType.parse("text/plain"), medicine.is_percent_discount.toString()),
+                manufacture = RequestBody.create(MediaType.parse("text/plain"), medicine.manufacture.toString()),
+                kind = RequestBody.create(MediaType.parse("text/plain"), medicine.kind.toString()),
+                form = RequestBody.create(MediaType.parse("text/plain"), medicine.form.toString()),
+                remaining_quantity = RequestBody.create(MediaType.parse("text/plain"), medicine.remaining_quantity.toString()),
+                damage_quantity = RequestBody.create(MediaType.parse("text/plain"), medicine.damage_quantity.toString()),
+                exp_date = RequestBody.create(MediaType.parse("text/plain"), medicine.exp_date.toString()),
+                rack_number = RequestBody.create(MediaType.parse("text/plain"), medicine.rack_number.toString()),
+                image = multipartBody,
+                units = units
+            ).toLocalMedicine()
+
+
+            try{
+                cache.insertLocalMedicine(medicineResponse.toLocalMedicineEntity())
+                for (unit in medicineResponse.toLocalMedicineUnitEntity()) {
+                    cache.insertLocalMedicineUnit(unit)
+                }
+            }catch (e: Exception){
+                e.printStackTrace()
+            }
+
+        }
+        catch (e: Exception){
+            e.printStackTrace()
+            emit(
+                DataState.error<LocalMedicine>(
+                    response = Response(
+                        message = "Can't update without internet",
+                        uiComponentType = UIComponentType.Dialog(),
+                        messageType = MessageType.Error()
+                    )
+                )
+            )
+            return@flow
+        }
+
+
+        val stateMedicine = medicine.toLocalMedicine()
+
+        emit(
+            DataState.data(response = Response(
+            message = "Successfully Uploaded.",
+            uiComponentType = UIComponentType.Dialog(),
+            messageType = MessageType.Success()
+        ), data = stateMedicine))
+    }.catch { e ->
+        emit(handleUseCaseException(e))
+    }
+}

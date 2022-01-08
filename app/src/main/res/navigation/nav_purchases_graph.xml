@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_purchases_graph"
+    app:startDestination="@id/purchaseFragment">
+
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.PurchaseFragment"
+        android:label="fragment_purchase"
+        tools:layout="@layout/fragment_purchase" >
+        <action
+            android:id="@+id/action_purchaseFragment_to_purchasesInventoryFragment"
+            app:destination="@id/purchasesInventoryFragment" />
+        <action
+            android:id="@+id/action_purchaseFragment_to_purchasesReturnFragment"
+            app:destination="@id/purchasesReturnFragment" />
+        <action
+            android:id="@+id/action_purchaseFragment_to_purchasesOrderDetailsFragment"
+            app:destination="@id/purchasesOrderDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesOrdersFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.orderlist.PurchasesOrdersFragment"
+        android:label="fragment_purchase_generated"
+        tools:layout="@layout/fragment_purchase_generated" />
+    <fragment
+        android:id="@+id/purchaseCompletedFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.ordercompleted.PurchaseCompletedFragment"
+        android:label="fragment_purchase_completed"
+        tools:layout="@layout/fragment_purchase_completed" />
+    <fragment
+        android:id="@+id/purchasesInventoryFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.purchasesinventory.PurchasesInventoryFragment"
+        android:label="fragment_purchases_inventory"
+        tools:layout="@layout/fragment_purchases_inventory" >
+        <action
+            android:id="@+id/action_purchasesInventoryFragment_to_purchasesCartFragment"
+            app:destination="@id/purchasesCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesCartFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartFragment"
+        android:label="fragment_purchase_new_order"
+        tools:layout="@layout/fragment_purchase_new_order" >
+        <action
+            android:id="@+id/action_purchasesCartFragment_to_purchasesPaymentFragment"
+            app:destination="@id/purchasesPaymentFragment" />
+        <action
+            android:id="@+id/action_purchasesCartFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_purchases_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesPaymentFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPaymentFragment"
+        android:label="fragment_purchases_payment"
+        tools:layout="@layout/fragment_purchases_payment" >
+        <action
+            android:id="@+id/action_purchasesPaymentFragment_to_purchasesSuplierListFragment"
+            app:destination="@id/purchasesSuplierListFragment" />
+        <action
+            android:id="@+id/action_purchasesPaymentFragment_to_createSupplierFragment2"
+            app:destination="@id/createSupplierFragment2" />
+        <action
+            android:id="@+id/action_purchasesPaymentFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_purchases_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesSuplierListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
+        android:label="fragment_purchases_suplier_list"
+        tools:layout="@layout/fragment_purchases_suplier_list" >
+        <action
+            android:id="@+id/action_purchasesSuplierListFragment_to_createSupplierFragment2"
+            app:destination="@id/createSupplierFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/createSupplierFragment2"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.createsupplier.PurchasesCreateSupplierFragment"
+        android:label="fragment_create_supplier"
+        tools:layout="@layout/fragment_create_supplier" />
+    <fragment
+        android:id="@+id/purchasesReturnFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.purchasesreturn.PurchasesReturnFragment"
+        android:label="fragment_purchases_return"
+        tools:layout="@layout/fragment_purchases_return" >
+        <action
+            android:id="@+id/action_purchasesReturnFragment_to_purchasesReturnPayFragment"
+            app:destination="@id/purchasesReturnPayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesReturnPayFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.returnpayment.PurchasesReturnPayFragment"
+        android:label="fragment_purchases_return_pay"
+        tools:layout="@layout/fragment_purchases_return_pay" >
+        <action
+            android:id="@+id/action_purchasesReturnPayFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_purchases_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchasesOrderDetailsFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.details.PurchasesOrderDetailsFragment"
+        android:label="fragment_purchases_order_details"
+        tools:layout="@layout/fragment_purchases_order_details" >
+        <action
+            android:id="@+id/action_purchasesOrderDetailsFragment_to_purchasesCartFragment"
+            app:destination="@id/purchasesCartFragment" />
+        <action
+            android:id="@+id/action_purchasesOrderDetailsFragment_to_purchasesPaymentFragment"
+            app:destination="@id/purchasesPaymentFragment" />
+        <action
+            android:id="@+id/action_purchasesOrderDetailsFragment_to_purchasesReturnFragment"
+            app:destination="@id/purchasesReturnFragment" />
+        <action
+            android:id="@+id/action_purchasesOrderDetailsFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_purchases_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

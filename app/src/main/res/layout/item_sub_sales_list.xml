@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="5dp"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:id="@+id/salesPaymentOrderItemBrandName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Paracetamol"
+        android:textColor="@color/colorPrimaryVariant"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemUnitPrize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/salesPaymentOrderItemUnitPrize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="৳ 5.00"
+        android:textColor="@color/colorPrimaryVariant"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemBrandName"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemUnitCount"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemBrandName" />
+
+    <TextView
+        android:id="@+id/salesPaymentOrderItemUnitCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="4 pcs"
+        android:textColor="@color/colorPrimaryVariant"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemUnitPrize"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemTotalAmount"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemUnitPrize" />
+
+    <TextView
+        android:id="@+id/salesPaymentOrderItemTotalAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:text="৳ 20.00"
+        android:textColor="@color/colorPrimaryVariant"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemUnitCount"
+        app:layout_constraintEnd_toStartOf="@+id/salesPaymentOrderItemDelete"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemUnitCount"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/salesPaymentOrderItemDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/salesPaymentOrderItemTotalAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/salesPaymentOrderItemTotalAmount"
+        app:srcCompat="@drawable/ic_remove" />
+</androidx.constraintlayout.widget.ConstraintLayout>

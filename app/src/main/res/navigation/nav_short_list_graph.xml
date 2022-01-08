@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_short_list_graph"
+    app:startDestination="@id/shortListFragment">
+
+    <fragment
+        android:id="@+id/shortListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.shortlist.shortlist.ShortListFragment"
+        android:label="fragment_short_list"
+        tools:layout="@layout/fragment_short_list" >
+        <action
+            android:id="@+id/action_shortListFragment_to_shortListSalesCartFragment"
+            app:destination="@id/shortListSalesCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shortListSalesCartFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.shortlist.salescart.ShortListCartFragment"
+        android:label="fragment_short_list_sales_cart"
+        tools:layout="@layout/fragment_short_list_sales_cart" >
+        <action
+            android:id="@+id/action_shortListSalesCartFragment_to_shortListPayFragment"
+            app:destination="@id/shortListPayFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shortListPayFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.shortlist.salespay.ShortListPayFragment"
+        android:label="fragment_short_list_pay"
+        tools:layout="@layout/fragment_short_list_pay" >
+        <action
+            android:id="@+id/action_shortListPayFragment_to_shortListAddFragment"
+            app:destination="@id/shortListAddFragment" />
+        <action
+            android:id="@+id/action_shortListPayFragment_to_shortListCustomerListFragment"
+            app:destination="@id/shortListCustomerListFragment" />
+        <action
+            android:id="@+id/action_shortListPayFragment_to_shortListFragment"
+            app:destination="@id/shortListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_short_list_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/shortListAddFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.shortlist.add.ShortListAddFragment"
+        android:label="fragment_short_list_add"
+        tools:layout="@layout/fragment_short_list_add" />
+    <fragment
+        android:id="@+id/shortListCustomerListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.shortlist.customerlist.ShortListSupplierListFragment"
+        android:label="fragment_short_list_customer_list"
+        tools:layout="@layout/fragment_short_list_customer_list" />
+</navigation>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:minHeight="25dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/unitDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_delete"
+        android:padding="8dp"
+        />
+
+
+    <TextView
+        android:id="@+id/unitDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="6 pcs =  a page"
+        android:textSize="12sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryVariant"
+        app:layout_constraintBottom_toBottomOf="@+id/img3"
+        app:layout_constraintStart_toEndOf="@+id/img3"
+        app:layout_constraintTop_toTopOf="@+id/img3" />
+
+</LinearLayout>

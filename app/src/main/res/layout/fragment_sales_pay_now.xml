@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.sales.payment.SalesPayNowFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardBottomId"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/salesPaymentRvId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="1"
+                    tools:listitem="@layout/item_sales_list" />
+
+                <ImageView
+                    android:id="@+id/img1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_floating"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/salesPaymentRvId" />
+
+                <TextView
+                    android:id="@+id/addCustomerTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Add customer"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img1"
+                    app:layout_constraintEnd_toStartOf="@+id/img1"
+                    app:layout_constraintTop_toTopOf="@+id/img1" />
+
+
+                <LinearLayout
+                    android:id="@+id/searchId"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/img1">
+
+                    <TextView
+                        android:id="@+id/salesPaymentSearchView"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/search_shape"
+                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                        app:iconifiedByDefault="false"
+                        android:text="     Walk-in customer"
+                        android:gravity="center_vertical"
+                        android:drawableStart="@drawable/ic_search_black_24dp"
+                        android:paddingStart="5dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:queryHint="Walk-in customer" />
+
+
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/productDetailsMenufactureName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Total : "
+                    android:textAllCaps="true"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/searchId" />
+
+
+                <TextView
+                    android:id="@+id/salesPaymentTotalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="৳1340.00"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/productDetailsMenufactureName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/productDetailsMenufactureName" />
+
+
+                <TextView
+                    android:id="@+id/tv3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="%"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/salesPaymentTotalAmount" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:layout_marginEnd="8dp"
+                    android:padding="10dp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv3"
+                    app:layout_constraintEnd_toStartOf="@+id/tv3"
+                    app:layout_constraintTop_toTopOf="@id/tv3" />
+
+
+                <TextView
+                    android:id="@+id/cashTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Cash"
+                    app:layout_constraintBottom_toBottomOf="@id/tv3"
+                    app:layout_constraintEnd_toStartOf="@+id/switchId"
+                    app:layout_constraintStart_toEndOf="@+id/salesPaymentDiscount"
+                    app:layout_constraintTop_toTopOf="@id/tv3" />
+
+
+                <EditText
+                    android:id="@+id/salesPaymentDiscount"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:imeOptions="actionDone"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="5dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="5dp"
+                    android:paddingBottom="5dp"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@id/tv3"
+                    app:layout_constraintEnd_toStartOf="@+id/cashTvId"
+                    app:layout_constraintStart_toEndOf="@+id/textView25"
+                    app:layout_constraintTop_toTopOf="@id/tv3" />
+
+
+                <TextView
+                    android:id="@+id/textView25"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Discount :"
+                    app:layout_constraintBottom_toBottomOf="@id/tv3"
+                    app:layout_constraintEnd_toStartOf="@+id/salesPaymentDiscount"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv3" />
+
+
+                <TextView
+                    android:id="@+id/totalAfterDiscount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Total (after discount) : "
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+                <TextView
+                    android:id="@+id/totalAfterDiscountValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:text="৳1200.00"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/totalAfterDiscount"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/totalAfterDiscount" />
+
+
+                <TextView
+                    android:id="@+id/amountReceivedTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Amount received:"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/totalAfterDiscountValue" />
+
+                <EditText
+                    android:id="@+id/salesPaymentReceiveAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:minWidth="100dp"
+                    android:textSize="12sp"
+                    android:inputType="numberDecimal"
+                    app:layout_constraintBottom_toBottomOf="@+id/amountReceivedTv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/amountReceivedTv" />
+
+                <TextView
+                    android:id="@+id/due"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Due"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/amountReceivedTv" />
+
+                <TextView
+                    android:id="@+id/salesPaymentDueAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:textColor="@color/speech_red"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/due"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/due" />
+
+
+                <ImageView
+                    android:id="@+id/img2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_floating"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/salesPaymentDueAmount"
+                    android:visibility="invisible"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="Sales From External"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/img2"
+                    app:layout_constraintEnd_toStartOf="@+id/img2"
+                    app:layout_constraintTop_toTopOf="@+id/img2"
+                    android:visibility="invisible"
+                    />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBottomId"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bottom_blue_shape">
+
+
+            <TextView
+                android:id="@+id/orderNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center_horizontal"
+                android:text="#Order Number: "
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/salesPaymentItemCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:text="Items : 2"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/salesPaymentTotal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/orderNo" />
+
+
+            <TextView
+                android:id="@+id/salesPaymentTotal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Total : ৳20.00"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salesPaymentItemCount" />
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/createSalesOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:backgroundTint="@color/colorPrimaryVariant"
+                android:text="Complete"
+                android:textAllCaps="false"
+                app:icon="@drawable/ic_forward"
+                app:iconGravity="end"
+                app:layout_constraintBottom_toBottomOf="@+id/salesPaymentTotal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/salesPaymentItemCount"
+                app:layout_constraintVertical_bias="0.703" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

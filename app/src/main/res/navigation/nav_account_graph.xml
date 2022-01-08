@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_settings_graph"
+    app:startDestination="@id/settingsFragment">
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.main.account.profie.AccountFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_employeeListFragment"
+            app:destination="@id/employeeListFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_accountUpdateFragment"
+            app:destination="@id/accountUpdateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/employeeListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.main.account.employee.EmployeeListFragment"
+        android:label="fragment_employee_list"
+        tools:layout="@layout/fragment_employee_list" >
+        <action
+            android:id="@+id/action_employeeListFragment_to_createEmployeeFragment"
+            app:destination="@id/createEmployeeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEmployeeFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.main.account.createemployee.CreateEmployeeFragment"
+        android:label="fragment_create_employee"
+        tools:layout="@layout/fragment_create_employee" />
+    <fragment
+        android:id="@+id/accountUpdateFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.main.account.update.AccountUpdateFragment"
+        android:label="AccountUpdateFragment" />
+</navigation>

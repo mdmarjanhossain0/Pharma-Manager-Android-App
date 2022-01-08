@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_customer_graph"
+    app:startDestination="@id/customersListFragment">
+
+    <fragment
+        android:id="@+id/customersListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.customer.customerlist.CustomersListFragment"
+        android:label="fragment_customers_list"
+        tools:layout="@layout/fragment_customers_list" >
+        <action
+            android:id="@+id/action_customersListFragment_to_addCustomerFragment"
+            app:destination="@id/addCustomerFragment" />
+        <action
+            android:id="@+id/action_customersListFragment_to_customerPreviousOrdersFragment"
+            app:destination="@id/customerPreviousOrdersFragment" />
+        <action
+            android:id="@+id/action_customersListFragment_to_updateCustomerFragment"
+            app:destination="@id/updateCustomerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCustomerFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.customer.createcustomer.AddCustomerFragment"
+        android:label="fragment_add_customer"
+        tools:layout="@layout/fragment_add_customer" />
+    <fragment
+        android:id="@+id/customerPreviousOrdersFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.customer.details.CustomerPreviousOrdersFragment"
+        android:label="fragment_customer_previous_orders"
+        tools:layout="@layout/fragment_customer_previous_orders" />
+    <fragment
+        android:id="@+id/updateCustomerFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.customer.update.UpdateCustomerFragment"
+        android:label="UpdateCustomerFragment" >
+        <action
+            android:id="@+id/action_updateCustomerFragment_to_customersListFragment"
+            app:destination="@id/customersListFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/nav_customer_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

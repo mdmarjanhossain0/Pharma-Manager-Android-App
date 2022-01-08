@@ -1,0 +1,57 @@
+package com.devscore.digital_pharmacy.business.datasource.network.account
+
+import com.devscore.digital_pharmacy.business.datasource.network.GenericResponse
+import com.devscore.digital_pharmacy.business.datasource.network.account.network_response.EmployeeDto
+import com.devscore.digital_pharmacy.business.datasource.network.account.network_response.EmployeeResponse
+import com.devscore.digital_pharmacy.business.datasource.network.auth.network_responses.LoginResponse
+import com.devscore.digital_pharmacy.business.datasource.network.auth.network_responses.RegistrationResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.http.*
+
+interface AccountApiService {
+
+    @POST("account/createemployee")
+    @FormUrlEncoded
+    suspend fun createEmployee (
+        @Header("Authorization") authorization: String,
+        @Field("email") email: String = "abc1@gmail.com",
+        @Field("username") username: String = "a",
+        @Field("password") password: String = "adminpassword",
+        @Field("password2") password2: String = "adminpassword",
+        @Field("mobile") mobile: String = "54354",
+        @Field("address") address: String = "BD",
+        @Field("role") role : String
+    ): EmployeeDto
+
+
+    @GET("account/employeelist")
+    suspend fun getEmployeeList (
+        @Header("Authorization") authorization : String
+    ): EmployeeResponse
+
+
+
+    @PUT("account/changepassword")
+    @FormUrlEncoded
+    suspend fun updatePassword(
+        @Header("Authorization") authorization: String,
+        @Field("old_password") currentPassword: String,
+        @Field("new_password") newPassword: String,
+        @Field("confirm_new_password") confirmNewPassword: String
+    ): GenericResponse
+
+
+
+
+    @PUT("account/properties/update")
+    @Multipart
+    suspend fun update(
+        @Header("Authorization") authorization: String,
+        @Part profile_picture: MultipartBody.Part?,
+        @Part("username") username: RequestBody,
+        @Part("mobile") mobile: RequestBody,
+        @Part("license_key") license_key: RequestBody,
+        @Part("address") address: RequestBody
+    ): RegistrationResponse
+}

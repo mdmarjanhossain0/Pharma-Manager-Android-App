@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#194682</color>
+    <color name="colorPrimaryVariant">#2866B9</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+
+    <color name="speech_red">#A70303</color>
+    <color name="image_border">#DEE1F2</color>
+    <color name="card_color">#F5F7FA</color>
+    <color name="gray">#707070</color>
+    <color name="link_blue">#0000EE</color>
+
+    <color name="register_button_default">#EAEAEA</color>
+    <color name="globalFilterCheck">#5082C5</color>
+
+
+
+</resources>
