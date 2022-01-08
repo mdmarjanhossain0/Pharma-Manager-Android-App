@@ -4,6 +4,9 @@
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/8e6d6b663dac3db31f6affb526dcd224/transformed/jetified-swipe-reveal-layout-1.4.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8e6d6b663dac3db31f6affb526dcd224/transformed/jetified-swipe-reveal-layout-1.4.1/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/8e6d6b663dac3db31f6affb526dcd224/transformed/jetified-swipe-reveal-layout-1.4.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1dc032ef6f26dce870539c75287e8210/transformed/jetified-swipe-reveal-layout-1.4.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/1dc032ef6f26dce870539c75287e8210/transformed/jetified-swipe-reveal-layout-1.4.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/1dc032ef6f26dce870539c75287e8210/transformed/jetified-swipe-reveal-layout-1.4.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.chauthai.swipereveallayout/swipe-reveal-layout/1.4.1/4cb70dfff631146eb4ce510e9d6aee014887fa4b/swipe-reveal-layout-1.4.1-javadoc.jar!/" />
