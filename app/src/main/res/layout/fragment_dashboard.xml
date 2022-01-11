@@ -6,177 +6,173 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.dashboard.DashboardFragment">
 
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/homeScrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:orientation="vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="120dp"
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/notification"-->
+            <!--                    android:layout_width="30dp"-->
+            <!--                    android:layout_height="30dp"-->
+            <!--                    android:layout_gravity="end"-->
+            <!--                    android:layout_marginTop="16dp"-->
+            <!--                    android:layout_marginEnd="16dp"-->
+            <!--                    android:src="@drawable/ic_notifications"-->
+            <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                    app:layout_constraintTop_toTopOf="parent"-->
+            <!--                    app:tint="@color/white" />-->
+
+            <include
+                android:id="@+id/notification"
+                layout="@layout/dynamic_notification"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_notifications"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <include
+                android:id="@+id/sync"
+                layout="@layout/dynamic_sync"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="end"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_sync"
+                app:layout_constraintEnd_toStartOf="@id/notification"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardId"
+            android:layout_width="match_parent"
+            android:layout_height="110dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="24dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/topLayoutId"
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:background="@color/colorPrimary"
-                android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/pollImgId"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_sales"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/notification"-->
-<!--                    android:layout_width="30dp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:layout_gravity="end"-->
-<!--                    android:layout_marginTop="16dp"-->
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:src="@drawable/ic_notifications"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent"-->
-<!--                    app:tint="@color/white" />-->
-
-                <include
-                    android:id="@+id/notification"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="end"
+                <TextView
+                    android:id="@+id/titleTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_notifications"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/white"
-                    layout="@layout/dynamic_notification"
-                    />
+                    android:text="Sales IN MARCH"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/pollImgId"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                <include
-                    android:id="@+id/sync"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_sync"
-                    app:layout_constraintEnd_toStartOf="@id/notification"
-                    app:layout_constraintTop_toTopOf="parent"
-                    layout="@layout/dynamic_sync"
-                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/amountTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Amount:"
+                    app:layout_constraintStart_toStartOf="@+id/titleTvId"
+                    app:layout_constraintTop_toBottomOf="@+id/titleTvId" />
+
+                <TextView
+                    android:id="@+id/amountValueTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="$1066,"
+                    android:textColor="@color/colorPrimaryVariant"
+                    app:layout_constraintBottom_toBottomOf="@+id/amountTvId"
+                    app:layout_constraintStart_toEndOf="@+id/amountTvId"
+                    app:layout_constraintTop_toTopOf="@+id/amountTvId" />
+
+                <TextView
+                    android:id="@+id/dueTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Due:"
+                    app:layout_constraintBottom_toBottomOf="@+id/amountValueTvId"
+                    app:layout_constraintStart_toEndOf="@+id/amountValueTvId"
+                    app:layout_constraintTop_toTopOf="@+id/amountValueTvId" />
+
+                <TextView
+                    android:id="@+id/dueValueTvId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="$234"
+                    android:textColor="@color/colorPrimaryVariant"
+                    app:layout_constraintBottom_toBottomOf="@+id/dueTvId"
+                    app:layout_constraintStart_toEndOf="@+id/dueTvId"
+                    app:layout_constraintTop_toTopOf="@+id/dueTvId" />
+
+                <TextView
+                    android:id="@+id/itemCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="Quantity : 21"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/amountTvId"
+                    app:layout_constraintTop_toBottomOf="@+id/amountTvId" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cardId"
-                android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="60dp"
-                android:layout_marginEnd="24dp"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+
+        </com.google.android.material.card.MaterialCardView>
 
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/pollImgId"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_marginStart="16dp"
-                        android:src="@drawable/ic_sales"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/titleTvId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="Sales IN ..."
-                        android:textColor="@color/colorPrimaryVariant"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toEndOf="@+id/pollImgId"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-
-                    <TextView
-                        android:id="@+id/amountTvId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Amount:"
-                        app:layout_constraintStart_toStartOf="@+id/titleTvId"
-                        app:layout_constraintTop_toBottomOf="@+id/titleTvId" />
-
-                    <TextView
-                        android:id="@+id/amountValueTvId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="$1066,"
-                        android:textColor="@color/colorPrimaryVariant"
-                        app:layout_constraintBottom_toBottomOf="@+id/amountTvId"
-                        app:layout_constraintStart_toEndOf="@+id/amountTvId"
-                        app:layout_constraintTop_toTopOf="@+id/amountTvId" />
-
-                    <TextView
-                        android:id="@+id/dueTvId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Due:"
-                        app:layout_constraintBottom_toBottomOf="@+id/amountValueTvId"
-                        app:layout_constraintStart_toEndOf="@+id/amountValueTvId"
-                        app:layout_constraintTop_toTopOf="@+id/amountValueTvId" />
-
-                    <TextView
-                        android:id="@+id/dueValueTvId"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="$234"
-                        android:textColor="@color/colorPrimaryVariant"
-                        app:layout_constraintBottom_toBottomOf="@+id/dueTvId"
-                        app:layout_constraintStart_toEndOf="@+id/dueTvId"
-                        app:layout_constraintTop_toTopOf="@+id/dueTvId" />
-
-                    <TextView
-                        android:id="@+id/itemCount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="16dp"
-                        android:text="Quantity : 21"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/amountTvId"
-                        app:layout_constraintTop_toBottomOf="@+id/amountTvId" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            </com.google.android.material.card.MaterialCardView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardId">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -185,22 +181,24 @@
 
                 <ImageView
                     android:id="@+id/purchaseImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_purchase"
+                    app:layout_constraintEnd_toStartOf="@+id/salesImgId"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/salesImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_sales"
                     app:layout_constraintBottom_toBottomOf="@+id/purchaseImgId"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/purchaseImgId"
                     app:layout_constraintTop_toTopOf="@+id/purchaseImgId" />
 
 
@@ -229,22 +227,24 @@
 
                 <ImageView
                     android:id="@+id/inventoryImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_inventory"
+                    app:layout_constraintEnd_toStartOf="@+id/shortlistImgId"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/purchaseTvId" />
 
                 <ImageView
                     android:id="@+id/shortlistImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginEnd="24dp"
                     android:src="@drawable/ic_shortlist"
                     app:layout_constraintBottom_toBottomOf="@+id/inventoryImgId"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/inventoryImgId"
                     app:layout_constraintTop_toTopOf="@+id/inventoryImgId" />
 
 
@@ -274,9 +274,10 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/customerCardId"
                     android:layout_width="100dp"
-                    android:layout_height="135dp"
+                    android:layout_height="125dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginBottom="24dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
@@ -294,8 +295,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_customers" />
 
@@ -311,11 +312,11 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/SupplierCardId"
                     android:layout_width="100dp"
-                    android:layout_height="135dp"
+                    android:layout_height="125dp"
+                    android:layout_marginEnd="8dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
                     app:layout_constraintBottom_toBottomOf="@+id/customerCardId"
@@ -332,8 +333,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_supplier" />
 
@@ -350,11 +351,10 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
-
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cashRegCardId"
                     android:layout_width="100dp"
-                    android:layout_height="135dp"
+                    android:layout_height="125dp"
                     android:layout_marginEnd="24dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
@@ -372,8 +372,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_cash_reg" />
 
@@ -394,9 +394,8 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

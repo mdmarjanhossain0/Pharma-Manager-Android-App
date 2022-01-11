@@ -140,9 +140,7 @@ class GlobalFragment : BaseInventoryFragment(),
             when(state.action) {
                 InventoryUtils.BRAND_NAME -> {
 
-
-
-                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.white_shape_outline_background_left)
                     globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.black))
 
                     globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
@@ -155,11 +153,10 @@ class GlobalFragment : BaseInventoryFragment(),
                 InventoryUtils.GENERIC -> {
 
 
-
                     globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
                     globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
 
-                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_white)
                     globalFragmentGenericAction.setTextColor(resources.getColor(R.color.black))
 
                     globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
@@ -172,19 +169,17 @@ class GlobalFragment : BaseInventoryFragment(),
 
 
 
-
                     globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
                     globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
                     globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
                     globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
 
-                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_white)
                     globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.black))
                     globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
                     globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
                 }
                 InventoryUtils.SYMPTOM -> {
-
 
 
                     globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
@@ -195,7 +190,7 @@ class GlobalFragment : BaseInventoryFragment(),
                     globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
                     globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
 
-                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.color.white)
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.white_shape_outline_background_right)
                     globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.black))
                 }
                 else -> {
