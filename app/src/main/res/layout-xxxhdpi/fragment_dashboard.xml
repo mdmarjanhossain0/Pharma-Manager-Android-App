@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="140dp"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="70dp"
             android:layout_marginEnd="24dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
@@ -181,8 +181,8 @@
 
                 <ImageView
                     android:id="@+id/purchaseImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_purchase"
@@ -191,8 +191,8 @@
 
                 <ImageView
                     android:id="@+id/salesImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/ic_sales"
                     app:layout_constraintBottom_toBottomOf="@+id/purchaseImgId"
@@ -225,8 +225,8 @@
 
                 <ImageView
                     android:id="@+id/inventoryImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_inventory"
@@ -235,8 +235,8 @@
 
                 <ImageView
                     android:id="@+id/shortlistImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/ic_shortlist"
                     app:layout_constraintBottom_toBottomOf="@+id/inventoryImgId"
@@ -270,7 +270,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/customerCardId"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_height="125dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="8dp"
@@ -291,14 +291,14 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_customers" />
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="Customers"
                             android:textColor="@color/colorPrimaryVariant" />
 
@@ -311,7 +311,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/SupplierCardId"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_height="125dp"
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
@@ -329,8 +329,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_supplier" />
 
@@ -350,7 +350,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cashRegCardId"
                     android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_height="125dp"
                     android:layout_marginEnd="24dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
@@ -362,14 +362,14 @@
                     <LinearLayout
                         android:id="@+id/dashBoardCashRegister"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
-                        android:layout_gravity="fill"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_margin="15dp"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_cash_reg" />
 

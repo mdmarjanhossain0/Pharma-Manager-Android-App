@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="110dp"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
@@ -63,7 +63,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardId"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="100dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
@@ -181,9 +181,9 @@
 
                 <ImageView
                     android:id="@+id/purchaseImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="46dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_purchase"
                     app:layout_constraintStart_toStartOf="parent"
@@ -191,9 +191,9 @@
 
                 <ImageView
                     android:id="@+id/salesImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="46dp"
                     android:src="@drawable/ic_sales"
                     app:layout_constraintBottom_toBottomOf="@+id/purchaseImgId"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -225,9 +225,9 @@
 
                 <ImageView
                     android:id="@+id/inventoryImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="32dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginStart="46dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_inventory"
                     app:layout_constraintStart_toStartOf="parent"
@@ -235,9 +235,9 @@
 
                 <ImageView
                     android:id="@+id/shortlistImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginEnd="46dp"
                     android:src="@drawable/ic_shortlist"
                     app:layout_constraintBottom_toBottomOf="@+id/inventoryImgId"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -269,9 +269,9 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/customerCardId"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="24dp"
@@ -291,8 +291,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_customers" />
 
@@ -300,7 +300,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Customers"
-                            android:textColor="@color/colorPrimaryVariant" />
+                            android:textColor="@color/colorPrimaryVariant"
+                            android:textSize="7sp" />
 
 
                     </LinearLayout>
@@ -310,8 +311,8 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/SupplierCardId"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
@@ -329,8 +330,8 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_supplier" />
 
@@ -339,6 +340,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Supplier"
+                            android:textSize="7sp"
                             android:textColor="@color/colorPrimaryVariant" />
 
 
@@ -349,9 +351,9 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cashRegCardId"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginEnd="32dp"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
                     app:layout_constraintBottom_toBottomOf="@+id/SupplierCardId"
@@ -362,14 +364,14 @@
                     <LinearLayout
                         android:id="@+id/dashBoardCashRegister"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="60dp"
                         android:layout_gravity="fill"
                         android:layout_margin="15dp"
                         android:orientation="vertical">
 
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
                             android:layout_gravity="center"
                             android:src="@drawable/ic_cash_reg" />
 
@@ -378,7 +380,8 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:text="Cash Register"
-                            android:textColor="@color/colorPrimaryVariant" />
+                            android:textColor="@color/colorPrimaryVariant"
+                            android:textSize="7sp" />
 
 
                     </LinearLayout>

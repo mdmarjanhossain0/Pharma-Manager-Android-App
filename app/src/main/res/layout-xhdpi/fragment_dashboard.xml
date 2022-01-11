@@ -14,7 +14,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="100dp"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
@@ -63,9 +63,9 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardId"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="100dp"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="24dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="5dp"
@@ -181,8 +181,8 @@
 
                 <ImageView
                     android:id="@+id/purchaseImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_purchase"
@@ -191,8 +191,8 @@
 
                 <ImageView
                     android:id="@+id/salesImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/ic_sales"
                     app:layout_constraintBottom_toBottomOf="@+id/purchaseImgId"
@@ -225,8 +225,8 @@
 
                 <ImageView
                     android:id="@+id/inventoryImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/ic_inventory"
@@ -235,8 +235,8 @@
 
                 <ImageView
                     android:id="@+id/shortlistImgId"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_marginEnd="32dp"
                     android:src="@drawable/ic_shortlist"
                     app:layout_constraintBottom_toBottomOf="@+id/inventoryImgId"
