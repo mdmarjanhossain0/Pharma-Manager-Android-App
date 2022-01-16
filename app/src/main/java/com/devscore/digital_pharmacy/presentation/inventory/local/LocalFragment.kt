@@ -323,74 +323,67 @@ class LocalFragment : BaseInventoryFragment(),
             when(state.action) {
                 InventoryUtils.BRAND_NAME -> {
 
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
 
-
-                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.color.white)
-                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.black))
-
-                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
-                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
-                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
-                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.right_outline)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
                 }
                 InventoryUtils.GENERIC -> {
 
 
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.left_outline)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
 
-                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
-                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
 
-                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.white)
-                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.black))
-
-                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
-
-                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
-                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.right_outline)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
                 }
                 InventoryUtils.INDICATION -> {
 
 
 
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.left_outline)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.colorPrimary))
 
-                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
-                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
-                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
-
-                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.white)
-                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.black))
-                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
-                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.right_outline)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
                 }
                 InventoryUtils.SYMPTOM -> {
 
 
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.left_outline)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
 
-                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
-                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
-
-                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
-                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
-
-                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.color.white)
-                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.black))
-                }
-                else -> {
-                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_left)
-                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.white))
-
-                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.white))
-                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.color.colorPrimaryVariant)
-                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.white))
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.colorPrimary))
                     globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.blue_shape_outline_background_right)
                     globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.white))
+                }
+                else -> {
+                    globalFragmentBrandNameAction.background = context?.resources?.getDrawable(R.drawable.left_outline)
+                    globalFragmentBrandNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
+
+                    globalFragmentGenericAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentGenericAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentIndicationAction.background = context?.resources?.getDrawable(R.drawable.box_outline)
+                    globalFragmentIndicationAction.setTextColor(resources.getColor(R.color.colorPrimary))
+                    globalFragmentCompanyNameAction.background = context?.resources?.getDrawable(R.drawable.right_outline)
+                    globalFragmentCompanyNameAction.setTextColor(resources.getColor(R.color.colorPrimary))
                 }
 
             }

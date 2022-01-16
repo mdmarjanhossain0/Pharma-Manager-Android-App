@@ -55,26 +55,30 @@
                 <TextView
                     android:id="@+id/globalFragmentBrandNameAction"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/blue_shape_outline_background_left"
+                    android:layout_height="0dp"
                     android:gravity="center"
                     android:text="Brand Name"
+                    android:background="@drawable/left_outline"
                     android:textSize="12sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view1"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <!--                android:background="@drawable/blue_shape_outline_background_left"-->
+
                 <View
                     android:id="@+id/view1"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/globalFragmentGenericAction"
                     app:layout_constraintStart_toEndOf="@+id/globalFragmentBrandNameAction"
+                    android:visibility="gone"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <!--                android:background="@color/colorPrimaryVariant"-->
 
                 <TextView
                     android:id="@+id/globalFragmentGenericAction"
@@ -83,8 +87,8 @@
                     android:gravity="center"
                     android:text="Generic Name"
                     android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:background="@color/colorPrimaryVariant"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/box_outline"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view2"
                     app:layout_constraintStart_toEndOf="@+id/view1"
@@ -95,21 +99,21 @@
                     android:id="@+id/view2"
                     android:layout_width="1dp"
                     android:layout_height="wrap_content"
-                    android:background="@color/colorPrimaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/globalFragmentIndicationAction"
                     app:layout_constraintStart_toEndOf="@+id/globalFragmentGenericAction"
+                    android:visibility="gone"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/globalFragmentIndicationAction"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimaryVariant"
                     android:gravity="center"
                     android:text="Indication"
                     android:textSize="12sp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/box_outline"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/view3"
                     app:layout_constraintStart_toEndOf="@+id/view2"
@@ -119,10 +123,10 @@
                     android:id="@+id/view3"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/colorPrimaryVariant"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/globalFragmentCompanyNameAction"
                     app:layout_constraintStart_toEndOf="@+id/globalFragmentIndicationAction"
+                    android:visibility="gone"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
@@ -132,8 +136,8 @@
                     android:gravity="center"
                     android:text="Company"
                     android:textSize="12sp"
-                    android:background="@color/colorPrimaryVariant"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/right_outline"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/view3"
