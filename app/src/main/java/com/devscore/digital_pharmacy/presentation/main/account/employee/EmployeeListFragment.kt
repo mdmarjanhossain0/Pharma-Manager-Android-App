@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -147,6 +148,8 @@ class EmployeeListFragment : BaseInventoryFragment(),
     }
 
     override fun onItemSelected(position: Int, item: Employee) {
+        val bundle = bundleOf("pk" to item.pk)
+        findNavController().navigate(R.id.action_employeeListFragment_to_employeeUpdateFragment, bundle)
     }
 
     override fun restoreListPosition() {

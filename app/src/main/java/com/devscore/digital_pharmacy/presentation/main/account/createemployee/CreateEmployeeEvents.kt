@@ -28,6 +28,10 @@ sealed class CreateEmployeeEvents{
         val address : String
     ): CreateEmployeeEvents()
 
+    data class OnUpdateIsActive(
+        val is_active : Boolean
+    ): CreateEmployeeEvents()
+
 
     data class OnUpdateRole (
         val role : String

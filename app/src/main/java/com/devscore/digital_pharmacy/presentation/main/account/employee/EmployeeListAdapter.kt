@@ -31,7 +31,8 @@ constructor(
         license_key = "",
         address = "",
         is_employee = 1,
-        role = ""
+        role = "",
+        is_active = true
     )
 
     val notFound = Employee(
@@ -44,7 +45,8 @@ constructor(
         license_key = "",
         address = "",
         is_employee = 1,
-        role = ""
+        role = "",
+        is_active = true
     )
 
     companion object {

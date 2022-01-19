@@ -17,5 +17,6 @@ data class CreateEmployeeState (
     val mobile : String = "",
     val address : String = "",
     val role : String = "",
+    val is_active : Boolean = true,
     val queue: Queue<StateMessage> = Queue(mutableListOf())
 )

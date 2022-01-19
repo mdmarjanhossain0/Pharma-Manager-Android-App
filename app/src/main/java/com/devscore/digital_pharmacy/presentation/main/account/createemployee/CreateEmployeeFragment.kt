@@ -53,7 +53,6 @@ class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
             val list = mutableListOf<String>()
             list.add("Sales Man")
             list.add("Cashier")
-            list.add("Other")
             initDialogRecyclerAdapter(bottomSheetDialog?.selectUnitRvId!!,list!!)
             bottomSheetDialog?.show()
         }
@@ -141,6 +140,12 @@ class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
         viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateConfirmPassword(confirmPasswordEdT.text.toString()))
         viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateMobile(phoneNumberEdT.text.toString()))
         viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateRole(roleEdT.text.toString()))
+        if (switchMaterial.isChecked) {
+            viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateIsActive(true))
+        }
+        else {
+            viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateIsActive(false))
+        }
 //        viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateAddress(addressLineEtvId1.text.toString()))
         viewModel.onTriggerEvent(CreateEmployeeEvents.Create)
 

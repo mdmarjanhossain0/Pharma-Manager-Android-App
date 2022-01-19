@@ -54,6 +54,18 @@ object AccountModule{
         )
     }
 
+    @Singleton
+    @Provides
+    fun provideUpdateEmployee (
+        service : AccountApiService,
+        cache : EmployeeDao
+    ): UpdateEmployee {
+        return UpdateEmployee(
+            service = service,
+            cache = cache
+        )
+    }
+
 
 
     @Singleton
@@ -108,6 +120,19 @@ object AccountModule{
         return AccountUpdate(
             service = service,
             accountDao = cache
+        )
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideGetEmployee (
+        service : AccountApiService,
+        cache : EmployeeDao
+    ): GetEmployee {
+        return GetEmployee(
+            service = service,
+            cache = cache
         )
     }
 }

@@ -8,7 +8,8 @@ data class Employee (
 //    val business_name : String,
     val mobile : String,
     val license_key : String,
-    val address : String,
+    val address : String?,
     val is_employee : Int,
-    val role : String?
+    val role : String?,
+    val is_active : Boolean
 )

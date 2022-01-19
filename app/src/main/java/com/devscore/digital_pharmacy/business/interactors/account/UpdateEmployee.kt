@@ -1,24 +1,18 @@
 package com.devscore.digital_pharmacy.business.interactors.account
 
-import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.account.EmployeeDao
 import com.devscore.digital_pharmacy.business.datasource.cache.account.toEmployeeEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.account.toEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.auth.toEntity
-import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.network.account.AccountApiService
-import com.devscore.digital_pharmacy.business.datasource.network.customer.CustomerApiService
-import com.devscore.digital_pharmacy.business.datasource.network.customer.network_response.toCustomer
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
-import com.devscore.digital_pharmacy.business.domain.models.*
+import com.devscore.digital_pharmacy.business.domain.models.AuthToken
+import com.devscore.digital_pharmacy.business.domain.models.Employee
 import com.devscore.digital_pharmacy.business.domain.util.*
-import com.devscore.digital_pharmacy.presentation.util.DataStoreKeys
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import java.lang.Exception
 
-class CreateEmployee (
+class UpdateEmployee (
     private val service : AccountApiService,
     private val cache : EmployeeDao
 ) {
@@ -27,22 +21,20 @@ class CreateEmployee (
 
     fun execute(
         authToken: AuthToken?,
+        pk : Int,
         email: String,
         username: String,
-        password: String,
-        confirmPassword: String,
         mobile : String,
         address : String,
         role : String,
         is_active : Boolean
     ): Flow<DataState<Employee>> = flow {
         emit(DataState.loading<Employee>())
-        val registerResponse = service.createEmployee(
+        val registerResponse = service.updateEmployee(
             "Token ${authToken?.token}",
+            pk = pk,
             email = email,
             username = username,
-            password = password,
-            password2 = confirmPassword,
             mobile = mobile,
             address = address,
             role = role,
@@ -75,11 +67,13 @@ class CreateEmployee (
         cache.insertEmployee(
             employee.toEmployeeEntity()
         )
-        emit(DataState.data(data = employee, response = Response(
-            message = "Successfully Add New User.",
-            uiComponentType = UIComponentType.Dialog(),
+        emit(
+            DataState.data(data = employee, response = Response(
+            message = "Successfully Update User.",
+            uiComponentType = UIComponentType.Toast(),
             messageType = MessageType.Success()
-        )))
+        )
+            ))
     }.catch { e ->
         emit(handleUseCaseException(e))
     }

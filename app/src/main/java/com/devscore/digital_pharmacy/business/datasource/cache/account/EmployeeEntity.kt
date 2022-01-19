@@ -29,7 +29,7 @@ data class EmployeeEntity(
     val license_key : String,
 
     @ColumnInfo(name = "address")
-    val address : String,
+    val address : String?,
 
     @ColumnInfo(name = "profile_picture")
     val profile_picture : String?,
@@ -39,7 +39,10 @@ data class EmployeeEntity(
 
 
     @ColumnInfo(name = "role")
-    var role : String?
+    var role : String?,
+
+    @ColumnInfo(name="is_active")
+    var is_active : Boolean
 )
 
 fun EmployeeEntity.toEmployee(): Employee {
@@ -52,7 +55,8 @@ fun EmployeeEntity.toEmployee(): Employee {
         license_key = license_key,
         address = address,
         is_employee = is_employee,
-        role = role
+        role = role,
+        is_active = is_active
     )
 }
 
@@ -66,6 +70,7 @@ fun Employee.toEmployeeEntity(): EmployeeEntity {
         license_key = license_key,
         address = address,
         is_employee = is_employee,
-        role = role
+        role = role,
+        is_active = is_active
     )
 }

@@ -11,6 +11,7 @@ import com.devscore.digital_pharmacy.business.interactors.account.CreateEmployee
 import com.devscore.digital_pharmacy.business.interactors.auth.Register
 import com.devscore.digital_pharmacy.presentation.auth.register.RegisterEvents
 import com.devscore.digital_pharmacy.presentation.auth.register.RegisterState
+import com.devscore.digital_pharmacy.presentation.main.account.updateemployee.OnCompleteCallback
 import com.devscore.digital_pharmacy.presentation.session.SessionEvents
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,6 +29,11 @@ constructor(
     private val TAG: String = "AppDebug"
 
     val state: MutableLiveData<CreateEmployeeState> = MutableLiveData(CreateEmployeeState())
+
+    private lateinit var callback : OnCompleteCallback
+    fun submit(callback: OnCompleteCallback) {
+        this.callback = callback
+    }
 
     fun onTriggerEvent(event: CreateEmployeeEvents) {
         when (event) {
@@ -59,12 +65,24 @@ constructor(
             is CreateEmployeeEvents.OnUpdateConfirmPassword -> {
                 onUpdateConfirmPassword(event.confirmPassword)
             }
+
+            is CreateEmployeeEvents.OnUpdateIsActive -> {
+                onUpdateIsActive(event.is_active)
+            }
             is CreateEmployeeEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
         }
     }
 
+
+
+
+    private fun onUpdateIsActive(is_active: Boolean) {
+        state.value?.let { state ->
+            this.state.value = state.copy(is_active = is_active)
+        }
+    }
     private fun onUpdateRole(role: String) {
         state.value?.let { state ->
             this.state.value = state.copy(role = role)
@@ -114,7 +132,8 @@ constructor(
         confirmPassword: String = state.value?.confirmPassword!!,
         mobile : String = state.value?.mobile!!,
         role : String = state.value?.role!!,
-        address : String = state.value?.address!!
+        address : String = state.value?.address!!,
+        is_active : Boolean = state.value?.is_active!!
     ) {
         state.value?.let { state ->
             createEmployee.execute(
@@ -125,7 +144,8 @@ constructor(
                 confirmPassword = confirmPassword,
                 mobile = mobile,
                 role = role,
-                address = address
+                address = address,
+                is_active = is_active
             ).onEach { dataState ->
                 this.state.value = state.copy(isLoading = dataState.isLoading)
 
@@ -164,4 +184,8 @@ constructor(
         }
     }
 
+}
+
+interface OnCompleteCallback {
+    fun done()
 }

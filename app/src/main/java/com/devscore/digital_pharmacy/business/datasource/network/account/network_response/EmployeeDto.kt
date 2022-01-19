@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName
 class EmployeeDto(
 
     @SerializedName("response")
-    var response: String,
+    var response: String?,
 
     @SerializedName("error_message")
-    var errorMessage: String,
+    var errorMessage: String?,
 
     @SerializedName("email")
     var email: String,
@@ -36,14 +36,17 @@ class EmployeeDto(
     var license_key : String,
 
     @SerializedName("address")
-    var address : String,
+    var address : String?,
 
 
     @SerializedName("is_employee")
     var is_employee : Int,
 
     @SerializedName("role")
-    var role : String?
+    var role : String?,
+
+    @SerializedName("is_active")
+    var is_active : Boolean
 )
 
 
@@ -59,6 +62,7 @@ fun EmployeeDto.toEmployee() : Employee {
         license_key = license_key,
         address = address,
         is_employee = is_employee,
-        role = role
+        role = role,
+        is_active = is_active
     )
 }

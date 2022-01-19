@@ -25,11 +25,13 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xxxhdpi/fragment_dashboard.xml" value="0.1911231884057971" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dashboard.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dashboardtest.xml" value="0.14" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_create_employee.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_employee_update.xml" value="0.1814814814814815" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_employee_update.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_global.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_local.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_login.xml" value="0.19429347826086957" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_register.xml" value="0.16203703703703703" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_vendor_receive.xml" value="0.11775362318840579" />
       </map>
     </option>

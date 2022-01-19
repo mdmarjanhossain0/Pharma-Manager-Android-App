@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 42,
-    "identityHash": "471728d352b545e01ed0367c6bf8c8e8",
+    "version": 44,
+    "identityHash": "27fc1d4c5fd3071af2ce80b80981c90c",
     "entities": [
       {
         "tableName": "auth_token",
@@ -2380,7 +2380,7 @@
       },
       {
         "tableName": "AppClientEmployee",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER NOT NULL, `email` TEXT NOT NULL, `username` TEXT NOT NULL, `mobile` TEXT NOT NULL, `license_key` TEXT NOT NULL, `address` TEXT NOT NULL, `profile_picture` TEXT, `is_employee` INTEGER NOT NULL, `role` TEXT, `is_active` INTEGER NOT NULL, PRIMARY KEY(`pk`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`pk` INTEGER NOT NULL, `email` TEXT NOT NULL, `username` TEXT NOT NULL, `mobile` TEXT NOT NULL, `license_key` TEXT NOT NULL, `address` TEXT, `profile_picture` TEXT, `is_employee` INTEGER NOT NULL, `role` TEXT, `is_active` INTEGER NOT NULL, PRIMARY KEY(`pk`))",
         "fields": [
           {
             "fieldPath": "pk",
@@ -2416,7 +2416,7 @@
             "fieldPath": "address",
             "columnName": "address",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "profile_picture",
@@ -2500,7 +2500,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '471728d352b545e01ed0367c6bf8c8e8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '27fc1d4c5fd3071af2ce80b80981c90c')"
     ]
   }
 }

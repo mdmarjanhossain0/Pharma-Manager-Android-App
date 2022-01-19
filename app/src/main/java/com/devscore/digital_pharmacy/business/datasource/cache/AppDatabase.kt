@@ -53,7 +53,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
     SalesDetailsMonthEntity::class,
     EmployeeEntity::class,
     CardEntity::class
-], version = 42)
+], version = 44)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getAuthTokenDao(): AuthTokenDao

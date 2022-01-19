@@ -1,60 +1,192 @@
 package com.devscore.digital_pharmacy.presentation.main.account.updateemployee
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.devscore.digital_pharmacy.MainActivity
 import com.devscore.digital_pharmacy.R
+import com.devscore.digital_pharmacy.business.domain.models.Employee
+import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
+import com.devscore.digital_pharmacy.presentation.auth.BaseAuthFragment
+import com.devscore.digital_pharmacy.presentation.main.account.createemployee.EmployeeRoleAdapter
+import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
+import com.devscore.digital_pharmacy.presentation.util.processQueue
+import com.devscore.digital_pharmacy.presentation.util.setDivider
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.dialog_unit_select.*
+import kotlinx.android.synthetic.main.fragment_employee_update.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class EmployeeUpdateFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interaction, OnCompleteCallback {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [EmployeeUpdateFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class EmployeeUpdateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private val viewModel: EmployeeUpdateViewModel by viewModels()
+    private var roleRecyclerAdapter : EmployeeRoleAdapter? = null
+    private var bottomSheetDialog : BottomSheetDialog? = null
+    var pk : Int? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        pk = arguments?.getInt("pk", -1)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
         return inflater.inflate(R.layout.fragment_employee_update, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EmployeeUpdateFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EmployeeUpdateFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initUIClick()
+        updateButton.setOnClickListener {
+            create()
+        }
+        subscribeObservers()
+    }
+
+    private fun initUIClick() {
+        backImage.setOnClickListener {
+            (activity as MainActivity).onBackPressed()
+        }
+
+        roleEdT.setOnClickListener {
+            bottomSheetDialog = BottomSheetDialog(requireContext())
+            bottomSheetDialog?.setContentView(R.layout.dialog_unit_select)
+            val list = mutableListOf<String>()
+            list.add("Sales Man")
+            list.add("Cashier")
+            initDialogRecyclerAdapter(bottomSheetDialog?.selectUnitRvId!!,list!!)
+            bottomSheetDialog?.show()
+        }
+    }
+
+    private fun initDialogRecyclerAdapter(recyclerView : RecyclerView, list : List<String>) {
+        recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            val topSpacingDecorator = TopSpacingItemDecoration(5)
+            removeItemDecoration(topSpacingDecorator) // does nothing if not applied already
+            addItemDecoration(topSpacingDecorator)
+
+            roleRecyclerAdapter = EmployeeRoleAdapter(this@EmployeeUpdateFragment)
+            adapter = roleRecyclerAdapter
+            setDivider(R.drawable.recycler_view_divider)
+        }
+        roleRecyclerAdapter?.submit(list)
+    }
+
+    private fun subscribeObservers() {
+        viewModel.submit(this)
+        viewModel.state.observe(viewLifecycleOwner) { state ->
+            uiCommunicationListener.displayProgressBar(state.isLoading)
+            processQueue(
+                context = context,
+                queue = state.queue,
+                stateMessageCallback = object : StateMessageCallback {
+                    override fun removeMessageFromStack() {
+                        viewModel.onTriggerEvent(
+                            EmployeeUpdateEvents.OnRemoveHeadFromQueue)
+                    }
+                })
+
+
+            if (state.employee != null) {
+                setField(state.employee)
             }
+        }
+    }
+
+    private fun setField(
+        employee : Employee
+    ){
+        emailId.setText(employee.email)
+        userName.setText(employee.username)
+        phoneNumberEdT.setText(employee.mobile)
+        roleEdT.setText(employee.role)
+        if (employee.is_active) {
+            switchMaterial.isChecked = true
+        }
+        else {
+            switchMaterial.isChecked = false
+        }
+    }
+
+    private fun cacheState(){
+        var blank = false
+
+
+
+
+
+        if (emailId.text.isNullOrBlank()) {
+            blank = true
+            emailId.error = "Error"
+        }
+        if (userName.text.isNullOrBlank()) {
+            blank = true
+            userName.error = "Error"
+        }
+        if (phoneNumberEdT.text.isNullOrBlank()) {
+            blank = true
+            phoneNumberEdT.error = "Error"
+        }
+        if (blank) {
+            throw Exception("Error")
+        }
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateEmail(emailId.text.toString()))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateUsername(userName.text.toString()))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateMobile(phoneNumberEdT.text.toString()))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateRole(roleEdT.text.toString()))
+        if (switchMaterial.isChecked) {
+            viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateIsActive(true))
+        }
+        else {
+            viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateIsActive(false))
+        }
+//        viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateAddress(addressLineEtvId1.text.toString()))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.Update)
+
+    }
+
+    private fun create() {
+        try {
+            cacheState()
+        }
+        catch (e : Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
+
+    override fun onItemSelected(position: Int, item: String) {
+        roleEdT.setText(item)
+    }
+
+
+
+
+    override fun onResume() {
+        super.onResume()
+        (activity as MainActivity).hideBottomNav(true)
+        if (pk != null && pk!! > 0) {
+            viewModel.onTriggerEvent(EmployeeUpdateEvents.GetEmployee(pk!!))
+        }
+    }
+
+    override fun done() {
+        findNavController().popBackStack()
     }
 }

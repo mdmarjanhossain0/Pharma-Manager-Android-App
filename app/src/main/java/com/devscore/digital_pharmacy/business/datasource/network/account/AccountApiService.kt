@@ -21,7 +21,21 @@ interface AccountApiService {
         @Field("password2") password2: String = "adminpassword",
         @Field("mobile") mobile: String = "54354",
         @Field("address") address: String = "BD",
-        @Field("role") role : String
+        @Field("role") role : String,
+        @Field("is_active") is_active : Boolean
+    ): EmployeeDto
+
+    @PUT("account/employeelist/{pk}/update")
+    @FormUrlEncoded
+    suspend fun updateEmployee (
+        @Header("Authorization") authorization: String,
+        @Path("pk") pk : Int,
+        @Field("email") email: String = "abc1@gmail.com",
+        @Field("username") username: String = "a",
+        @Field("mobile") mobile: String = "54354",
+        @Field("address") address: String = "BD",
+        @Field("role") role : String,
+        @Field("is_active") is_active : Boolean
     ): EmployeeDto
 
 
@@ -29,6 +43,12 @@ interface AccountApiService {
     suspend fun getEmployeeList (
         @Header("Authorization") authorization : String
     ): EmployeeResponse
+
+    @GET("account/employeelist/{pk}")
+    suspend fun getEmployee (
+        @Header("Authorization") authorization : String,
+        @Path("pk") pk : Int
+    ): EmployeeDto
 
 
 

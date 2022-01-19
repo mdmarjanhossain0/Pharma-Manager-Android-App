@@ -25,5 +25,9 @@ interface EmployeeDao {
 
 
     @Query("SELECT * FROM AppClientEmployee")
-    suspend fun getEmployee() : List<EmployeeEntity>
+    suspend fun getEmployeeList() : List<EmployeeEntity>
+
+
+    @Query("SELECT * FROM AppClientEmployee WHERE pk =:pk")
+    suspend fun getEmployee(pk : Int) : EmployeeEntity
 }

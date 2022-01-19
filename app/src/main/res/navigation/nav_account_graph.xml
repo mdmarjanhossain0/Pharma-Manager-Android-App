@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_employeeListFragment_to_createEmployeeFragment"
             app:destination="@id/createEmployeeFragment" />
+        <action
+            android:id="@+id/action_employeeListFragment_to_employeeUpdateFragment"
+            app:destination="@id/employeeUpdateFragment" />
     </fragment>
     <fragment
         android:id="@+id/createEmployeeFragment"
@@ -35,4 +38,8 @@
         android:id="@+id/accountUpdateFragment"
         android:name="com.devscore.digital_pharmacy.presentation.main.account.update.AccountUpdateFragment"
         android:label="AccountUpdateFragment" />
+    <fragment
+        android:id="@+id/employeeUpdateFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.main.account.updateemployee.EmployeeUpdateFragment"
+        android:label="EmployeeUpdateFragment" />
 </navigation>
