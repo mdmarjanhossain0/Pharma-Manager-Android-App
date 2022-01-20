@@ -30,7 +30,6 @@ constructor(
     val state: MutableLiveData<EmployeeLIstState> = MutableLiveData(EmployeeLIstState())
 
     init {
-        onTriggerEvent(EmployeeListEvents.NewEmployeeSearch)
     }
 
     fun onTriggerEvent(event: EmployeeListEvents) {

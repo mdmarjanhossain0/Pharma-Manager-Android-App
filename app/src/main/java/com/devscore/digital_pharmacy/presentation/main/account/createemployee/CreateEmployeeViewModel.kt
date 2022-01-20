@@ -11,7 +11,6 @@ import com.devscore.digital_pharmacy.business.interactors.account.CreateEmployee
 import com.devscore.digital_pharmacy.business.interactors.auth.Register
 import com.devscore.digital_pharmacy.presentation.auth.register.RegisterEvents
 import com.devscore.digital_pharmacy.presentation.auth.register.RegisterState
-import com.devscore.digital_pharmacy.presentation.main.account.updateemployee.OnCompleteCallback
 import com.devscore.digital_pharmacy.presentation.session.SessionEvents
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -151,6 +150,7 @@ constructor(
 
                 dataState.data?.let { employee ->
                     this.state.value = state.copy(employee = employee)
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->

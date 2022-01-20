@@ -88,7 +88,7 @@ class EmployeeListFragment : BaseInventoryFragment(),
     private fun subscribeObservers(){
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
-            uiCommunicationListener.displayProgressBar(state.isLoading)
+//            uiCommunicationListener.displayProgressBar(state.isLoading)
 
             processQueue(
                 context = context,
@@ -167,5 +167,6 @@ class EmployeeListFragment : BaseInventoryFragment(),
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).hideBottomNav(true)
+        viewModel.onTriggerEvent(EmployeeListEvents.NewEmployeeSearch)
     }
 }

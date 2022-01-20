@@ -12,7 +12,7 @@ data class EmployeeUpdateState (
     val username: String = "",
     val mobile : String = "",
     val address : String = "",
-    val role : String = "",
+    val role : String? = "",
     val is_active : Boolean = true,
     val queue: Queue<StateMessage> = Queue(mutableListOf())
 )

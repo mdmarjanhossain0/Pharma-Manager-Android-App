@@ -26,7 +26,7 @@ class UpdateEmployee (
         username: String,
         mobile : String,
         address : String,
-        role : String,
+        role : String?,
         is_active : Boolean
     ): Flow<DataState<Employee>> = flow {
         emit(DataState.loading<Employee>())

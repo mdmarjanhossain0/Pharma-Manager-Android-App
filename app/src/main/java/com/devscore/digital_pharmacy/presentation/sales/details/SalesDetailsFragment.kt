@@ -29,11 +29,8 @@ import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardState
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
 import com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnEvents
 import com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnViewModel
-import com.devscore.digital_pharmacy.presentation.util.PdfDocumentAdapter
-import com.devscore.digital_pharmacy.presentation.util.SalesPdfWorker
+import com.devscore.digital_pharmacy.presentation.util.*
 import com.devscore.digital_pharmacy.presentation.util.SalesPdfWorker.Companion.Progress
-import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
-import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sales_details.*
 import kotlinx.coroutines.*
@@ -312,6 +309,7 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
             addItemDecoration(topSpacingDecorator)
             recyclerAdapter = SalesDetailsAdapter(this@SalesDetailsFragment)
             adapter = recyclerAdapter
+            setDivider(R.drawable.details_divider)
         }
     }
 

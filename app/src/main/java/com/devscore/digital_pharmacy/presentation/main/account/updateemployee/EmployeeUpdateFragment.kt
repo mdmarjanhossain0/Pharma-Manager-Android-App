@@ -1,6 +1,7 @@
 package com.devscore.digital_pharmacy.presentation.main.account.updateemployee
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,6 +63,10 @@ class EmployeeUpdateFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
             val list = mutableListOf<String>()
             list.add("Sales Man")
             list.add("Cashier")
+            bottomSheetDialog?.dialogClose?.setOnClickListener {
+                Log.d(TAG, "Bottom Dialog dismiss")
+                bottomSheetDialog?.dismiss()
+            }
             initDialogRecyclerAdapter(bottomSheetDialog?.selectUnitRvId!!,list!!)
             bottomSheetDialog?.show()
         }
@@ -94,22 +99,34 @@ class EmployeeUpdateFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
                             EmployeeUpdateEvents.OnRemoveHeadFromQueue)
                     }
                 })
+            setField(
+                email = state.email,
+                username = state.username,
+                mobile = state.mobile,
+                role = state.role,
+                is_active = state.is_active
+            )
 
-
-            if (state.employee != null) {
-                setField(state.employee)
-            }
         }
     }
 
     private fun setField(
-        employee : Employee
+        email : String,
+        username : String,
+        mobile : String,
+        role : String?,
+        is_active : Boolean
     ){
-        emailId.setText(employee.email)
-        userName.setText(employee.username)
-        phoneNumberEdT.setText(employee.mobile)
-        roleEdT.setText(employee.role)
-        if (employee.is_active) {
+        emailId.setText(email)
+        userName.setText(username)
+        phoneNumberEdT.setText(mobile)
+        if (role != null) {
+            roleEdT.setText(role)
+        }
+        else {
+            roleEdT.setText("")
+        }
+        if (is_active) {
             switchMaterial.isChecked = true
         }
         else {
@@ -119,9 +136,13 @@ class EmployeeUpdateFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
 
     private fun cacheState(){
         var blank = false
+        var is_active1 = switchMaterial.isChecked
 
-
-
+        val email1 = emailId.text.toString()
+        val username1 = userName.text.toString()
+        val mobile1 = phoneNumberEdT.text.toString()
+        val role1 = roleEdT.text.toString()
+        Log.d(TAG, "First1 " + email1 + "  " +username1 + "   " + mobile1 + " " + role1 + " " + is_active1)
 
 
         if (emailId.text.isNullOrBlank()) {
@@ -137,25 +158,36 @@ class EmployeeUpdateFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
             phoneNumberEdT.error = "Error"
         }
         if (blank) {
+            Log.d(TAG, "Error")
             throw Exception("Error")
         }
-        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateEmail(emailId.text.toString()))
-        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateUsername(userName.text.toString()))
-        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateMobile(phoneNumberEdT.text.toString()))
-        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateRole(roleEdT.text.toString()))
-        if (switchMaterial.isChecked) {
-            viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateIsActive(true))
-        }
-        else {
-            viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateIsActive(false))
-        }
-//        viewModel.onTriggerEvent(CreateEmployeeEvents.OnUpdateAddress(addressLineEtvId1.text.toString()))
-        viewModel.onTriggerEvent(EmployeeUpdateEvents.Update)
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateEmail(email1))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateUsername(username1))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateMobile(mobile1))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateRole(role1))
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.OnUpdateIsActive(switchMaterial.isChecked))
+        val email = emailId.text.toString()
+        val username = userName.text.toString()
+        val mobile = phoneNumberEdT.text.toString()
+        val role = roleEdT.text.toString()
+        Log.d(TAG, "Second " + email + "  " +username + "   " + mobile + " " + role + " " + is_active1.toString())
+        viewModel.onTriggerEvent(EmployeeUpdateEvents.Update(
+            email = email,
+            username = username,
+            mobile = mobile,
+            role = role,
+            is_active = is_active1
+        ))
 
     }
 
     private fun create() {
         try {
+            val email = emailId.text.toString()
+            val username = userName.text.toString()
+            val mobile = phoneNumberEdT.text.toString()
+            val role = roleEdT.text.toString()
+            Log.d(TAG, "First1 " + email + "  " +username + "   " + mobile + " " + role + " ")
             cacheState()
         }
         catch (e : Exception) {
@@ -173,6 +205,7 @@ class EmployeeUpdateFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
 
     override fun onItemSelected(position: Int, item: String) {
         roleEdT.setText(item)
+        bottomSheetDialog?.dismiss()
     }
 
 

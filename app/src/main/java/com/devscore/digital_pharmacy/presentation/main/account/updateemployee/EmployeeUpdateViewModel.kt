@@ -35,7 +35,13 @@ constructor(
     fun onTriggerEvent(event: EmployeeUpdateEvents) {
         when (event) {
             is EmployeeUpdateEvents.Update -> {
-                updateEmployee()
+                updateEmployee(
+                    email = event.email,
+                    username = event.username,
+                    mobile = event.mobile,
+                    role = event.role,
+                    is_active = event.is_active
+                )
             }
 
             is EmployeeUpdateEvents.GetEmployee -> {
@@ -79,8 +85,15 @@ constructor(
                 Log.d(TAG, "ViewModel " + dataState.toString())
                 this.state.value = state.copy(isLoading = dataState.isLoading)
 
-                dataState.data?.let { account ->
-                    this.state.value = state.copy(employee = account)
+                dataState.data?.let { employee ->
+                    this.state.value = state.copy(
+                        employee = employee,
+                        email = employee.email,
+                        username = employee.username,
+                        mobile = employee.mobile,
+                        role = employee.role,
+                        is_active = employee.is_active
+                    )
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -141,23 +154,14 @@ constructor(
     }
 
     private fun updateEmployee(
-        email: String = state.value?.email!!,
-        username: String = state.value?.username!!,
-        mobile : String = state.value?.mobile!!,
-        role : String = state.value?.role!!,
-        address : String = state.value?.address!!,
-        is_active : Boolean = state.value?.is_active!!
+        email: String,
+        username: String,
+        mobile: String,
+        role: String?,
+        is_active: Boolean
     ) {
         state.value?.let { state ->
-            this.state.value = state.copy(
-               employee = state.employee?.copy(
-                   email = email,
-                   username = username,
-                   mobile = mobile,
-                   role = role,
-                   is_active = is_active
-               )
-            )
+            Log.d(TAG, email + "  " +username + "   " + mobile + " " + role + " " + is_active.toString())
             updateEmployee.execute(
                 authToken = sessionManager.state.value?.authToken,
                 pk = state.employee?.pk!!,
@@ -165,7 +169,7 @@ constructor(
                 username = username,
                 mobile = mobile,
                 role = role,
-                address = address,
+                address = state.address,
                 is_active = is_active
             ).onEach { dataState ->
                 this.state.value = state.copy(isLoading = dataState.isLoading)

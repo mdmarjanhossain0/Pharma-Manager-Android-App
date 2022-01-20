@@ -1,10 +1,12 @@
 package com.devscore.digital_pharmacy.presentation.main.account.createemployee
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.devscore.digital_pharmacy.MainActivity
@@ -18,7 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.dialog_unit_select.*
 import kotlinx.android.synthetic.main.fragment_create_employee.*
 
-class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interaction {
+class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interaction, OnCompleteCallback {
 
     private val viewModel: CreateEmployeeViewModel by viewModels()
     private var roleRecyclerAdapter : EmployeeRoleAdapter? = null
@@ -53,6 +55,10 @@ class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
             val list = mutableListOf<String>()
             list.add("Sales Man")
             list.add("Cashier")
+            bottomSheetDialog?.dialogClose?.setOnClickListener {
+                Log.d(TAG, "Bottom Dialog dismiss")
+                bottomSheetDialog?.dismiss()
+            }
             initDialogRecyclerAdapter(bottomSheetDialog?.selectUnitRvId!!,list!!)
             bottomSheetDialog?.show()
         }
@@ -73,6 +79,7 @@ class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
     }
 
     private fun subscribeObservers() {
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner) { state ->
             uiCommunicationListener.displayProgressBar(state.isLoading)
             processQueue(
@@ -170,6 +177,7 @@ class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
 
     override fun onItemSelected(position: Int, item: String) {
         roleEdT.setText(item)
+        bottomSheetDialog?.dismiss()
     }
 
 
@@ -178,5 +186,9 @@ class CreateEmployeeFragment : BaseAuthFragment(), EmployeeRoleAdapter.Interacti
     override fun onResume() {
         super.onResume()
         (activity as MainActivity).hideBottomNav(true)
+    }
+
+    override fun done() {
+        findNavController().popBackStack()
     }
 }

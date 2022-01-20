@@ -5,7 +5,13 @@ import com.devscore.digital_pharmacy.presentation.main.account.createemployee.Cr
 
 sealed class EmployeeUpdateEvents{
 
-    object Update : EmployeeUpdateEvents()
+    data class Update(
+        val email: String,
+        val username: String,
+        val mobile: String,
+        val role: String?,
+        val is_active: Boolean
+    ) : EmployeeUpdateEvents()
 
 
 
@@ -20,14 +26,6 @@ sealed class EmployeeUpdateEvents{
 
     data class OnUpdateUsername(
         val username: String
-    ): EmployeeUpdateEvents()
-
-    data class OnUpdatePassword(
-        val password: String
-    ): EmployeeUpdateEvents()
-
-    data class OnUpdateConfirmPassword(
-        val confirmPassword: String
     ): EmployeeUpdateEvents()
 
     data class OnUpdateMobile(

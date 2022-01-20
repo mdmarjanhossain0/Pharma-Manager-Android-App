@@ -317,6 +317,10 @@ constructor(
                         unit = it
                     )
                 }
+                bottomSheetDialog?.dialogClose?.setOnClickListener {
+                    Log.d("AppDebug", "Bottom Dialog dismiss")
+                    bottomSheetDialog?.dismiss()
+                }
                 initDialogRecyclerAdapter(bottomSheetDialog?.selectUnitRvId!!,list!!)
                 bottomSheetDialog?.show()
 

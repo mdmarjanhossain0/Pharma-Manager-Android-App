@@ -35,6 +35,7 @@
             android:text="Order Id #"
             android:gravity="center_vertical"
             android:paddingStart="5dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -52,8 +53,10 @@
             app:iconifiedByDefault="false"
             android:text="     Walk-in customer"
             android:gravity="center_vertical"
+            android:textColor="@color/white"
             android:drawableStart="@drawable/ic_person"
-            android:paddingStart="5dp"
+            android:paddingStart="15dp"
+            android:background="@drawable/search_shape"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -94,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/totalItem"
         tools:itemCount="1"
-        tools:listitem="@layout/item_sub_sales_list" />
+        tools:listitem="@layout/item_details_unit" />
 
 
     <com.google.android.material.card.MaterialCardView
