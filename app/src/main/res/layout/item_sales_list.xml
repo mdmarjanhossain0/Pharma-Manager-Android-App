@@ -7,6 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
     android:orientation="vertical"
+    android:background="@drawable/box_outline"
     app:layoutDescription="@xml/item_sales_list_scene">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +65,7 @@
         android:clipToPadding="false"
         android:paddingVertical="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingLeft="5dp"
         tools:itemCount="5"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
         tools:listitem="@layout/item_sub_sales_list"

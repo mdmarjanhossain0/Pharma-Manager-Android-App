@@ -27,6 +27,8 @@ import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.coroutines.*
 
 import androidx.core.widget.doOnTextChanged
+import androidx.fragment.app.viewModels
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 
 
 @AndroidEntryPoint
@@ -34,8 +36,14 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
 
 
     private var recyclerAdapter: SalesOrdersAdapter? = null // can leak memory so need to null
-    private var recyclerItemAdapter: SalesOrderItemAdapter? = null
-    private val viewModel: SalesCardViewModel by activityViewModels()
+    private val viewModel: SalesPayViewModel by viewModels()
+    var pk : Int? = null
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pk = arguments?.getInt("pk", -2)
+    }
 
 
     override fun onCreateView(
@@ -70,35 +78,35 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
                 dueWarning()
             }
             else {
-                viewModel.onTriggerEvent(SalesCardEvents.OrderCompleted)
+                viewModel.onTriggerEvent(SalesPayEvents.OrderCompleted)
             }
         }
 
         switchId.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                viewModel.onTriggerEvent(SalesCardEvents.IsDiscountPercent(true))
+                viewModel.onTriggerEvent(SalesPayEvents.IsDiscountPercent(true))
             }
             else {
-                viewModel.onTriggerEvent(SalesCardEvents.IsDiscountPercent(false))
+                viewModel.onTriggerEvent(SalesPayEvents.IsDiscountPercent(false))
             }
         }
 
 
         salesPaymentReceiveAmount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
-                viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
+                viewModel.onTriggerEvent(SalesPayEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
             }
             else {
-                viewModel.onTriggerEvent(SalesCardEvents.ReceiveAmount(0f))
+                viewModel.onTriggerEvent(SalesPayEvents.ReceiveAmount(0f))
             }
         }
 
         salesPaymentDiscount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
-                viewModel.onTriggerEvent(SalesCardEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
+                viewModel.onTriggerEvent(SalesPayEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
             }
             else {
-                viewModel.onTriggerEvent(SalesCardEvents.Discount(0f))
+                viewModel.onTriggerEvent(SalesPayEvents.Discount(0f))
             }
         }
 
@@ -123,15 +131,17 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
                 queue = state.queue,
                 stateMessageCallback = object: StateMessageCallback {
                     override fun removeMessageFromStack() {
-                        viewModel.onTriggerEvent(SalesCardEvents.OnRemoveHeadFromQueue)
+                        viewModel.onTriggerEvent(SalesPayEvents.OnRemoveHeadFromQueue)
                     }
                 })
 
-            recyclerAdapter?.apply {
-                submitList(order = state.order, cartList = state.salesCartList)
+            if (state.order != null) {
+                recyclerAdapter?.apply {
+                    submitList(order = state.order)
+                }
             }
 
-            salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
+            salesPaymentItemCount.setText("Items : " + state.order?.sales_oder_medicines?.size.toString())
             salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
 
@@ -149,10 +159,10 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
                 salesPaymentSearchView.setText("      " + "Walk-In Customer")
             }
 
-            if (state.uploaded) {
-                viewModel.state.value = SalesCardState()
-                findNavController().navigate(R.id.action_salesPayNowFragment_to_salesFragment)
-            }
+//            if (state.uploaded) {
+//                viewModel.state.value = SalesCardState()
+//                findNavController().navigate(R.id.action_salesPayNowFragment_to_salesFragment)
+//            }
 
             if (state.pk > 0) {
                 orderNo.setText("#Order Number: " + state.pk)
@@ -207,8 +217,14 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
         }
     }
 
-    override fun onItemDelete(item: SalesCart) {
-        viewModel.onTriggerEvent(SalesCardEvents.DeleteMedicine(item.medicine!!))
+    override fun onItemDelete(item: SalesOrderMedicine) {
+//        viewModel.onTriggerEvent(SalesCardEvents.DeleteMedicine(item.medicine!!))
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.onTriggerEvent(SalesPayEvents.OrderDetails(pk!!))
     }
 
 

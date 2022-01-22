@@ -144,7 +144,7 @@ constructor(
 
 
 
-    private fun getAccount() {
+    /*private fun getAccount() {
         state.value?.let { state ->
             getAccountInteractor.execute(
                 authToken = sessionManager.state.value?.authToken
@@ -165,7 +165,7 @@ constructor(
                 }
             }.launchIn(viewModelScope)
         }
-    }
+    }*/
 
     private fun selectCustomer(customer: Customer) {
         state.value?.let { state ->

@@ -49,13 +49,13 @@ class SalesOrderItemAdapter
         return differ.currentList.size
     }
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesCart>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<SalesOrderMedicine>() {
 
-        override fun areItemsTheSame(oldItem: SalesCart, newItem: SalesCart): Boolean {
-            return oldItem.medicine?.id == newItem.medicine?.id
+        override fun areItemsTheSame(oldItem: SalesOrderMedicine, newItem: SalesOrderMedicine): Boolean {
+            return oldItem.pk == newItem.pk
         }
 
-        override fun areContentsTheSame(oldItem: SalesCart, newItem: SalesCart): Boolean {
+        override fun areContentsTheSame(oldItem: SalesOrderMedicine, newItem: SalesOrderMedicine): Boolean {
             return oldItem == newItem
         }
     }
@@ -87,7 +87,7 @@ class SalesOrderItemAdapter
         }
     }
 
-    fun submitList(list: List<SalesCart>?){
+    fun submitList(list: List<SalesOrderMedicine>?){
         differ.submitList(list)
         notifyDataSetChanged()
     }
@@ -101,10 +101,10 @@ class SalesOrderItemAdapter
         private val interaction: Interaction? = null
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: SalesCart) = with(itemView) {
-            salesPaymentOrderItemBrandName.setText(item.medicine?.brand_name)
-            salesPaymentOrderItemUnitPrize.setText("৳" + (item.salesUnit?.quantity!! * item.medicine?.mrp!!))
-            salesPaymentOrderItemUnitCount.setText(item.quantity.toString() + " " + item.salesUnit?.name.toString())
+        fun bind(item: SalesOrderMedicine) = with(itemView) {
+            salesPaymentOrderItemBrandName.setText(item.brand_name)
+            salesPaymentOrderItemUnitPrize.setText("৳" + (item.quantity!! * item.mrp!!))
+            salesPaymentOrderItemUnitCount.setText(item.quantity.toString() + " " + item.unit_name.toString())
             salesPaymentOrderItemTotalAmount.setText("৳" + item.amount.toString())
 
 
@@ -117,6 +117,6 @@ class SalesOrderItemAdapter
 
     interface Interaction {
 
-        fun onItemDelete(item : SalesCart)
+        fun onItemDelete(item : SalesOrderMedicine)
     }
 }

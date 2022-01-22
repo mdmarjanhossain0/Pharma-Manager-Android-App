@@ -131,4 +131,16 @@ object SalesModule {
             cache = cache
         )
     }
+
+    @Singleton
+    @Provides
+    fun provideSalesOrderLocalDetailsInteractor (
+        service : SalesApiService,
+        cache : SalesDao
+    ) : SalesOrderLocalDetailsInteractor {
+        return SalesOrderLocalDetailsInteractor(
+            service = service,
+            cache = cache
+        )
+    }
 }

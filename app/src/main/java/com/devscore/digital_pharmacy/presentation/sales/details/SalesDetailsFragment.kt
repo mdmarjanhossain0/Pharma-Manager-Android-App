@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -85,7 +86,10 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
         }
 
         createSalesOrder.setOnClickListener {
-            findNavController().navigate(R.id.action_salesDetailsFragment_to_salesCartFragment)
+//            findNavController().navigate(R.id.action_salesDetailsFragment_to_salesCartFragment)
+            val bundle = bundleOf("pk" to viewModel.state.value?.pk)
+            Log.d(TAG, bundle.toString() + "             " + viewModel.state.value?.pk)
+            findNavController().navigate(R.id.action_salesDetailsFragment_to_salesPayNowFragment3, bundle)
         }
 
         createSalesOrderReturn.setOnClickListener {

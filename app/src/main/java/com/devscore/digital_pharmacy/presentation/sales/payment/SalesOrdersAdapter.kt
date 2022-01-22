@@ -12,6 +12,7 @@ import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardAdapter
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
+import com.devscore.digital_pharmacy.presentation.util.setDivider
 import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.android.synthetic.main.item_sales_list.view.*
 import java.util.ArrayList
@@ -51,6 +52,7 @@ class SalesOrdersAdapter
                 recyclerItemAdapter = SalesOrderItemAdapter(interaction)
             }
             adapter = recyclerItemAdapter
+//            setDivider(R.drawable.blue_divider)
         }
     }
 
@@ -58,12 +60,12 @@ class SalesOrdersAdapter
         return 1
     }
 
-    fun submitList(order: SalesOrder, cartList : List<SalesCart>) {
+    fun submitList(order: SalesOrder) {
         if (recyclerItemAdapter == null) {
             recyclerItemAdapter = SalesOrderItemAdapter(interaction)
         }
-        recyclerItemAdapter?.submitList(cartList)
-        itemNumber = cartList.size
+        recyclerItemAdapter?.submitList(order.sales_oder_medicines)
+        itemNumber = order.sales_oder_medicines?.size!!
         notifyDataSetChanged()
     }
 }

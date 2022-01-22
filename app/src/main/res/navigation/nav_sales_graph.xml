@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_salesFragment_to_salesDetailsFragment"
             app:destination="@id/salesDetailsFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_salesPayNowFragment"
+            app:destination="@id/salesPayNowFragment" />
     </fragment>
     <fragment
         android:id="@+id/salesOrdersFragment"
@@ -119,6 +122,12 @@
             app:destination="@id/salesReturnFragment" />
         <action
             android:id="@+id/action_salesDetailsFragment_to_salesPayNowFragment"
+            app:destination="@id/salesPayNowFragment" />
+        <action
+            android:id="@+id/action_salesDetailsFragment_to_salesPayNowFragment2"
+            app:destination="@id/salesPayNowFragment" />
+        <action
+            android:id="@+id/action_salesDetailsFragment_to_salesPayNowFragment3"
             app:destination="@id/salesPayNowFragment" />
     </fragment>
 </navigation>

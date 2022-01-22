@@ -23,7 +23,7 @@ data class SalesCardState (
         sales_oder_medicines = ArrayList<SalesOrderMedicine>()
     ),
     val pk : Int = -2,
-    val account : Account? = null,
+//    val account : Account? = null,
     val totalAmount : Float = 0f,
     val is_discount_percent : Boolean = false,
     val receivedAmount : Float = 0f,

@@ -14,6 +14,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.SalesCart
+import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
 import com.devscore.digital_pharmacy.presentation.sales.payment.SalesOrderItemAdapter
@@ -134,7 +135,7 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
                 })
 
             recyclerAdapter?.apply {
-                submitList(order = state.order, cartList = state.salesCartList)
+                submitList(order = state.order)
             }
 
             salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
@@ -213,8 +214,8 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
         }
     }
 
-    override fun onItemDelete(item: SalesCart) {
-        viewModel.onTriggerEvent(SalesReturnEvents.DeleteMedicine(item.medicine!!))
+    override fun onItemDelete(item: SalesOrderMedicine) {
+//        viewModel.onTriggerEvent(SalesReturnEvents.DeleteMedicine(item.medicine!!))
     }
 
 
