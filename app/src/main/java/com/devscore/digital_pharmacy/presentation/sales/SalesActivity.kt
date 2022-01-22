@@ -205,9 +205,10 @@ class SalesActivity : BaseActivity(), View.OnClickListener {
         navController.navigate(R.id.action_salesInventoryFragment_to_salesCartFragment)
     }
 
-    fun navigateSalesToSalesReturn() {
+    fun navigateSalesToSalesReturn(pk : Int) {
+        val bundle = bundleOf("pk" to pk)
 //        navController.navigate(R.id.action_salesFragment_to_salesReturnFragment)
-        navController.navigate(R.id.action_salesDetailsFragment_to_salesReturnFragment)
+        navController.navigate(R.id.action_salesDetailsFragment_to_salesReturnFragment, bundle)
     }
 
     fun navigateDetailsFragment(pk : Int) {

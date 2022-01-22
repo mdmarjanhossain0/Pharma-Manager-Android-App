@@ -15,6 +15,7 @@ import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.*
@@ -25,9 +26,6 @@ import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
 import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardState
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
 import com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnEvents
 import com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnViewModel
 import com.devscore.digital_pharmacy.presentation.util.*
@@ -40,13 +38,13 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interaction{
+class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interaction, OnCompleteCallback{
 
 
     private var recyclerAdapter: SalesDetailsAdapter? = null // can leak memory so need to null
-//    private val viewModel: SalesDetailsViewModel by viewModels()
-    private val viewModel : SalesCardViewModel by activityViewModels()
-    private val shareViewModel : SalesReturnViewModel by activityViewModels()
+    private val viewModel: SalesDetailsViewModel by viewModels()
+//    private val viewModel : SalesCardViewModel by activityViewModels()
+//    private val shareViewModel : SalesReturnViewModel by activityViewModels()
     var pk : Int? = null
 
 
@@ -76,11 +74,16 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
     private fun initUIClick() {
 
         salesOrderDelete.setOnClickListener {
-            viewModel.onTriggerEvent(SalesCardEvents.DeleteOrder(viewModel.state.value?.order!!))
+            if (viewModel.state.value?.order != null) {
+                viewModel.onTriggerEvent(SalesDetailsEvents.DeleteOrder)
+            }
+            else {
+                Toast.makeText(context, "Loading order...", Toast.LENGTH_SHORT).show()
+            }
         }
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
-            viewModel.state.value = SalesCardState()
+//            viewModel.state.value = SalesCardState()
             findNavController().popBackStack()
             Log.d(TAG, "Fragment On Back Press Callback call")
         }
@@ -93,8 +96,8 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
         }
 
         createSalesOrderReturn.setOnClickListener {
-            shareViewModel.onTriggerEvent(SalesReturnEvents.OrderDetails(viewModel.state.value?.order?.pk!!))
-            (activity as SalesActivity).navigateSalesToSalesReturn()
+//            shareViewModel.onTriggerEvent(SalesReturnEvents.OrderDetails(viewModel.state.value?.order?.pk!!))
+//            (activity as SalesActivity).navigateSalesToSalesReturn()
         }
 
 
@@ -250,6 +253,7 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -259,16 +263,29 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
                 queue = state.queue,
                 stateMessageCallback = object: StateMessageCallback {
                     override fun removeMessageFromStack() {
-                        viewModel.onTriggerEvent(SalesCardEvents.OnRemoveHeadFromQueue)
+                        viewModel.onTriggerEvent(SalesDetailsEvents.OnRemoveHeadFromQueue)
                     }
                 })
 
-            recyclerAdapter?.apply {
-                submitList(list = state.order.sales_oder_medicines)
-            }
+            if (state.order != null) {
+                recyclerAdapter?.apply {
+                    submitList(list = state.order?.sales_oder_medicines)
+                }
 
-            salesPaymentItemCount.setText("Items : " + state.order.sales_oder_medicines?.size.toString())
-            salesPaymentTotal.setText("Total : ৳" + state.order.total_after_discount.toString())
+                salesPaymentItemCount.setText("Items : " + state.order?.sales_oder_medicines?.size.toString())
+                salesPaymentTotal.setText("Total : ৳" + state.order?.total_after_discount.toString())
+                totalItem.setText("Total Item :  " + state.order.sales_oder_medicines?.size)
+
+                if (state.order?.status == 0) {
+                    createSalesOrder.visibility = View.VISIBLE
+                    salesOrderDelete.visibility = View.VISIBLE
+                }
+                else {
+                    createSalesOrder.visibility = View.GONE
+                    salesOrderDelete.visibility = View.GONE
+                    createSalesOrderReturn.visibility = View.VISIBLE
+                }
+            }
 
             if (viewModel.state.value?.order?.customer != null) {
                 if (viewModel.state.value?.order?.customer_name != null) {
@@ -282,21 +299,11 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
                 salesPaymentSearchView.setText("      " + "Walk-In Customer")
             }
 
-            if (state.order.status == 0) {
-                createSalesOrder.visibility = View.VISIBLE
-                salesOrderDelete.visibility = View.VISIBLE
-            }
-            else {
-                createSalesOrder.visibility = View.GONE
-                salesOrderDelete.visibility = View.GONE
-                createSalesOrderReturn.visibility = View.VISIBLE
-            }
+//            if (state.deleted) {
+//                (activity as SalesActivity).onBackPressed()
+//            }
 
-            if (state.deleted) {
-                (activity as SalesActivity).onBackPressed()
-            }
-
-            totalItem.setText("Total Item :  " + state.order.sales_oder_medicines?.size)
+//            totalItem.setText("Total Item :  " + state.order.sales_oder_medicines?.size)
 
         })
     }
@@ -319,7 +326,7 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
 
     override fun onResume() {
         super.onResume()
-        viewModel.onTriggerEvent(SalesCardEvents.OrderDetails(pk!!))
+        viewModel.onTriggerEvent(SalesDetailsEvents.OrderDetails(pk!!))
     }
 
 
@@ -341,7 +348,7 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
                 title(R.string.are_you_sure)
                 message(text = "Cart item will be dismiss")
                 positiveButton(R.string.text_ok){
-                    viewModel.state.value = SalesCardState()
+//                    viewModel.state.value = SalesCardState()
                     findNavController().popBackStack()
                     dismiss()
                 }
@@ -352,5 +359,9 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
                 }
                 cancelable(false)
             }
+    }
+
+    override fun delete() {
+        findNavController().popBackStack()
     }
 }

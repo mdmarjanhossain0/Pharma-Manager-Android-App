@@ -29,12 +29,14 @@ import kotlinx.android.synthetic.main.fragment_sales_pay_now.*
 import kotlinx.coroutines.*
 
 @AndroidEntryPoint
-class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interaction{
+class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interaction, OnCompleteCallback{
 
 
     private var recyclerAdapter: SalesOrdersAdapter? = null // can leak memory so need to null
     private var recyclerItemAdapter: SalesOrderItemAdapter? = null
-    private val viewModel: SalesReturnViewModel by activityViewModels()
+//    private val viewModel: SalesReturnViewModel by activityViewModels()
+    private val viewModel : SalesReturnPayViewModel by activityViewModels()
+    var pk : Int? = null
 
 
     override fun onCreateView(
@@ -69,35 +71,35 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
                 dueWarning()
             }
             else {
-                viewModel.onTriggerEvent(SalesReturnEvents.GenerateNewOrder)
+                viewModel.onTriggerEvent(SalesReturnPayEvents.OrderCompleted)
             }
         }
 
         switchId.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                viewModel.onTriggerEvent(SalesReturnEvents.IsDiscountPercent(true))
+                viewModel.onTriggerEvent(SalesReturnPayEvents.IsDiscountPercent(true))
             }
             else {
-                viewModel.onTriggerEvent(SalesReturnEvents.IsDiscountPercent(false))
+                viewModel.onTriggerEvent(SalesReturnPayEvents.IsDiscountPercent(false))
             }
         }
 
 
         salesPaymentReceiveAmount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
-                viewModel.onTriggerEvent(SalesReturnEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
+                viewModel.onTriggerEvent(SalesReturnPayEvents.ReceiveAmount(salesPaymentReceiveAmount.text.toString().toFloat()))
             }
             else {
-                viewModel.onTriggerEvent(SalesReturnEvents.ReceiveAmount(0f))
+                viewModel.onTriggerEvent(SalesReturnPayEvents.ReceiveAmount(0f))
             }
         }
 
         salesPaymentDiscount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
-                viewModel.onTriggerEvent(SalesReturnEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
+                viewModel.onTriggerEvent(SalesReturnPayEvents.Discount(salesPaymentDiscount.text.toString().toFloat()))
             }
             else {
-                viewModel.onTriggerEvent(SalesReturnEvents.Discount(0f))
+                viewModel.onTriggerEvent(SalesReturnPayEvents.Discount(0f))
             }
         }
 
@@ -130,15 +132,15 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
                 queue = state.queue,
                 stateMessageCallback = object: StateMessageCallback {
                     override fun removeMessageFromStack() {
-                        viewModel.onTriggerEvent(SalesReturnEvents.OnRemoveHeadFromQueue)
+                        viewModel.onTriggerEvent(SalesReturnPayEvents.OnRemoveHeadFromQueue)
                     }
                 })
 
             recyclerAdapter?.apply {
-                submitList(order = state.order)
+                submitList(order = state.order!!)
             }
 
-            salesPaymentItemCount.setText("Items : " + state.salesCartList.size.toString())
+            salesPaymentItemCount.setText("Items : " + state.order?.sales_oder_medicines?.size.toString())
             salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
 
@@ -156,10 +158,10 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
                 salesPaymentSearchView.setText("      " + "Walk-In Customer")
             }
 
-            if (state.uploaded) {
-                viewModel.state.value = SalesReturnState()
-                findNavController().navigate(R.id.action_salesReturnPayFragment_to_salesFragment)
-            }
+//            if (state.uploaded) {
+//                viewModel.state.value = SalesReturnState()
+//                findNavController().navigate(R.id.action_salesReturnPayFragment_to_salesFragment)
+//            }
 
             if (state.pk > 0) {
                 orderNo.setText("#Order Number: " + state.pk)
@@ -232,5 +234,9 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
                 }
                 cancelable(false)
             }
+    }
+
+    override fun done() {
+        findNavController().popBackStack()
     }
 }

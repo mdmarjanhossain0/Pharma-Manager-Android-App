@@ -8,15 +8,9 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 
 sealed class SalesDetailsEvents {
 
-    data class GenerateNewOrder(val pk : Int) : SalesDetailsEvents()
-
     data class OrderDetails(val pk : Int) : SalesDetailsEvents()
 
-    object GetOrderDetails : SalesDetailsEvents()
-
-
-    data class SearchWithQuery(val query: String) : SalesDetailsEvents()
-
+    object DeleteOrder : SalesDetailsEvents()
 
     data class Error(val stateMessage: StateMessage): SalesDetailsEvents()
 

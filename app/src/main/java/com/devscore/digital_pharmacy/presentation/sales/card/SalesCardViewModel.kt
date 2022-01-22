@@ -55,7 +55,7 @@ constructor(
             }
 
             is SalesCardEvents.OrderCompleted -> {
-                orderCompleted()
+//                orderCompleted()
             }
 
             is SalesCardEvents.NewLocalMedicineSearch -> {
@@ -71,7 +71,7 @@ constructor(
 
             is SalesCardEvents.DeleteOrder -> {
                 Log.d(TAG, "Delete Order")
-                deleteOrder(event.order)
+//                deleteOrder(event.order)
             }
 
             is SalesCardEvents.AddToCard -> {
@@ -139,33 +139,6 @@ constructor(
             )
         }
     }
-
-
-
-
-
-    /*private fun getAccount() {
-        state.value?.let { state ->
-            getAccountInteractor.execute(
-                authToken = sessionManager.state.value?.authToken
-            ).onEach { dataState ->
-                Log.d(TAG, "ViewModel " + dataState.toString())
-                this.state.value = state.copy(isLoading = dataState.isLoading)
-
-                dataState.data?.let { account ->
-                    this.state.value = state.copy(
-                        account = account
-                    )
-
-
-                }
-
-                dataState.stateMessage?.let { stateMessage ->
-                    appendToMessageQueue(stateMessage)
-                }
-            }.launchIn(viewModelScope)
-        }
-    }*/
 
     private fun selectCustomer(customer: Customer) {
         state.value?.let { state ->
@@ -412,164 +385,6 @@ constructor(
         }
     }
 
-    /*private fun changeUnit(medicine: LocalMedicine, unitId: Int?, quantity : Int? = 1) {
-        state.value?.let { state ->
-            var checkExist = 0
-            for (item in state.salesCartList) {
-                if (item.medicine?.id == medicine.id) {
-                    checkExist = 1
-                    break
-                }
-            }
-            if (checkExist == 0 ) {
-                return@changeUnit
-            }
-            Log.d(TAG, "Medicine exist in cart")
-            Log.d(TAG, "Show Medicine property " + medicine.toString())
-
-            val previousAmount = state.totalAmount
-            Log.d(TAG, "Previous Amount " + previousAmount.toString())
-            var unitEquivalentQuantity : Int = 0
-            var salesUnit : MedicineUnits? = null
-            for (unit in medicine.units) {
-                if (unit.id == unitId) {
-                    unitEquivalentQuantity = unit.quantity
-                    salesUnit = unit
-                    break
-                }
-            }
-            if (unitEquivalentQuantity == 0) {
-                throw Exception("Unit Not Found")
-            }
-            if (salesUnit == null) {
-                throw Exception("Unit cann't usable")
-            }
-
-            val newAmount = medicine.mrp!! * quantity!! * unitEquivalentQuantity!!
-            Log.d(TAG, "New Amount " + newAmount.toString())
-
-            var previousSalesCartItem : SalesCart? = null
-
-            for (item in state.salesCartList) {
-                if (item.medicine?.id == medicine.id) {
-                    previousSalesCartItem = item
-                }
-            }
-
-            if (previousSalesCartItem == null) {
-                throw Exception("Item Not Found")
-            }
-
-
-            val totalAmount = previousAmount!! + newAmount - previousSalesCartItem.amount!!
-
-            val newCartList = state.salesCartList.toMutableList()
-            for (item in state.salesCartList) {
-                if (item.medicine?.id == medicine.id) {
-                    newCartList.set(state.salesCartList.indexOf(item), SalesCart(
-                        medicine = medicine,
-                        salesUnit = salesUnit,
-                        quantity = quantity,
-                        amount = newAmount
-                    ))
-                    break
-                }
-            }
-
-            this.state.value = state.copy(
-                salesCartList = newCartList,
-                totalAmount = totalAmount,
-                totalAmountAfterDiscount = totalAmount,
-            )
-        }
-    }*/
-
-
-
-
-    /*private fun addToCards(item : LocalMedicine, quantity : Int = 1, unitId : Int = -1) {
-        Log.d(TAG, "item has code " + item.hashCode())
-        val medicine = item.copy()
-        Log.d(TAG, "medicine has code " + medicine.hashCode())
-        state.value?.let { state ->
-
-            try {
-                for (item in state.salesCartList) {
-                    if (item.medicine?.id == medicine.id) {
-                        return@addToCards
-                    }
-                }
-                val previousAmount = state.totalAmount?.toInt()
-                Log.d(TAG, "Previous Amount " + previousAmount.toString())
-                var unitEquivalentQuantity : Int = 0
-                var salesUnit : MedicineUnits? = null
-                if (unitId == -1) {
-                    for (unit in medicine.units) {
-                        if (unit.id == unitId) {
-                            unitEquivalentQuantity = unit.quantity
-                            salesUnit = unit.copy()
-                            break
-                        }
-                    }
-                }
-                else {
-                    for (unit in medicine.units) {
-                        if (unit.type == "SALES") {
-                            unitEquivalentQuantity = unit.quantity
-                            salesUnit = unit.copy()
-                            break
-                        }
-                    }
-                }
-
-                if (unitEquivalentQuantity == 0) {
-                    unitEquivalentQuantity = medicine.units.first().quantity
-                    salesUnit = medicine.units.first().copy()
-                }
-                if (unitEquivalentQuantity == 0) {
-                    throw Exception("Unit Not Found")
-                }
-
-                if (salesUnit == null) {
-                    throw Exception("Unit Not Found")
-                }
-                val newAmount = medicine.mrp!! * quantity!! * unitEquivalentQuantity!!
-                Log.d(TAG, "New Amount " + newAmount.toString())
-
-                val totalAmount = newAmount!! + previousAmount!!
-
-                val newCartList = state.salesCartList.toMutableList()
-                newCartList.add(SalesCart(
-                    medicine = medicine,
-                    salesUnit = salesUnit!!,
-                    quantity = quantity,
-                    amount = newAmount
-                ))
-
-
-                this.state.value = state.copy(
-                    salesCartList = newCartList,
-                    testCart = newCartList,
-                    totalAmount = totalAmount,
-                    totalAmountAfterDiscount = totalAmount
-                )
-
-            }
-            catch (e : Exception) {
-                e.printStackTrace()
-                appendToMessageQueue(
-                    StateMessage(
-                        response = Response(
-                            message = medicine.brand_name + " " + " has no unit",
-                            uiComponentType = UIComponentType.Dialog(),
-                            messageType = MessageType.Error()
-                        )
-                    )
-                )
-            }
-        }
-    }*/
-
     private fun addToCard(item : LocalMedicine, quantity : Int = 1, unitId : Int = -1) {
         var unitList = mutableListOf<MedicineUnits>()
         for (unit in item.units) {
@@ -743,32 +558,6 @@ constructor(
     }
 
 
-    private fun orderCompleted() {
-        processOder()
-        state.value?.let { state ->
-            salesCompleted.execute(
-                authToken = sessionManager.state.value?.authToken,
-                pk = state.order.pk!!,
-                createSalesOder = state.order.toCreateSalesOrder()
-            ).onEach { dataState ->
-                Log.d(TAG, "ViewModel " + dataState.toString())
-                this.state.value = state.copy(isLoading = dataState.isLoading)
-
-                dataState.data?.let { order ->
-                    this.state.value = state.copy(
-                        order = order,
-                        uploaded = true
-                    )
-                }
-
-                dataState.stateMessage?.let { stateMessage ->
-                    appendToMessageQueue(stateMessage)
-                }
-
-            }.launchIn(viewModelScope)
-        }
-    }
-
     private fun createNewOrder() {
         processOder()
         Log.d(TAG, "ViewModel page number " + state.value?.page)
@@ -783,8 +572,7 @@ constructor(
                 dataState.data?.let { order ->
                     if (order.pk != null) {
                         this.state.value = state.copy(
-                            order = order,
-                            uploaded = true
+                            order = order
                         )
                     }
 
@@ -917,53 +705,8 @@ constructor(
     }
 
 
-    private fun getOrder(pk : Int) {
-        state.value?.let { state ->
-            CoroutineScope(Dispatchers.IO).launch {
-                val order = salesDao.getSalesOrder(pk = pk).toSalesOder()
-                withContext(Dispatchers.Main) {
-                    this@SalesCardViewModel.state.value = state.copy(
-                        order = order
-                    )
-                }
-            }
-        }
-    }
+}
 
-
-
-
-
-    private fun deleteOrder(order : SalesOrder) {
-        state.value?.let { state ->
-            deleteSalesOrderInteractor.execute(
-                authToken = sessionManager.state.value?.authToken,
-                order = order
-            ).onEach { dataState ->
-                Log.d(TAG, "ViewModel " + dataState.toString())
-                this.state.value = state.copy(isLoading = dataState.isLoading)
-
-                dataState.data?.let { response ->
-                    if (response.response == "Successfully Deleted") {
-                        this.state.value = state.copy(
-                            deleted = true
-                        )
-
-
-
-
-                        withContext(Dispatchers.Main){
-                            search()
-                        }
-                    }
-                }
-
-                dataState.stateMessage?.let { stateMessage ->
-                    appendToMessageQueue(stateMessage)
-                }
-
-            }.launchIn(viewModelScope)
-        }
-    }
-
+interface OnCompleteCallback {
+    fun done()
 }

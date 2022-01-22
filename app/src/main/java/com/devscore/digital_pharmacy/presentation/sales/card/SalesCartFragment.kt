@@ -45,6 +45,7 @@ class SalesCartFragment : BaseSalesFragment(),
     private lateinit var menu: Menu
     private var unitRecyclerAdapter : SelectUnitAdapter? = null
     private var bottomSheetDialog : BottomSheetDialog? = null
+    var pk : Int? = null
 
 
     override fun onCreateView(
@@ -111,10 +112,10 @@ class SalesCartFragment : BaseSalesFragment(),
                 Log.d(TAG, "Quantity " + item.quantity)
             }
 
-            if (state.uploaded) {
-                viewModel.state.value = SalesCardState()
-                findNavController().navigate(R.id.action_salesCartFragment_to_salesFragment)
-            }
+//            if (state.uploaded) {
+//                viewModel.state.value = SalesCardState()
+//                findNavController().navigate(R.id.action_salesCartFragment_to_salesFragment)
+//            }
 
 
             if (state.pk == -2) {
@@ -150,6 +151,9 @@ class SalesCartFragment : BaseSalesFragment(),
     }
 
 
+    override fun onResume() {
+        super.onResume()
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerAdapter = null

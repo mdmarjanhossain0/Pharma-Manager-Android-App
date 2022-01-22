@@ -40,6 +40,7 @@ class GetAccount(
 
         // emit from cache
         val cachedAccount = cache.searchByEmail(email!!)?.toAccount()
+        emit(DataState.data(response = null, data = cachedAccount))
 
 
         Log.d(TAG, "Cache Data " + cachedAccount)

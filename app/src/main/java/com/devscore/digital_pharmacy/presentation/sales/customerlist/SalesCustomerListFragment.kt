@@ -23,6 +23,8 @@ import com.devscore.digital_pharmacy.presentation.customer.customerlist.Customer
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayEvents
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayViewModel
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,7 +37,7 @@ class SalesCustomerListFragment : BaseSalesFragment(),
 
     private var recyclerAdapter: SalesCustomerListAdapter? = null // can leak memory so need to null
     private val viewModel: CustomerListVIewModel by viewModels()
-    private val shareViewModel : SalesCardViewModel by activityViewModels()
+    private val shareViewModel : SalesPayViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -142,7 +144,7 @@ class SalesCustomerListFragment : BaseSalesFragment(),
     }
 
     override fun onSelectCustomer(position: Int, item: Customer) {
-        shareViewModel.onTriggerEvent(SalesCardEvents.SelectCustomer(item))
+        shareViewModel.onTriggerEvent(SalesPayEvents.SelectCustomer(item))
         findNavController().popBackStack()
     }
 

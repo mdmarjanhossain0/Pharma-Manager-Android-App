@@ -1,14 +1,19 @@
-package com.devscore.digital_pharmacy.presentation.sales.payment
+package com.devscore.digital_pharmacy.presentation.sales.returnpayment
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devscore.digital_pharmacy.business.domain.models.*
-import com.devscore.digital_pharmacy.business.domain.util.*
+import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
+import com.devscore.digital_pharmacy.business.domain.util.StateMessage
+import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
+import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
 import com.devscore.digital_pharmacy.business.interactors.sales.SalesCompleted
-import com.devscore.digital_pharmacy.business.interactors.sales.SalesOrderDetailsInteractor
 import com.devscore.digital_pharmacy.business.interactors.sales.SalesOrderLocalDetailsInteractor
+import com.devscore.digital_pharmacy.business.interactors.sales.SalesReturnInteractor
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayEvents
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayState
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
@@ -16,17 +21,18 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class SalesPayViewModel
+class SalesReturnPayViewModel
 @Inject
 constructor(
     private val sessionManager: SessionManager,
     private val orderLocalDetailsInteractor: SalesOrderLocalDetailsInteractor,
     private val salesCompleted: SalesCompleted,
+    private val createSalesReturnInteractor: SalesReturnInteractor,
 ) : ViewModel() {
 
     private val TAG: String = "AppDebug"
 
-    val state: MutableLiveData<SalesPayState> = MutableLiveData(SalesPayState())
+    val state: MutableLiveData<SalesReturnPayState> = MutableLiveData(SalesReturnPayState())
     private lateinit var callback : OnCompleteCallback
     fun submit(callback: OnCompleteCallback) {
         this.callback = callback
@@ -35,61 +41,67 @@ constructor(
     init {
     }
 
-    fun onTriggerEvent(event: SalesPayEvents) {
+    fun onTriggerEvent(event: SalesReturnPayEvents) {
         when (event) {
-            is SalesPayEvents.OrderCompleted -> {
-                orderCompleted()
+            is SalesReturnPayEvents.OrderCompleted -> {
+                createNewOrder()
             }
 
-            is SalesPayEvents.OrderDetails -> {
+            is SalesReturnPayEvents.OrderDetails -> {
                 getOrderDetails(event.pk)
             }
 
-            is SalesPayEvents.ReceiveAmount -> {
+            is SalesReturnPayEvents.ReceiveAmount -> {
                 receiveAmount(event.amount!!)
             }
 
-            is SalesPayEvents.IsDiscountPercent -> {
-                isDiscountPercent(event.isDiscountPercent)
+            is SalesReturnPayEvents.IsDiscountPercent -> {
+                isFinePercent(event.isDiscountPercent)
             }
 
-            is SalesPayEvents.Discount -> {
-                discount(event.discount)
+            is SalesReturnPayEvents.Discount -> {
+                fine(event.discount)
             }
 
-            is SalesPayEvents.DeleteMedicine -> {
+            is SalesReturnPayEvents.DeleteMedicine -> {
 //                deleteFromCart(event.medicine)
             }
 
 
-            is SalesPayEvents.SelectCustomer -> {
+            is SalesReturnPayEvents.SelectCustomer -> {
                 selectCustomer(event.customer)
             }
 
-            is SalesPayEvents.Error -> {
+            is SalesReturnPayEvents.Error -> {
                 appendToMessageQueue(event.stateMessage)
             }
-            is SalesPayEvents.OnRemoveHeadFromQueue -> {
+            is SalesReturnPayEvents.OnRemoveHeadFromQueue -> {
                 removeHeadFromQueue()
             }
         }
     }
 
 
-    private fun orderCompleted() {
+    private fun createNewOrder() {
         processOder()
+        Log.d(TAG, "ViewModel page number " + state.value)
         state.value?.let { state ->
-            salesCompleted.execute(
+            createSalesReturnInteractor.execute(
                 authToken = sessionManager.state.value?.authToken,
-                pk = state.order?.pk!!,
-                createSalesOder = state.order.toCreateSalesOrder()
+                state.returnOrder!!
             ).onEach { dataState ->
                 Log.d(TAG, "ViewModel " + dataState.toString())
                 this.state.value = state.copy(isLoading = dataState.isLoading)
 
                 dataState.data?.let { order ->
+                    if (order.pk != null) {
+                        this.state.value = state.copy(
+                            returnOrder = order.toCreateSalesReturn()
+                        )
+                    }
+
                     this.state.value = state.copy(
-                        order = order
+                        returnOrder = order.toCreateSalesReturn()
                     )
                     callback.done()
                 }
@@ -102,6 +114,36 @@ constructor(
         }
     }
 
+    private fun processOder() {
+        val list = processOrderMedicine()
+        state.value?.let { state ->
+            this.state.value = state.copy(
+                returnOrder = CreateSalesReturn (
+                    customer = state.customer?.pk,
+                    sales_order = state.order?.pk,
+                    total_amount = state.totalAmount?.toFloat(),
+                    total_after_fine = state.totalAmountAfterFine?.toFloat(),
+                    return_amount = state.returnAmount!!,
+                    fine = state.fineAmount,
+                    is_fine_percent = (state.fine == state.totalAmountAfterFine),
+                    sales_return_medicines = list.map { it.toCreateSalesOrderMedicine() }
+                )
+            )
+        }
+    }
+
+    private fun processOrderMedicine() : List<SalesOrderMedicine> {
+        val list = mutableListOf<SalesOrderMedicine>()
+        state.value?.let {state ->
+            for (item in state.order?.sales_oder_medicines!!) {
+                list.add(
+                    item
+                )
+            }
+        }
+        return list
+    }
+
     private fun selectCustomer(customer: Customer) {
         state.value?.let { state ->
             this.state.value = state.copy(
@@ -110,39 +152,38 @@ constructor(
         }
     }
 
-
-    private fun discount(discount: Float?) {
+    private fun fine(discount: Float?) {
         state.value?.let {state ->
             var discountAmount = 0f
-            if (state.is_discount_percent) {
+            if (state.is_fine_percent) {
                 discountAmount = ((state.totalAmount!! * discount!!) / 100)
             }
             else {
                 discountAmount = discount!!
             }
-            val totalAmountAfterDiscount = state.totalAmount!! - discountAmount
+            val totalAmountAfterDiscount = state.totalAmount!! + discountAmount
             this.state.value = state.copy(
-                discount = discount,
-                discountAmount = discountAmount,
-                totalAmountAfterDiscount = totalAmountAfterDiscount
+                fine = discount,
+                fineAmount = discountAmount,
+                totalAmountAfterFine = totalAmountAfterDiscount
             )
         }
     }
 
-    private fun isDiscountPercent(discountPercent: Boolean) {
+    private fun isFinePercent(discountPercent: Boolean) {
         state.value?.let {state ->
             var discountAmount : Float = 0f
             if (discountPercent) {
-                discountAmount = ((state.totalAmount!! * state.discount!!) / 100 )
+                discountAmount = ((state.totalAmount!! * state.fine!!) / 100 )
             }
             else {
-                discountAmount = state.discount!!
+                discountAmount = state.fine!!
             }
-            val totalAmountAfterDiscount = state.totalAmount!! - discountAmount
+            val totalAmountAfterDiscount = state.totalAmount!! + discountAmount
             this.state.value = state.copy(
-                is_discount_percent = discountPercent,
-                discountAmount = discountAmount,
-                totalAmountAfterDiscount = totalAmountAfterDiscount
+                is_fine_percent = discountPercent,
+                fineAmount = discountAmount,
+                totalAmountAfterFine = totalAmountAfterDiscount
             )
         }
     }
@@ -150,7 +191,7 @@ constructor(
     private fun receiveAmount(amount : Float) {
         state.value?.let {state ->
             this.state.value = state.copy(
-                receivedAmount = amount
+                returnAmount = amount
             )
         }
     }
@@ -196,9 +237,9 @@ constructor(
                         order = order,
                         pk = pk,
                         totalAmount = order.total_amount,
-                        totalAmountAfterDiscount = order.total_after_discount,
-                        discount = order.discount,
-                        is_discount_percent = order.is_discount_percent
+                        totalAmountAfterFine = order.total_after_discount,
+                        fine = order.discount,
+                        is_fine_percent = order.is_discount_percent
                     )
 
                 }
@@ -208,23 +249,6 @@ constructor(
                 }
             }.launchIn(viewModelScope)
         }
-    }
-
-    private fun processOder() {
-        var order : SalesOrder = state.value?.order!!
-        state.value?.let { state ->
-            order = order.copy(
-                    customer = state.customer?.pk,
-                    paid_amount = state.receivedAmount,
-                    discount = state.discount,
-                    total_after_discount = state.totalAmountAfterDiscount,
-                    is_discount_percent = state.is_discount_percent
-                )
-            this.state.value = state.copy(
-                order = order
-            )
-        }
-//        return order
     }
 }
 

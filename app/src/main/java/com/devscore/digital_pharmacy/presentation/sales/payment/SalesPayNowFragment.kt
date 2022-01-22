@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -12,12 +13,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardState
-import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,16 +24,16 @@ import kotlinx.android.synthetic.main.item_sales_list.*
 import kotlinx.coroutines.*
 
 import androidx.core.widget.doOnTextChanged
-import androidx.fragment.app.viewModels
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
+import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 
 
 @AndroidEntryPoint
-class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interaction{
+class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interaction, OnCompleteCallback{
 
 
     private var recyclerAdapter: SalesOrdersAdapter? = null // can leak memory so need to null
-    private val viewModel: SalesPayViewModel by viewModels()
+    private val viewModel: SalesPayViewModel by activityViewModels()
     var pk : Int? = null
 
 
@@ -70,6 +67,12 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
 //            backPressWarning()
 //            Log.d(TAG, "Fragment On Back Press Callback call")
 //        }
+
+
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            viewModel.state.value = SalesPayState()
+            findNavController().popBackStack()
+        }
 
 
         createSalesOrder.setOnClickListener {
@@ -122,6 +125,7 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -241,5 +245,9 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
                 }
                 cancelable(false)
             }
+    }
+
+    override fun done() {
+        (activity as SalesActivity).onBackPressed()
     }
 }

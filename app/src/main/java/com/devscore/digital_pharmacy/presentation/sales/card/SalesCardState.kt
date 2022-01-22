@@ -23,7 +23,6 @@ data class SalesCardState (
         sales_oder_medicines = ArrayList<SalesOrderMedicine>()
     ),
     val pk : Int = -2,
-//    val account : Account? = null,
     val totalAmount : Float = 0f,
     val is_discount_percent : Boolean = false,
     val receivedAmount : Float = 0f,
@@ -36,9 +35,7 @@ data class SalesCardState (
     val query: String = "",
     val page: Int = 1,
     val isQueryExhausted: Boolean = false, // no more results available, prevent next page
-    val queue: Queue<StateMessage> = Queue(mutableListOf()),
-    val uploaded : Boolean = false,
-    val deleted : Boolean = false
+    val queue: Queue<StateMessage> = Queue(mutableListOf())
 )
 
 //val unitList = mutableListOf<MedicineUnits>()
