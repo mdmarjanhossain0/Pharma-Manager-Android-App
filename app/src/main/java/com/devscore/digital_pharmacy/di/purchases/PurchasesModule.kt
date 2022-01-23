@@ -135,4 +135,22 @@ object PurchasesModule {
             cache = cache
         )
     }
+
+
+
+
+
+
+
+    @Singleton
+    @Provides
+    fun providePurchasesOrderLocalDetailsInteractor (
+        service : PurchasesApiService,
+        cache : PurchasesDao
+    ) : PurchasesOrderLocalDetailsInteractor {
+        return PurchasesOrderLocalDetailsInteractor(
+            service = service,
+            cache = cache
+        )
+    }
 }

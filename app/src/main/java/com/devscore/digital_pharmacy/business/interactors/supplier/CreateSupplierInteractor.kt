@@ -55,7 +55,7 @@ class CreateSupplierInteractor (
             emit(
                 DataState.data(response = Response(
                     message = "Successfully Uploaded.",
-                    uiComponentType = UIComponentType.Dialog(),
+                    uiComponentType = UIComponentType.Toast(),
                     messageType = MessageType.Success()
                 ), data = supplier))
             return@flow

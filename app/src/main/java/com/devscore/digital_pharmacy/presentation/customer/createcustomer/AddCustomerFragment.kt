@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
@@ -16,6 +18,8 @@ import com.devscore.digital_pharmacy.business.domain.models.Customer
 import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.customer.BaseCustomerFragment
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayEvents
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayViewModel
 import com.devscore.digital_pharmacy.presentation.supplier.BaseSupplierFragment
 import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.SupplierCreateEvents
 import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.SupplierCreateViewModel
@@ -25,9 +29,23 @@ import kotlinx.android.synthetic.main.fragment_create_supplier.*
 import kotlinx.android.synthetic.main.fragment_register.*
 
 
-class AddCustomerFragment : BaseCustomerFragment() {
+class AddCustomerFragment : BaseCustomerFragment(), OnCompleteCallback {
 
     private val viewModel: CreateCustomerViewModel by viewModels()
+    private val shareViewModel : SalesPayViewModel by activityViewModels()
+    var returnable : Boolean = false
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        try {
+            returnable = arguments?.getBoolean("returnable", false)!!
+        }
+        catch (e : Exception) {
+            returnable = false
+        }
+        Log.d(TAG, "Returnable " + returnable.toString())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -72,6 +90,7 @@ class AddCustomerFragment : BaseCustomerFragment() {
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -134,7 +153,12 @@ class AddCustomerFragment : BaseCustomerFragment() {
             date_of_birth = date_of_birth,
         )
         viewModel.onTriggerEvent(CreateCustomerEvents.CacheState(customer))
-        viewModel.onTriggerEvent(CreateCustomerEvents.NewCustomerCreate)
+        if (returnable!!) {
+            viewModel.onTriggerEvent(CreateCustomerEvents.NewCustomerCreateAndReturn)
+        }
+        else {
+            viewModel.onTriggerEvent(CreateCustomerEvents.NewCustomerCreate)
+        }
 
     }
 
@@ -188,6 +212,11 @@ class AddCustomerFragment : BaseCustomerFragment() {
                 }
                 cancelable(false)
             }
+    }
+
+    override fun done() {
+        shareViewModel.onTriggerEvent(SalesPayEvents.SelectCustomer(viewModel.state.value?.customer!!))
+        findNavController().popBackStack()
     }
 
 }

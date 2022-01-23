@@ -63,7 +63,7 @@ class PurchasesCompleted (
                 }
                 emit(DataState.data(response = Response(
                     message = "Payment successful",
-                    uiComponentType = UIComponentType.Dialog(),
+                    uiComponentType = UIComponentType.Toast(),
                     messageType = MessageType.Success()
                 ), data = order))
                 return@flow

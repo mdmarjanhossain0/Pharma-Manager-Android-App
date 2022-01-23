@@ -42,6 +42,10 @@ constructor(
     private val TAG: String = "AppDebug"
 
     val state: MutableLiveData<SalesCardState> = MutableLiveData(SalesCardState())
+    private lateinit var callback : OnCompleteCallback
+    fun submit(callback: OnCompleteCallback) {
+        this.callback = callback
+    }
 
     init {
 //        getAccount()
@@ -579,6 +583,7 @@ constructor(
                     this.state.value = state.copy(
                         order = order
                     )
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->

@@ -19,6 +19,8 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
 import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartEvents
 import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartViewModel
+import com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPayEvents
+import com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPayViewModel
 import com.devscore.digital_pharmacy.presentation.supplier.BaseSupplierFragment
 import com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierEvents
 import com.devscore.digital_pharmacy.presentation.supplier.supplierlist.SupplierListAdapter
@@ -35,7 +37,7 @@ class PurchasesSupplierListFragment : BaseSupplierFragment(),
 
     private var recyclerAdapter: PurchasesSupplierListAdapter? = null // can leak memory so need to null
     private val viewModel: SupplierListViewModel by viewModels()
-    private val shareViewModel : PurchasesCartViewModel by activityViewModels()
+    private val shareViewModel : PurchasesPayViewModel by activityViewModels()
 
 
     override fun onCreateView(
@@ -148,7 +150,7 @@ class PurchasesSupplierListFragment : BaseSupplierFragment(),
     }
 
     override fun onSelectSupplier(position: Int, item: Supplier) {
-        shareViewModel.onTriggerEvent(PurchasesCartEvents.SelectSupplier(item))
+        shareViewModel.onTriggerEvent(PurchasesPayEvents.SelectSupplier(item))
         findNavController().popBackStack()
     }
 

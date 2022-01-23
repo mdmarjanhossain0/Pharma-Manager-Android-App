@@ -28,6 +28,11 @@ constructor(
 
     val state: MutableLiveData<SupplierCreateState> = MutableLiveData(SupplierCreateState())
 
+    private lateinit var callback : OnCompleteCallback
+    fun submit(callback: OnCompleteCallback) {
+        this.callback = callback
+    }
+
     init {
     }
 
@@ -35,6 +40,9 @@ constructor(
         when (event) {
             is SupplierCreateEvents.NewSupplierCreate -> {
                 createSupplier()
+            }
+            is SupplierCreateEvents.NewSupplierCreateAndReturn -> {
+                createSupplierAndReturn()
             }
 
             is SupplierCreateEvents.CacheState -> {
@@ -92,6 +100,7 @@ constructor(
 
                 dataState.data?.let { supplier ->
                     this.state.value = state.copy(supplier = supplier)
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -102,4 +111,44 @@ constructor(
         }
     }
 
+
+
+
+
+
+
+
+    private fun createSupplierAndReturn() {
+        state.value?.let { state ->
+            createSupplierInteractor.execute(
+                authToken = sessionManager.state.value?.authToken,
+                createSupplier = state.supplier.toCreateSupplier()
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { supplier ->
+                    this.state.value = state.copy(supplier = supplier)
+                    callback.done()
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    appendToMessageQueue(stateMessage)
+                }
+
+            }.launchIn(viewModelScope)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+interface OnCompleteCallback {
+    fun done()
 }

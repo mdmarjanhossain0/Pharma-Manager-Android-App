@@ -97,7 +97,7 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
 
         createSalesOrderReturn.setOnClickListener {
 //            shareViewModel.onTriggerEvent(SalesReturnEvents.OrderDetails(viewModel.state.value?.order?.pk!!))
-//            (activity as SalesActivity).navigateSalesToSalesReturn()
+            (activity as SalesActivity).navigateSalesToSalesReturn(pk!!)
         }
 
 
@@ -285,6 +285,8 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
                     salesOrderDelete.visibility = View.GONE
                     createSalesOrderReturn.visibility = View.VISIBLE
                 }
+                
+                orderNo.setText("#Order No : " + state.order.pk)
             }
 
             if (viewModel.state.value?.order?.customer != null) {
@@ -320,7 +322,6 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
             addItemDecoration(topSpacingDecorator)
             recyclerAdapter = SalesDetailsAdapter(this@SalesDetailsFragment)
             adapter = recyclerAdapter
-            setDivider(R.drawable.details_divider)
         }
     }
 

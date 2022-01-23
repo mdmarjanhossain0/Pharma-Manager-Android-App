@@ -208,11 +208,22 @@ class SalesActivity : BaseActivity(), View.OnClickListener {
     fun navigateSalesToSalesReturn(pk : Int) {
         val bundle = bundleOf("pk" to pk)
 //        navController.navigate(R.id.action_salesFragment_to_salesReturnFragment)
-        navController.navigate(R.id.action_salesDetailsFragment_to_salesReturnFragment, bundle)
+//        navController.navigate(R.id.action_salesDetailsFragment_to_salesReturnFragment, bundle)
+        navController.navigate(R.id.action_salesDetailsFragment_to_salesReturnPayFragment, bundle)
     }
 
     fun navigateDetailsFragment(pk : Int) {
         val bundle = bundleOf("pk" to pk)
         navController.navigate(R.id.action_salesFragment_to_salesDetailsFragment, bundle)
+    }
+
+
+
+
+
+
+    fun navigateSalesFragmentToSalesPayFragment(pk : Int) {
+        val bundle = bundleOf("pk" to pk)
+        navController.navigate(R.id.action_salesFragment_to_salesPayNowFragment, bundle)
     }
 }

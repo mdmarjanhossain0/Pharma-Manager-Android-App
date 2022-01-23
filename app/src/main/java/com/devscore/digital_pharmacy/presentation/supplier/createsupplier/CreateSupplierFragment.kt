@@ -12,7 +12,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
@@ -24,6 +26,8 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
 import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddMedicineEvents
 import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddMedicineViewModel
+import com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPayEvents
+import com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPayViewModel
 import com.devscore.digital_pharmacy.presentation.supplier.BaseSupplierFragment
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.add_product_dialog.*
@@ -32,10 +36,21 @@ import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
 import kotlinx.android.synthetic.main.fragment_create_supplier.*
 
 
-class CreateSupplierFragment : BaseSupplierFragment() {
+class CreateSupplierFragment : BaseSupplierFragment(), OnCompleteCallback {
 
     private val viewModel: SupplierCreateViewModel by viewModels()
+    private val shareViewModel : PurchasesPayViewModel by activityViewModels()
+    var returnable : Boolean = false
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        try {
+            returnable = arguments?.getBoolean("returnable", false)!!
+        }
+        catch (e : Exception) {
+            returnable = false
+        }
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -79,6 +94,7 @@ class CreateSupplierFragment : BaseSupplierFragment() {
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -144,7 +160,12 @@ class CreateSupplierFragment : BaseSupplierFragment() {
             address = address
         )
         viewModel.onTriggerEvent(SupplierCreateEvents.CacheState(supplier))
-        viewModel.onTriggerEvent(SupplierCreateEvents.NewSupplierCreate)
+        if (returnable!!) {
+            viewModel.onTriggerEvent(SupplierCreateEvents.NewSupplierCreateAndReturn)
+        }
+        else {
+            viewModel.onTriggerEvent(SupplierCreateEvents.NewSupplierCreate)
+        }
     }
 
 
@@ -196,6 +217,13 @@ class CreateSupplierFragment : BaseSupplierFragment() {
                 }
                 cancelable(false)
             }
+    }
+
+    override fun done() {
+        if (returnable!!) {
+            shareViewModel.onTriggerEvent(PurchasesPayEvents.SelectSupplier(viewModel.state.value?.supplier!!))
+        }
+        findNavController().popBackStack()
     }
 
 }

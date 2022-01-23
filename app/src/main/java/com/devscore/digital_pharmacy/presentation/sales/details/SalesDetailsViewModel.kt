@@ -68,7 +68,8 @@ constructor(
 
                 dataState.data?.let { account ->
                     this.state.value = state.copy(
-                        account = account
+                        account = account,
+                        isLoading = false
                     )
                 }
 
@@ -80,6 +81,12 @@ constructor(
     }
 
     private fun getOrderDetails(pk : Int) {
+        state.value?.let { state ->
+            this.state.value = state.copy(
+                pk = pk
+            )
+        }
+
         state.value?.let { state ->
             salesOrderLocalDetailsInteractor.execute(
                 authToken = sessionManager.state.value?.authToken,

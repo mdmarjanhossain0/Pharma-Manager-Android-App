@@ -5,17 +5,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.devscore.digital_pharmacy.business.domain.models.Customer
-import com.devscore.digital_pharmacy.business.domain.models.Supplier
 import com.devscore.digital_pharmacy.business.domain.models.toCreateCustomer
-import com.devscore.digital_pharmacy.business.domain.models.toCreateSupplier
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.UIComponentType
 import com.devscore.digital_pharmacy.business.domain.util.doesMessageAlreadyExistInQueue
 import com.devscore.digital_pharmacy.business.interactors.customer.CreateCustomerInteractor
-import com.devscore.digital_pharmacy.business.interactors.supplier.CreateSupplierInteractor
 import com.devscore.digital_pharmacy.presentation.session.SessionManager
-import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.SupplierCreateEvents
-import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.SupplierCreateState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -33,13 +28,26 @@ constructor(
 
     val state: MutableLiveData<CreateCustomerState> = MutableLiveData(CreateCustomerState())
 
+
+
+
+
+    private lateinit var callback : OnCompleteCallback
+    fun submit(callback: OnCompleteCallback) {
+        this.callback = callback
+    }
+
     init {
     }
 
     fun onTriggerEvent(event: CreateCustomerEvents) {
         when (event) {
             is CreateCustomerEvents.NewCustomerCreate -> {
-                createSupplier()
+                createCustomer()
+            }
+
+            is CreateCustomerEvents.NewCustomerCreateAndReturn -> {
+                createCustomerAndReturn()
             }
 
             is CreateCustomerEvents.CacheState -> {
@@ -86,7 +94,7 @@ constructor(
         }
     }
 
-    private fun createSupplier() {
+    private fun createCustomer() {
         state.value?.let { state ->
             createCustomerInteractor.execute(
                 authToken = sessionManager.state.value?.authToken,
@@ -97,6 +105,7 @@ constructor(
 
                 dataState.data?.let { customer ->
                     this.state.value = state.copy(customer = customer)
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -107,4 +116,33 @@ constructor(
         }
     }
 
+    private fun createCustomerAndReturn() {
+        state.value?.let { state ->
+            createCustomerInteractor.execute(
+                authToken = sessionManager.state.value?.authToken,
+                createCustomer = state.customer.toCreateCustomer()
+            ).onEach { dataState ->
+                Log.d(TAG, "ViewModel " + dataState.toString())
+                this.state.value = state.copy(isLoading = dataState.isLoading)
+
+                dataState.data?.let { customer ->
+                    this.state.value = state.copy(customer = customer)
+                    callback.done()
+                }
+
+                dataState.stateMessage?.let { stateMessage ->
+                    appendToMessageQueue(stateMessage)
+                }
+
+            }.launchIn(viewModelScope)
+        }
+    }
+
+}
+
+
+
+
+interface OnCompleteCallback {
+    fun done()
 }

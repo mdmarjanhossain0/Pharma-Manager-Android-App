@@ -209,6 +209,10 @@ constructor(
             }
 
             itemView.orderProcess.setOnClickListener {
+                interaction?.onItemProcess(adapterPosition, item)
+            }
+
+            itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
             }
 
@@ -252,6 +256,8 @@ constructor(
     interface Interaction {
 
         fun onItemSelected(position: Int, item: SalesOrder)
+
+        fun onItemProcess(position: Int, item: SalesOrder)
 
 
         fun onItemRetrun(position: Int, item: SalesOrder)

@@ -58,12 +58,12 @@ constructor(
         return 1
     }
 
-    fun submitList(order: PurchasesOrder, cartList : List<PurchasesCart>) {
+    fun submitList(order: PurchasesOrder) {
         if (recyclerItemAdapter == null) {
             recyclerItemAdapter = PurchasesOrderItemAdapter(interaction)
         }
-        recyclerItemAdapter?.submitList(cartList)
-        itemNumber = cartList.size
+        recyclerItemAdapter?.submitList(order.purchases_order_medicines)
+        itemNumber = order.purchases_order_medicines?.size!!
         notifyDataSetChanged()
     }
 }

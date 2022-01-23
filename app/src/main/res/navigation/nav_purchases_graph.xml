@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_purchaseFragment_to_purchasesOrderDetailsFragment"
             app:destination="@id/purchasesOrderDetailsFragment" />
+        <action
+            android:id="@+id/action_purchaseFragment_to_purchasesPaymentFragment"
+            app:destination="@id/purchasesPaymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/purchasesOrdersFragment"
@@ -83,7 +86,7 @@
     </fragment>
     <fragment
         android:id="@+id/createSupplierFragment2"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.createsupplier.PurchasesCreateSupplierFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.supplier.createsupplier.CreateSupplierFragment"
         android:label="fragment_create_supplier"
         tools:layout="@layout/fragment_create_supplier" />
     <fragment
@@ -127,5 +130,11 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_purchases_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_purchasesOrderDetailsFragment_to_purchasesPaymentFragment2"
+            app:destination="@id/purchasesPaymentFragment" />
+        <action
+            android:id="@+id/action_purchasesOrderDetailsFragment_to_purchasesReturnPayFragment"
+            app:destination="@id/purchasesReturnPayFragment" />
     </fragment>
 </navigation>

@@ -39,6 +39,10 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
     var pk : Int? = null
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pk = arguments?.getInt("pk", -2)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -123,6 +127,7 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
 //            uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -136,26 +141,30 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
                     }
                 })
 
-            recyclerAdapter?.apply {
-                submitList(order = state.order!!)
-            }
-
-            salesPaymentItemCount.setText("Items : " + state.order?.sales_oder_medicines?.size.toString())
-            salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
 
+            if (state.order != null) {
+                recyclerAdapter?.apply {
+                    submitList(order = state.order!!)
+                }
 
-            salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
-            val totalAmountAfterDiscount = state.totalAmountAfterFine!!
-            totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
-            val due = totalAmountAfterDiscount - state.fineAmount!!
-            salesPaymentDueAmount.setText("৳ " + due.toString())
+                salesPaymentItemCount.setText("Items : " + state.order?.sales_oder_medicines?.size.toString())
+                salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
-            if (viewModel.state.value?.customer != null) {
-                salesPaymentSearchView.setText("        " + viewModel.state.value?.customer?.name!!)
-            }
-            else {
-                salesPaymentSearchView.setText("      " + "Walk-In Customer")
+
+
+                salesPaymentTotalAmount.setText("৳ " + state.totalAmount)
+                val totalAmountAfterDiscount = state.totalAmountAfterFine!!
+                totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
+                val due = totalAmountAfterDiscount - state.fineAmount!!
+                salesPaymentDueAmount.setText("৳ " + due.toString())
+
+                if (viewModel.state.value?.customer != null) {
+                    salesPaymentSearchView.setText("        " + viewModel.state.value?.customer?.name!!)
+                }
+                else {
+                    salesPaymentSearchView.setText("      " + "Walk-In Customer")
+                }
             }
 
 //            if (state.uploaded) {
@@ -185,6 +194,10 @@ class SalesReturnPayFragment : BaseSalesFragment(), SalesOrderItemAdapter.Intera
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onTriggerEvent(SalesReturnPayEvents.OrderDetails(pk!!))
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerAdapter = null

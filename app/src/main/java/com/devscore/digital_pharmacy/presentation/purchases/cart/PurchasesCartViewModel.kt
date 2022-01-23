@@ -36,6 +36,11 @@ constructor(
 
     val state: MutableLiveData<PurchasesCartState> = MutableLiveData(PurchasesCartState())
 
+    private lateinit var callback : OnCompleteCallback
+    fun submit(callback: OnCompleteCallback) {
+        this.callback = callback
+    }
+
 
 
     init {
@@ -51,7 +56,7 @@ constructor(
 
 
             is PurchasesCartEvents.PurchasesOrderCompleted -> {
-                orderCompleted()
+//                orderCompleted()
             }
 
 
@@ -471,6 +476,7 @@ constructor(
                         order = order,
                         uploaded = true
                     )
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -670,4 +676,13 @@ constructor(
             }.launchIn(viewModelScope)
         }
     }
+}
+
+
+
+
+
+
+interface OnCompleteCallback {
+    fun done()
 }

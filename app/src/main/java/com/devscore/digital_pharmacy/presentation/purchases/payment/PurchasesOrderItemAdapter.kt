@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.*
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesCart
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrderMedicine
 import kotlinx.android.synthetic.main.item_sub_sales_list.view.*
 
 class PurchasesOrderItemAdapter
@@ -45,13 +46,13 @@ constructor(
         return differ.currentList.size
     }
 
-    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PurchasesCart>() {
+    val DIFF_CALLBACK = object : DiffUtil.ItemCallback<PurchasesOrderMedicine>() {
 
-        override fun areItemsTheSame(oldItem: PurchasesCart, newItem: PurchasesCart): Boolean {
-            return oldItem.medicine?.id == newItem.medicine?.id
+        override fun areItemsTheSame(oldItem: PurchasesOrderMedicine, newItem: PurchasesOrderMedicine): Boolean {
+            return oldItem.pk == newItem.pk
         }
 
-        override fun areContentsTheSame(oldItem: PurchasesCart, newItem: PurchasesCart): Boolean {
+        override fun areContentsTheSame(oldItem: PurchasesOrderMedicine, newItem: PurchasesOrderMedicine): Boolean {
             return oldItem == newItem
         }
     }
@@ -83,7 +84,7 @@ constructor(
         }
     }
 
-    fun submitList(list: List<PurchasesCart>?){
+    fun submitList(list: List<PurchasesOrderMedicine>?){
         differ.submitList(list)
         notifyDataSetChanged()
     }
@@ -97,10 +98,10 @@ constructor(
         private val interaction: Interaction? = null
     ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(item: PurchasesCart) = with(itemView) {
-            salesPaymentOrderItemBrandName.setText(item.medicine?.brand_name)
-            salesPaymentOrderItemUnitPrize.setText("৳" + (item.purchasesUnit?.quantity!! * item.medicine?.mrp!!))
-            salesPaymentOrderItemUnitCount.setText(item.quantity.toString() + " " + item.purchasesUnit?.name.toString())
+        fun bind(item: PurchasesOrderMedicine) = with(itemView) {
+            salesPaymentOrderItemBrandName.setText(item.brand_name)
+            salesPaymentOrderItemUnitPrize.setText("৳" + (item.quantity!! * item.mrp!!))
+            salesPaymentOrderItemUnitCount.setText(item.quantity.toString() + " " + item.unit_name.toString())
             salesPaymentOrderItemTotalAmount.setText("৳" + item.amount.toString())
 
 
@@ -113,6 +114,6 @@ constructor(
 
     interface Interaction {
 
-        fun onItemDelete(item : PurchasesCart)
+        fun onItemDelete(item : PurchasesOrderMedicine)
     }
 }

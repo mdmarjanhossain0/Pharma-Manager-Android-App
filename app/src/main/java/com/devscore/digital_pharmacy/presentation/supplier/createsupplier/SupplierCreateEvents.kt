@@ -8,6 +8,12 @@ sealed class SupplierCreateEvents {
 
     object NewSupplierCreate : SupplierCreateEvents()
 
+
+
+
+
+    object NewSupplierCreateAndReturn : SupplierCreateEvents()
+
     data class CacheState(val supplier : Supplier): SupplierCreateEvents()
 
     data class Error(val stateMessage: StateMessage): SupplierCreateEvents()

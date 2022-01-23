@@ -162,9 +162,13 @@ class SalesOrdersFragment : BaseSalesFragment(),
 //        val bundle = bundleOf("pk" to item)
     }
 
+    override fun onItemProcess(position: Int, item: SalesOrder) {
+        (activity as SalesActivity).navigateSalesFragmentToSalesPayFragment(item.pk!!)
+    }
+
     override fun onItemRetrun(position: Int, item: SalesOrder) {
         shareViewModel.onTriggerEvent(SalesReturnEvents.OrderDetails(item.pk!!))
-        (activity as SalesActivity).navigateSalesToSalesReturn()
+        (activity as SalesActivity).navigateSalesToSalesReturn(item.pk!!)
     }
 
     override fun onItemDelete(position: Int, item: SalesOrder) {

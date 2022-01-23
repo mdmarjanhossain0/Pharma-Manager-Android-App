@@ -43,7 +43,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="5dp"
                 android:gravity="fill"
-                android:text="Short List"
+                android:text="Short List/Purchases"
                 android:textAppearance="@android:style/TextAppearance.Medium"
                 android:textColor="@color/white"
                 android:textStyle="bold"

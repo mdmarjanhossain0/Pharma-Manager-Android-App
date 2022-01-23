@@ -13,7 +13,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.work.*
@@ -35,11 +37,12 @@ import kotlinx.android.synthetic.main.fragment_sales_details.*
 import java.io.File
 
 @AndroidEntryPoint
-class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapter.Interaction{
+class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapter.Interaction, OnCompleteCallback{
 
 
     private var recyclerAdapter: PurchasesDetailsAdapter? = null // can leak memory so need to null
-    private val viewModel : PurchasesCartViewModel by activityViewModels()
+//    private val viewModel : PurchasesCartViewModel by activityViewModels()
+    private val viewModel : OrderDetailsViewModel by viewModels()
     private val shareViewModel : PurchasesReturnViewModel by activityViewModels()
     var pk : Int? = null
 
@@ -75,24 +78,26 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
 
 
 
-        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
-            viewModel.state.value = PurchasesCartState()
-            findNavController().popBackStack()
-            Log.d(TAG, "Fragment On Back Press Callback call")
-        }
+//        val callback = requireActivity().onBackPressedDispatcher.addCallback(this){
+//            viewModel.state.value = OrderDetailsState()
+//            findNavController().popBackStack()
+//            Log.d(TAG, "Fragment On Back Press Callback call")
+//        }
 
 
         createSalesOrder.setOnClickListener {
-            findNavController().navigate(R.id.action_purchasesOrderDetailsFragment_to_purchasesCartFragment)
+//            findNavController().navigate(R.id.action_purchasesOrderDetailsFragment_to_purchasesCartFragment)
+            val bundle = bundleOf("pk" to viewModel.state.value?.pk)
+            findNavController().navigate(R.id.action_purchasesOrderDetailsFragment_to_purchasesPaymentFragment2, bundle)
         }
 
         createSalesOrderReturn.setOnClickListener {
-            shareViewModel.onTriggerEvent(PurchasesReturnEvents.OrderDetails(viewModel.state.value?.order?.pk!!))
-            (activity as PurchasesActivity).navigatePurchasesToPurchasesReturnFragment()
+//            shareViewModel.onTriggerEvent(PurchasesReturnEvents.OrderDetails(viewModel.state.value?.order?.pk!!))
+            (activity as PurchasesActivity).navigatePurchasesToPurchasesReturnFragment(viewModel.state.value?.pk!!)
         }
 
         salesOrderDelete.setOnClickListener {
-            viewModel.onTriggerEvent(PurchasesCartEvents.DeleteOrder(viewModel.state.value?.order!!))
+            viewModel.onTriggerEvent(OrderDetailsEvents.DeleteOrder)
         }
 
 
@@ -258,48 +263,49 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
                 queue = state.queue,
                 stateMessageCallback = object: StateMessageCallback {
                     override fun removeMessageFromStack() {
-                        viewModel.onTriggerEvent(PurchasesCartEvents.OnRemoveHeadFromQueue)
+                        viewModel.onTriggerEvent(OrderDetailsEvents.OnRemoveHeadFromQueue)
                     }
                 })
 
-            recyclerAdapter?.apply {
-                submitList(list = state.order.purchases_order_medicines)
-            }
+            if (state.order != null) {
+                recyclerAdapter?.apply {
+                    submitList(list = state.order?.purchases_order_medicines)
+                }
 
-            salesPaymentItemCount.setText("Items : " + state.order.purchases_order_medicines?.size.toString())
-            salesPaymentTotal.setText("Total : ৳" + state.order.total_after_discount.toString())
+                salesPaymentItemCount.setText("Items : " + state.order?.purchases_order_medicines?.size.toString())
+                salesPaymentTotal.setText("Total : ৳" + state.order?.total_after_discount.toString())
 
-            if (viewModel.state.value?.order?.vendor != null) {
-                if (viewModel.state.value?.order?.company != null) {
-                    salesPaymentSearchView.setText("        " + viewModel.state.value?.order?.company)
+                if (viewModel.state.value?.order?.vendor != null) {
+                    if (viewModel.state.value?.order?.company != null) {
+                        salesPaymentSearchView.setText("        " + viewModel.state.value?.order?.company)
+                    }
+                    else {
+                        salesPaymentSearchView.setText("        Supplier has no name")
+                    }
                 }
                 else {
-                    salesPaymentSearchView.setText("        Supplier has no name")
+                    salesPaymentSearchView.setText("      " + "Walk-In Supplier")
                 }
-            }
-            else {
-                salesPaymentSearchView.setText("      " + "Walk-In Supplier")
-            }
 
-            if (state.order.status == 0) {
-                createSalesOrder.visibility = View.VISIBLE
-                salesOrderDelete.visibility = View.VISIBLE
-            }
-            else {
-                createSalesOrder.visibility = View.GONE
-                salesOrderDelete.visibility = View.GONE
-                createSalesOrderReturn.visibility = View.VISIBLE
-            }
+                if (state.order?.status == 0) {
+                    createSalesOrder.visibility = View.VISIBLE
+                    salesOrderDelete.visibility = View.VISIBLE
+                }
+                else {
+                    createSalesOrder.visibility = View.GONE
+                    salesOrderDelete.visibility = View.GONE
+                    createSalesOrderReturn.visibility = View.VISIBLE
+                }
 
-
-
-            if (state.deleted) {
-//                findNavController().navigate(R.id.action_purchasesOrderDetailsFragment_to_purchaseFragment)
-                (activity as PurchasesActivity).onBackPressed()
+                totalItem.setText("Total Item :  " + state.order?.purchases_order_medicines?.size)
             }
 
 
-            totalItem.setText("Total Item :  " + state.order.purchases_order_medicines?.size)
+
+//            if (state.deleted) {
+////                findNavController().navigate(R.id.action_purchasesOrderDetailsFragment_to_purchaseFragment)
+//                (activity as PurchasesActivity).onBackPressed()
+//            }
 
         })
     }
@@ -321,7 +327,7 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
 
     override fun onResume() {
         super.onResume()
-        viewModel.onTriggerEvent(PurchasesCartEvents.OrderDetails(pk!!))
+        viewModel.onTriggerEvent(OrderDetailsEvents.OrderDetails(pk!!))
     }
 
 
@@ -342,7 +348,7 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
                 title(R.string.are_you_sure)
                 message(text = "Cart item will be dismiss")
                 positiveButton(R.string.text_ok){
-                    viewModel.state.value = PurchasesCartState()
+                    viewModel.state.value = OrderDetailsState()
                     findNavController().popBackStack()
                     dismiss()
                 }
@@ -353,5 +359,9 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
                 }
                 cancelable(false)
             }
+    }
+
+    override fun delete() {
+        findNavController().popBackStack()
     }
 }

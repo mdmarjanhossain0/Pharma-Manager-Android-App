@@ -33,7 +33,7 @@ constructor(
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalesOrderItemDataViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_sub_sales_list,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_details_sales_list,parent,false)
         return SalesOrderItemDataViewHolder(itemView, interaction)
     }
 

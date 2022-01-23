@@ -21,6 +21,8 @@ import com.devscore.digital_pharmacy.presentation.customer.createcustomer.Create
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardEvents
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayEvents
+import com.devscore.digital_pharmacy.presentation.sales.payment.SalesPayViewModel
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.fragment_add_customer.*
 import kotlinx.android.synthetic.main.fragment_add_customer.createCustomer
@@ -39,7 +41,7 @@ import kotlinx.coroutines.*
 class SalesCreateCustomerFragment : BaseSalesFragment() {
 
     private val viewModel: CreateCustomerViewModel by viewModels()
-    private val shareViewModel : SalesCardViewModel by activityViewModels()
+    private val shareViewModel : SalesPayViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,7 +76,7 @@ class SalesCreateCustomerFragment : BaseSalesFragment() {
 
         okSelect.setOnClickListener {
             if (viewModel.state.value?.customer?.pk!! > 0) {
-                shareViewModel.onTriggerEvent(SalesCardEvents.SelectCustomer(viewModel.state.value?.customer!!))
+                shareViewModel.onTriggerEvent(SalesPayEvents.SelectCustomer(viewModel.state.value?.customer!!))
                 findNavController().popBackStack()
             }
             else {

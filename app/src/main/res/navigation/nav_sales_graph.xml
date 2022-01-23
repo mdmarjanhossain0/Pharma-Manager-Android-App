@@ -129,5 +129,8 @@
         <action
             android:id="@+id/action_salesDetailsFragment_to_salesPayNowFragment3"
             app:destination="@id/salesPayNowFragment" />
+        <action
+            android:id="@+id/action_salesDetailsFragment_to_salesReturnPayFragment"
+            app:destination="@id/salesReturnPayFragment" />
     </fragment>
 </navigation>

@@ -36,7 +36,7 @@ import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 class SalesCartFragment : BaseSalesFragment(),
-    SalesCardAdapter.Interaction{
+    SalesCardAdapter.Interaction, OnCompleteCallback{
 
 
     private lateinit var searchView: SearchView
@@ -88,6 +88,7 @@ class SalesCartFragment : BaseSalesFragment(),
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -249,5 +250,10 @@ class SalesCartFragment : BaseSalesFragment(),
                 dialog.dismiss()
             }
         }
+    }
+
+    override fun done() {
+        viewModel.state.value = SalesCardState()
+        findNavController().navigate(R.id.action_salesCartFragment_to_salesFragment)
     }
 }

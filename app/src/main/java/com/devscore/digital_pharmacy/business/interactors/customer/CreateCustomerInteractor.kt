@@ -48,8 +48,8 @@ class CreateCustomerInteractor (
 
             emit(
                 DataState.data(response = Response(
-                    message = "Successfully Uploaded.",
-                    uiComponentType = UIComponentType.Dialog(),
+                    message = "Successfully Created.",
+                    uiComponentType = UIComponentType.Toast(),
                     messageType = MessageType.Success()
                 ), data = customer))
 

@@ -200,9 +200,11 @@ class PurchasesActivity : BaseActivity(), View.OnClickListener {
 
 
 
-    fun navigatePurchasesToPurchasesReturnFragment() {
+    fun navigatePurchasesToPurchasesReturnFragment(pk : Int) {
 //        navController.navigate(R.id.action_purchaseFragment_to_purchasesReturnFragment)
-        navController.navigate(R.id.action_purchasesOrderDetailsFragment_to_purchasesReturnFragment)
+        val bundle = bundleOf("pk" to pk)
+//        navController.navigate(R.id.action_purchasesOrderDetailsFragment_to_purchasesReturnFragment)
+        navController.navigate(R.id.action_purchasesOrderDetailsFragment_to_purchasesReturnPayFragment, bundle)
     }
 
 

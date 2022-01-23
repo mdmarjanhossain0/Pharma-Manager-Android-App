@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -114,7 +115,8 @@ class SalesPayNowFragment : BaseSalesFragment(), SalesOrderItemAdapter.Interacti
         }
 
         img1.setOnClickListener {
-            findNavController().navigate(R.id.action_salesPayNowFragment_to_addCustomerFragment2)
+            val bundle = bundleOf("returnable" to true)
+            findNavController().navigate(R.id.action_salesPayNowFragment_to_addCustomerFragment2, bundle)
         }
 
         salesPaymentSearchView.setOnClickListener {

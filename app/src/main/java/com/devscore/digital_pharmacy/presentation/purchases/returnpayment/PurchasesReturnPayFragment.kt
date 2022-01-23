@@ -15,6 +15,7 @@ import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.callbacks.onDismiss
 import com.devscore.digital_pharmacy.R
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesCart
+import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrderMedicine
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.purchases.BasePurchasesFragment
 import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartEvents
@@ -39,12 +40,18 @@ import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
-class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAdapter.Interaction{
+class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAdapter.Interaction, OnCompleteCallback{
 
 
     private var recyclerAdapter: PurchasesOrdersAdapter? = null // can leak memory so need to null
-    private val viewModel: PurchasesReturnViewModel by activityViewModels()
+    private val viewModel: PurchasesReturnPayViewModel by activityViewModels()
+    var pk : Int? = null
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        pk = arguments?.getInt("pk", -2)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,35 +78,35 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
                 dueWarning()
             }
             else {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.GenerateNewOrder)
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.OrderCompleted)
             }
         }
 
         switchId.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.IsDiscountPercent(true))
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.IsDiscountPercent(true))
             }
             else {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.IsDiscountPercent(false))
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.IsDiscountPercent(false))
             }
         }
 
 
         purchasesPaymentReceiveAmount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.ReceiveAmount(purchasesPaymentReceiveAmount.text.toString().toFloat()))
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.ReceiveAmount(purchasesPaymentReceiveAmount.text.toString().toFloat()))
             }
             else {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.ReceiveAmount(0f))
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.ReceiveAmount(0f))
             }
         }
 
         purchasesPaymentDiscount.doOnTextChanged { text, start, before, count ->
             if (text!!.isNotEmpty()) {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.Discount(purchasesPaymentDiscount.text.toString().toFloat()))
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.Discount(purchasesPaymentDiscount.text.toString().toFloat()))
             }
             else {
-                viewModel.onTriggerEvent(PurchasesReturnEvents.Discount(0f))
+                viewModel.onTriggerEvent(PurchasesReturnPayEvents.Discount(0f))
             }
         }
 
@@ -127,6 +134,7 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
 //            uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -136,44 +144,50 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
                 queue = state.queue,
                 stateMessageCallback = object: StateMessageCallback {
                     override fun removeMessageFromStack() {
-                        viewModel.onTriggerEvent(PurchasesReturnEvents.OnRemoveHeadFromQueue)
+                        viewModel.onTriggerEvent(PurchasesReturnPayEvents.OnRemoveHeadFromQueue)
                     }
                 })
 
-            recyclerAdapter?.apply {
-                submitList(order = state.order, cartList = state.purchasesCartList)
+
+            if (state.order != null) {
+                recyclerAdapter?.apply {
+                    submitList(order = state.order!!)
+                }
+
+                salesPaymentItemCount.setText("Items : " + state.order?.purchases_order_medicines?.size.toString())
+                salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
+
+
+
+                purchasesPaymentTotalAmount.setText("৳ " + state.totalAmount)
+                val totalAmountAfterDiscount = state.totalAmountAfterFine!!
+                totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
+                val due = totalAmountAfterDiscount - state.returnAmount!!
+                purchasesPaymentDueAmount.setText("৳ " + due.toString())
+
+
+                if (state.vendor != null) {
+                    purchasesPaymentSearchView.setText("     " + state.vendor.agent_name)
+                }
+                else {
+                    purchasesPaymentSearchView.setText("      " + "Walk-In Supplier")
+                }
+
+
+
+
+
+                if (state.order.pk!! > 0) {
+                    orderNo.setText("#Order Number: " + state.order.pk)
+                }
             }
 
-            salesPaymentItemCount.setText("Items : " + state.purchasesCartList.size.toString())
-            salesPaymentTotal.setText("Total : ৳" + state.totalAmount.toString())
 
 
-
-            purchasesPaymentTotalAmount.setText("৳ " + state.totalAmount)
-            val totalAmountAfterDiscount = state.totalAmountAfterFine!!
-            totalAfterDiscountValue.setText("৳ " + totalAmountAfterDiscount.toString())
-            val due = totalAmountAfterDiscount - state.returnAmount!!
-            purchasesPaymentDueAmount.setText("৳ " + due.toString())
-
-
-            if (state.vendor != null) {
-                purchasesPaymentSearchView.setText("     " + state.vendor.agent_name)
-            }
-            else {
-                purchasesPaymentSearchView.setText("      " + "Walk-In Supplier")
-            }
-
-
-
-            if (state.uploaded) {
-                viewModel.state.value = PurchasesReturnState()
-                findNavController().navigate(R.id.action_purchasesReturnPayFragment_to_purchaseFragment)
-            }
-
-
-            if (state.order.pk!! > 0) {
-                orderNo.setText("#Order Number: " + state.order.pk)
-            }
+//            if (state.uploaded) {
+//                viewModel.state.value = PurchasesReturnPayState()
+//                findNavController().navigate(R.id.action_purchasesReturnPayFragment_to_purchaseFragment)
+//            }
         })
     }
 
@@ -193,6 +207,10 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.onTriggerEvent(PurchasesReturnPayEvents.OrderDetails(pk!!))
+    }
     override fun onDestroyView() {
         super.onDestroyView()
         recyclerAdapter = null
@@ -207,7 +225,7 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
                 title(R.string.are_you_sure)
                 message(text = "Cart item will be dismiss")
                 positiveButton(R.string.text_ok){
-                    viewModel.state.value = PurchasesReturnState()
+                    viewModel.state.value = PurchasesReturnPayState()
                     findNavController().popBackStack()
                     dismiss()
                 }
@@ -246,8 +264,8 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
         }
     }
 
-    override fun onItemDelete(item: PurchasesCart) {
-        viewModel.onTriggerEvent(PurchasesReturnEvents.DeleteMedicine(item.medicine!!))
+    override fun onItemDelete(item: PurchasesOrderMedicine) {
+//        viewModel.onTriggerEvent(PurchasesReturnEvents.DeleteMedicine(item.medicine!!))
     }
 
 
@@ -263,5 +281,10 @@ class PurchasesReturnPayFragment : BasePurchasesFragment(), PurchasesOrderItemAd
                 }
                 cancelable(false)
             }
+    }
+
+    override fun done() {
+        viewModel.state.value = PurchasesReturnPayState()
+        findNavController().navigate(R.id.action_purchasesReturnPayFragment_to_purchaseFragment)
     }
 }

@@ -39,7 +39,7 @@ import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class PurchasesCartFragment : BasePurchasesFragment(),
-    PurchasesCartAdapter.Interaction {
+    PurchasesCartAdapter.Interaction, OnCompleteCallback {
 
 
     private var recyclerAdapter: PurchasesCartAdapter? = null // can leak memory so need to null
@@ -87,6 +87,7 @@ class PurchasesCartFragment : BasePurchasesFragment(),
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
 //            uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -122,10 +123,10 @@ class PurchasesCartFragment : BasePurchasesFragment(),
             }
 
 
-            if (state.uploaded) {
-                viewModel.state.value = PurchasesCartState()
-                findNavController().navigate(R.id.action_purchasesCartFragment_to_purchaseFragment)
-            }
+//            if (state.uploaded) {
+//                viewModel.state.value = PurchasesCartState()
+//                findNavController().navigate(R.id.action_purchasesCartFragment_to_purchaseFragment)
+//            }
         })
     }
 
@@ -241,5 +242,10 @@ class PurchasesCartFragment : BasePurchasesFragment(),
                 dialog.dismiss()
             }
         }
+    }
+
+    override fun done() {
+        viewModel.state.value = PurchasesCartState()
+        findNavController().navigate(R.id.action_purchasesCartFragment_to_purchaseFragment)
     }
 }
