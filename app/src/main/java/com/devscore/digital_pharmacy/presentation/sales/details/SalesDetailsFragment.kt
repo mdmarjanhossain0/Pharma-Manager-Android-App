@@ -289,9 +289,9 @@ class SalesDetailsFragment : BaseSalesFragment(), SalesDetailsAdapter.Interactio
                 orderNo.setText("#Order No : " + state.order.pk)
             }
 
-            if (viewModel.state.value?.order?.customer != null) {
-                if (viewModel.state.value?.order?.customer_name != null) {
-                    salesPaymentSearchView.setText("        " + viewModel.state.value?.order?.customer_name)
+            if (state.order?.customer != null) {
+                if (state.order?.customer_name != null) {
+                    salesPaymentSearchView.setText("        " + state.order?.customer_name)
                 }
                 else {
                     salesPaymentSearchView.setText("        Customer has no name")

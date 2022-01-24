@@ -55,6 +55,7 @@ class ErrorHandling{
         const val CACHE_ERROR_TIMEOUT = "Cache timeout"
         const val UNKNOWN_ERROR = "Unknown error"
         const val ERROR_NOT_CWM_MEMBER = "You must become a member on Codingwithmitch.com to access the API. Visit https://codingwithmitch.com/enroll/"
+        const val NOT_FOUND = "Not found"
 
 
         fun isNetworkError(msg: String): Boolean{

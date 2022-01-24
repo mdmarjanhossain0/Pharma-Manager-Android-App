@@ -207,8 +207,12 @@ constructor(
 
                 itemView.orderDateTime.setText(newDate)
             }
-            itemView.orderProcess.setOnClickListener {
+
+            itemView.setOnClickListener {
                 interaction?.onItemSelected(adapterPosition, item)
+            }
+            itemView.orderProcess.setOnClickListener {
+                interaction?.onItemProcess(adapterPosition, item)
             }
 
             itemView.salesGenerateDelete.setOnClickListener {
@@ -254,6 +258,7 @@ constructor(
     interface Interaction {
 
         fun onItemSelected(position: Int, item: PurchasesOrder)
+        fun onItemProcess(position: Int, item: PurchasesOrder)
 
         fun onItemDelete(position: Int, item: PurchasesOrder)
     }

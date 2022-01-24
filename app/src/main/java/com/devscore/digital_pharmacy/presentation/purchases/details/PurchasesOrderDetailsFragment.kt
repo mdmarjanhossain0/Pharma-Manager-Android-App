@@ -275,9 +275,9 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
                 salesPaymentItemCount.setText("Items : " + state.order?.purchases_order_medicines?.size.toString())
                 salesPaymentTotal.setText("Total : ৳" + state.order?.total_after_discount.toString())
 
-                if (viewModel.state.value?.order?.vendor != null) {
-                    if (viewModel.state.value?.order?.company != null) {
-                        salesPaymentSearchView.setText("        " + viewModel.state.value?.order?.company)
+                if (state.order?.vendor != null) {
+                    if (state.order?.company != null) {
+                        salesPaymentSearchView.setText("        " + state.order?.company)
                     }
                     else {
                         salesPaymentSearchView.setText("        Supplier has no name")
@@ -286,6 +286,7 @@ class PurchasesOrderDetailsFragment : BaseSalesFragment(), PurchasesDetailsAdapt
                 else {
                     salesPaymentSearchView.setText("      " + "Walk-In Supplier")
                 }
+                orderNo.setText("#Order No : " + state.order.pk)
 
                 if (state.order?.status == 0) {
                     createSalesOrder.visibility = View.VISIBLE

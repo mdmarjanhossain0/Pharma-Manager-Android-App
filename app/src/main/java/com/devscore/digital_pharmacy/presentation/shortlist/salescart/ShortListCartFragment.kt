@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,10 +21,7 @@ import com.devscore.digital_pharmacy.business.domain.models.SalesCart
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.purchases.BasePurchasesFragment
 import com.devscore.digital_pharmacy.presentation.purchases.PurchasesActivity
-import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartAdapter
-import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartEvents
-import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartState
-import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartViewModel
+import com.devscore.digital_pharmacy.presentation.purchases.cart.*
 import com.devscore.digital_pharmacy.presentation.sales.BaseSalesFragment
 import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardAdapter
@@ -39,7 +37,7 @@ import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class ShortListCartFragment : BaseShortListFragment(),
-    PurchasesCartAdapter.Interaction {
+    PurchasesCartAdapter.Interaction, OnCompleteCallback {
 
 
         private var recyclerAdapter: PurchasesCartAdapter? = null // can leak memory so need to null
@@ -87,6 +85,7 @@ class ShortListCartFragment : BaseShortListFragment(),
         }
 
         private fun subscribeObservers(){
+            viewModel.submit(this)
             viewModel.state.observe(viewLifecycleOwner, { state ->
 
 //            uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -124,10 +123,10 @@ class ShortListCartFragment : BaseShortListFragment(),
                 }
 
 
-                if (state.uploaded) {
-                    viewModel.state.value = PurchasesCartState()
-                    (activity as ShortListActivity).onBackPressed()
-                }
+//                if (state.uploaded) {
+//                    viewModel.state.value = PurchasesCartState()
+//                    (activity as ShortListActivity).onBackPressed()
+//                }
             })
         }
 
@@ -245,4 +244,9 @@ class ShortListCartFragment : BaseShortListFragment(),
                 }
             }
         }
+
+    override fun done() {
+        val bundle = bundleOf("pk" to viewModel.state.value?.order?.pk)
+        findNavController().navigate(R.id.action_shortListSalesCartFragment_to_shortListPayFragment, bundle)
     }
+}

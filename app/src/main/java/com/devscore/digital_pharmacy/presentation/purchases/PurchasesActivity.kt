@@ -214,4 +214,8 @@ class PurchasesActivity : BaseActivity(), View.OnClickListener {
         val bundle = bundleOf("pk" to pk)
         navController.navigate(R.id.action_purchaseFragment_to_purchasesOrderDetailsFragment, bundle)
     }
+    fun navigatePurchasesFragmentToPurchasesPayFragment(pk : Int) {
+        val bundle = bundleOf("pk" to pk)
+        navController.navigate(R.id.action_purchaseFragment_to_purchasesPaymentFragment, bundle)
+    }
 }

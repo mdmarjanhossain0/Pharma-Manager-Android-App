@@ -40,6 +40,12 @@
             app:launchSingleTop="true"
             app:popUpTo="@id/nav_short_list_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_shortListPayFragment_to_purchasesSupplierListFragment"
+            app:destination="@id/purchasesSupplierListFragment" />
+        <action
+            android:id="@+id/action_shortListPayFragment_to_purchasesCreateSupplierFragment"
+            app:destination="@id/purchasesCreateSupplierFragment" />
     </fragment>
     <fragment
         android:id="@+id/shortListAddFragment"
@@ -51,4 +57,12 @@
         android:name="com.devscore.digital_pharmacy.presentation.shortlist.customerlist.ShortListSupplierListFragment"
         android:label="fragment_short_list_customer_list"
         tools:layout="@layout/fragment_short_list_customer_list" />
+    <fragment
+        android:id="@+id/purchasesSupplierListFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
+        android:label="PurchasesSupplierListFragment" />
+    <fragment
+        android:id="@+id/purchasesCreateSupplierFragment"
+        android:name="com.devscore.digital_pharmacy.presentation.shortlist.PurchasesCreateSupplierFragment"
+        android:label="PurchasesCreateSupplierFragment" />
 </navigation>

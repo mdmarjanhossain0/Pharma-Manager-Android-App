@@ -210,6 +210,7 @@ constructor(
             Log.d("SalesInventoryAdapter", item.toString())
             itemView.salesInventoryBrandName.setText(item.brand_name)
             itemView.salesInventoryCompanyName.setText(item.generic)
+            itemView.salesInventoryManufacture.setText(item.manufacture)
             itemView.salesInventoryMRP.setText("MRP ৳ "+ item.mrp.toString())
 
 

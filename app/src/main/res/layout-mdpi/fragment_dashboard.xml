@@ -52,7 +52,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardId"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="95dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
@@ -157,16 +157,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardId"
             android:orientation="vertical"
-            android:weightSum="11"
+            android:weightSum="9"
+            android:gravity="center"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="8"
-                android:layout_marginTop="15dp"
+                android:layout_weight="6"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
                 >
                 <GridLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:alignmentMode="alignMargins"
                     android:layout_gravity="center"
@@ -179,10 +182,9 @@
 
 
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_rowWeight="1"
                         android:layout_columnWeight="3"
                         android:orientation="vertical"
                         android:weightSum="15"
@@ -211,14 +213,13 @@
                             android:gravity="center"
                             android:textColor="@color/colorPrimaryVariant"
                             android:textStyle="bold"/>
-                    </LinearLayout>
+                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
 
 
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_rowWeight="1"
                         android:layout_columnWeight="3"
                         android:weightSum="15"
                         android:orientation="vertical">
@@ -247,15 +248,14 @@
                             android:weightSum="2"
                             android:gravity="center"
                             android:textStyle="bold"/>
-                    </LinearLayout>
+                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
 
 
 
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_rowWeight="1"
                         android:layout_columnWeight="3"
                         android:weightSum="15"
                         android:orientation="vertical">
@@ -284,14 +284,13 @@
                             android:textSize="14sp"
                             android:layout_marginBottom="1dp"
                             android:textStyle="bold" />
-                    </LinearLayout>
+                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
 
 
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_rowWeight="1"
                         android:layout_columnWeight="3"
                         android:weightSum="15"
                         android:orientation="vertical">
@@ -319,7 +318,7 @@
                             android:textColor="@color/colorPrimaryVariant"
                             android:gravity="center"
                             android:textStyle="bold"/>
-                    </LinearLayout>
+                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
                 </GridLayout>
             </LinearLayout>
 

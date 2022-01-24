@@ -140,7 +140,10 @@ constructor(
 
                 dataState.data?.let { list ->
                     Log.d(TAG, "ViewModel List Size " + list.size)
-                    this.state.value = state.copy(orderList = list)
+                    this.state.value = state.copy(
+                        orderList = list,
+                        isLoading = false
+                    )
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -149,6 +152,7 @@ constructor(
                     }else{
                         appendToMessageQueue(stateMessage)
                     }
+                    this.state.value = state.copy(isLoading = dataState.isLoading)
                 }
 
             }.launchIn(viewModelScope)

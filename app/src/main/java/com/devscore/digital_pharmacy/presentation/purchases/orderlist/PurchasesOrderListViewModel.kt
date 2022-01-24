@@ -36,9 +36,6 @@ constructor(
 
     val state: MutableLiveData<PurchasesOrderListState> = MutableLiveData(PurchasesOrderListState())
 
-
-    lateinit var searchJob : Job
-
     init {
         onTriggerEvent(PurchasesOrderListEvents.SearchNewOrder)
     }
@@ -194,7 +191,7 @@ constructor(
 
         Log.d(TAG, "ViewModel page number " + state.value?.page)
         state.value?.let { state ->
-            searchJob = searchPurchasesOrder.execute(
+            searchPurchasesOrder.execute(
                 authToken = sessionManager.state.value?.authToken,
                 query = state.query,
                 status = 0,
@@ -205,7 +202,10 @@ constructor(
 
                 dataState.data?.let { list ->
                     Log.d(TAG, "ViewModel List Size " + list.size)
-                    this.state.value = state.copy(orderList = list)
+                    this.state.value = state.copy(
+                        orderList = list,
+                        isLoading = false
+                    )
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -214,6 +214,7 @@ constructor(
                     }else{
                         appendToMessageQueue(stateMessage)
                     }
+                    this.state.value = state.copy(isLoading = dataState.isLoading)
                 }
 
             }.launchIn(viewModelScope)
