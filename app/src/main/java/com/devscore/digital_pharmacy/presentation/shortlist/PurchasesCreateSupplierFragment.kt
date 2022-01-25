@@ -18,7 +18,10 @@ import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.purchases.BasePurchasesFragment
 import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartEvents
 import com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartViewModel
+import com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPayEvents
+import com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPayViewModel
 import com.devscore.digital_pharmacy.presentation.supplier.BaseSupplierFragment
+import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.OnCompleteCallback
 import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.SupplierCreateEvents
 import com.devscore.digital_pharmacy.presentation.supplier.createsupplier.SupplierCreateViewModel
 import com.devscore.digital_pharmacy.presentation.util.processQueue
@@ -42,10 +45,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class PurchasesCreateSupplierFragment : BasePurchasesFragment() {
+class PurchasesCreateSupplierFragment : BasePurchasesFragment(), OnCompleteCallback {
 
     private val viewModel: SupplierCreateViewModel by viewModels()
-    private val shareViewModel : PurchasesCartViewModel by activityViewModels()
+    private val shareViewModel : PurchasesPayViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -78,15 +81,15 @@ class PurchasesCreateSupplierFragment : BasePurchasesFragment() {
         }
 
 
-        okSelect.setOnClickListener {
-            if (viewModel.state.value?.supplier?.pk!! > 0) {
-                shareViewModel.onTriggerEvent(PurchasesCartEvents.SelectSupplier(viewModel.state.value?.supplier!!))
-                findNavController().popBackStack()
-            }
-            else {
-                selectWarning()
-            }
-        }
+//        okSelect.setOnClickListener {
+//            if (viewModel.state.value?.supplier?.pk!! > 0) {
+//                shareViewModel.onTriggerEvent(PurchasesCartEvents.SelectSupplier(viewModel.state.value?.supplier!!))
+//                findNavController().popBackStack()
+//            }
+//            else {
+//                selectWarning()
+//            }
+//        }
     }
 
     private fun selectWarning() {
@@ -110,6 +113,7 @@ class PurchasesCreateSupplierFragment : BasePurchasesFragment() {
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -212,6 +216,11 @@ class PurchasesCreateSupplierFragment : BasePurchasesFragment() {
                 }
                 cancelable(false)
             }
+    }
+
+    override fun done() {
+        shareViewModel.onTriggerEvent(PurchasesPayEvents.SelectSupplier(viewModel.state.value?.supplier!!))
+        findNavController().popBackStack()
     }
 
 }

@@ -6,6 +6,7 @@ import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase
 import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase.Companion.DATABASE_NAME
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
+import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStoreManager
 import com.devscore.digital_pharmacy.business.domain.util.Constants
@@ -21,6 +22,9 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import okhttp3.OkHttpClient
+import java.util.concurrent.TimeUnit
+
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -44,8 +48,14 @@ object AppModule{
     @Singleton
     @Provides
     fun provideRetrofitBuilder(gsonBuilder:  Gson): Retrofit.Builder{
+        val okHttpClient = OkHttpClient.Builder()
+            .connectTimeout(1, TimeUnit.MINUTES)
+            .readTimeout(30, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
+            .build()
         return Retrofit.Builder()
             .baseUrl(Constants.BASE_URL)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gsonBuilder))
     }
 
@@ -64,7 +74,8 @@ object AppModule{
     fun provideSessionManager(
         checkPreviousAuthUser: CheckPreviousAuthUser,
         logout: Logout,
-        appDataStore : AppDataStore
+        appDataStore : AppDataStore,
+        customerDao: CustomerDao
     ) : SessionManager {
         return SessionManager(
             checkPreviousAuthUser = checkPreviousAuthUser,

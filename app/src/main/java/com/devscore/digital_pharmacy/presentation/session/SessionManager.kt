@@ -2,6 +2,7 @@ package com.devscore.digital_pharmacy.presentation.session
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
 import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
@@ -25,7 +26,7 @@ class SessionManager
 constructor(
     private val checkPreviousAuthUser: CheckPreviousAuthUser,
     private val logout: Logout,
-    private val appDataStoreManager : AppDataStore,
+    private val appDataStoreManager : AppDataStore
 ) {
 
     private val TAG: String = "AppDebug"

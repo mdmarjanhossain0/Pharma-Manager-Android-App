@@ -214,6 +214,18 @@ interface LocalMedicineDao {
     suspend fun searchFailureMedicineWithUnits(
         query: String
     ): List<FailureMedicineWithUnit>
+
+
+
+
+
+
+
+    @Query("DELETE FROM LocalMedicine")
+    suspend fun deleteLocalMedicine()
+
+    @Query("DELETE FROM FailureMedicine")
+    suspend fun deleteLocalFailureMedicine()
 }
 
 

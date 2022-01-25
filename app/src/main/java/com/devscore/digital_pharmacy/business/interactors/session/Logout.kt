@@ -15,6 +15,23 @@ class Logout(
 ) {
     fun execute(): Flow<DataState<Response>> = flow {
         emit(DataState.loading<Response>())
+        authTokenDao.deleteLocalMedicine()
+        authTokenDao.deleteLocalFailureMedicine()
+        authTokenDao.deleteCustomer()
+        authTokenDao.deleteCustomerF()
+        authTokenDao.deleteSupplier()
+        authTokenDao.deleteSupplierF()
+        authTokenDao.deleteSales()
+        authTokenDao.deleteSalesF()
+        authTokenDao.deletePurchases()
+        authTokenDao.deletePurchasesF()
+        authTokenDao.deleteShortList()
+        authTokenDao.deleteShortListF()
+        authTokenDao.deleteEmployee()
+        authTokenDao.deleteReceive()
+        authTokenDao.deleteReceiveF()
+        authTokenDao.deletePayment()
+        authTokenDao.deletePaymentF()
         authTokenDao.clearTokens()
         emit(DataState.data<Response>(
             data = Response(

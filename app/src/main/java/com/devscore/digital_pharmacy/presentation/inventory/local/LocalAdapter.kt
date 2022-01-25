@@ -216,7 +216,12 @@ constructor(
             Log.d("LocalAdapter", item.toString())
 
             if (item.id != null && item.id!! > 0) {
-                itemView.localBrandNameTV.setText(item.brand_name)
+                if (item.strength != null) {
+                    itemView.localBrandNameTV.setText(item.brand_name + " " + item.strength)
+                }
+                else {
+                    itemView.localBrandNameTV.setText(item.brand_name)
+                }
             }
             else {
                 val brand_name = SpannableString(item.brand_name)

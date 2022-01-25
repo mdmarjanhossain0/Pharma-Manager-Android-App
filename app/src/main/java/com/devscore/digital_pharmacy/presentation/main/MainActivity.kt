@@ -3,21 +3,28 @@ package com.devscore.digital_pharmacy
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.work.*
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.BaseActivity
 import com.devscore.digital_pharmacy.presentation.auth.AuthActivity
 import com.devscore.digital_pharmacy.presentation.session.SessionEvents
+import com.devscore.digital_pharmacy.presentation.util.GlobalWorker
+import com.devscore.digital_pharmacy.presentation.util.SalesPdfWorker
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.IOException
+import java.io.InputStream
+import java.nio.charset.Charset
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -49,6 +56,36 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
+        val constraints = Constraints.Builder().setRequiresCharging(false).build()
+
+        val pdfWorker : WorkRequest =
+            OneTimeWorkRequestBuilder<GlobalWorker>()
+                .setConstraints(constraints)
+                .build()
+
+        WorkManager
+            .getInstance(applicationContext)
+            .enqueue(pdfWorker)
+    }
+    private fun insertData() {
+        Log.d("AppDebug", "Load Json " + loadJSONFromAsset().toString())
+    }
+
+    fun loadJSONFromAsset(): String? {
+        var json: String? = null
+
+        json = try {
+            val `is`: InputStream = applicationContext.getAssets().open("global.json")
+            val size: Int = `is`.available()
+            val buffer = ByteArray(size)
+            `is`.read(buffer)
+            `is`.close()
+            String(buffer, Charset.forName("UTF-8"))
+        } catch (ex: IOException) {
+            ex.printStackTrace()
+            return null
+        }
+        return json
     }
 
     private fun setupBottomNavigationView() {

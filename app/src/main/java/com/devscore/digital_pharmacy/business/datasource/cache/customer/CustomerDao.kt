@@ -81,4 +81,20 @@ interface CustomerDao {
 
     @Query("SELECT * FROM FailureAppClientCustomer")
     fun getSyncDataLiveData(): LiveData<List<FailureCustomerEntity>>
+
+
+
+
+
+
+
+
+
+
+
+    @Query("DELETE FROM AppClientCustomer")
+    suspend fun delete()
+
+    @Query("DELETE FROM FailureAppClientCustomer")
+    suspend fun deleteFailure()
 }

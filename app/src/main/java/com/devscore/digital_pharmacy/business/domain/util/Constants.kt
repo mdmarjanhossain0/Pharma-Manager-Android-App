@@ -8,7 +8,7 @@ class Constants {
 //        const val BASE_URL = "http://127.0.0.1/:8000/api/"
 //        const val BASE_URL = "http://192.168.43.254:8000/api/"
 //        const val BASE_URL = "http://79.143.183.43/api/"
-        const val PASSWORD_RESET_URL: String = "http://157.245.147.57/password_reset/"
+        const val PASSWORD_RESET_URL: String = "http://79.143.183.43/password_reset/"
 
 
         const val NETWORK_TIMEOUT = 6000L

@@ -201,10 +201,11 @@ class ShortListFragment : BaseShortListFragment(),
     }
 
     override fun onItemSelected(position: Int, item: LocalMedicine) {
-        localMedicineDetails(item)
+//        localMedicineDetails(item)
     }
 
     override fun onItemCard(position: Int, item: LocalMedicine) {
+        Log.d(TAG, "Short List add card")
         shareViewModel.onTriggerEvent(PurchasesCartEvents.AddToCard(item))
     }
 

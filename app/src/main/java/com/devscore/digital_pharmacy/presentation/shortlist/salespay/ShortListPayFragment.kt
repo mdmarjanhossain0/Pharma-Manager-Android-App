@@ -267,6 +267,6 @@ class ShortListPayFragment : BasePurchasesFragment(), PurchasesOrderItemAdapter.
     }
 
     override fun done() {
-        findNavController().navigate(R.id.action_shortListPayFragment_to_shortListAddFragment)
+        findNavController().navigate(R.id.action_shortListPayFragment_to_shortListFragment)
     }
 }
