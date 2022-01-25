@@ -150,21 +150,21 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cardId"
             android:orientation="vertical"
-            android:weightSum="13"
+            android:weightSum="9"
             >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="9"
+                android:layout_weight="6"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:layout_marginTop="5dp"
                 >
                 <GridLayout
                     android:layout_width="wrap_content"
@@ -173,7 +173,7 @@
                     android:layout_gravity="center"
                     android:columnCount="2"
                     android:columnOrderPreserved="false"
-                    android:rowCount="2"
+                    android:rowCount="3"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     app:layout_editor_absoluteX="0dp">
@@ -183,7 +183,7 @@
                     <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_columnWeight="3"
+                        android:layout_columnWeight="1"
                         android:orientation="vertical"
                         android:weightSum="15"
                         >
@@ -205,7 +205,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Purchases l"
+                            android:text="Purchases"
                             android:textSize="14sp"
                             android:layout_weight="2"
                             android:gravity="center"
@@ -218,7 +218,7 @@
                     <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_columnWeight="3"
+                        android:layout_columnWeight="1"
                         android:weightSum="15"
                         android:orientation="vertical">
 
@@ -252,9 +252,9 @@
 
 
                     <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_columnWeight="3"
+                        android:layout_columnWeight="1"
                         android:weightSum="15"
                         android:orientation="vertical">
 
@@ -289,7 +289,7 @@
                     <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
-                        android:layout_columnWeight="3"
+                        android:layout_columnWeight="1"
                         android:weightSum="15"
                         android:orientation="vertical">
 
@@ -323,7 +323,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="3"
+                android:layout_weight="2"
+                android:layout_marginBottom="5dp"
                 >
                 <GridLayout
                     android:layout_width="match_parent"
@@ -346,10 +347,10 @@
                         android:layout_marginStart="25dp"
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="10dp"
+                        android:layout_marginBottom="5dp"
                         app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
-                        android:layout_marginBottom="15dp"
                         >
 
                         <LinearLayout
@@ -386,9 +387,9 @@
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="5dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
-                        android:layout_marginBottom="15dp"
                         >
 
                         <LinearLayout
@@ -424,10 +425,10 @@
                         android:layout_height="0dp"
                         app:cardCornerRadius="10dp"
                         android:layout_marginRight="25dp"
+                        android:layout_marginBottom="5dp"
                         app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
-                        android:layout_marginBottom="15dp"
                         >
 
                         <LinearLayout

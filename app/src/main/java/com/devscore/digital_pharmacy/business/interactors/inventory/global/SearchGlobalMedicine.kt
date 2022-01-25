@@ -78,29 +78,29 @@ class SearchGlobalMedicine(
             }
         }catch (e: Exception){
             e.printStackTrace()
-            emit(
-                DataState.error<List<GlobalMedicine>>(
-                    response = Response(
-                        message = "Unable to update the cache.",
-                        uiComponentType = UIComponentType.None(),
-                        messageType = MessageType.Error()
-                    )
-                )
-            )
+//            emit(
+//                DataState.error<List<GlobalMedicine>>(
+//                    response = Response(
+//                        message = "Unable to update the cache.",
+//                        uiComponentType = UIComponentType.None(),
+//                        messageType = MessageType.Error()
+//                    )
+//                )
+//            )
         }
-
-        // emit from cache
-        val cachedBlogs = cache.searchCacheGlobalMedicine(
-            query = query,
-            page = page,
-            ordering = "id",
-            action = action
-        ).map { it.toGlobalMedicine() }
-
-
-        Log.d(TAG, "Cache Data " + cachedBlogs.size + " " + "Query " + query + cachedBlogs.toString())
-
-        emit(DataState.data(response = null, data = cachedBlogs))
+//
+//        // emit from cache
+//        val cachedBlogs = cache.searchCacheGlobalMedicine(
+//            query = query,
+//            page = page,
+//            ordering = "id",
+//            action = action
+//        ).map { it.toGlobalMedicine() }
+//
+//
+//        Log.d(TAG, "Cache Data " + cachedBlogs.size + " " + "Query " + query + cachedBlogs.toString())
+//
+//        emit(DataState.data(response = null, data = cachedBlogs))
     }.catch { e ->
         emit(handleUseCaseException(e))
     }

@@ -56,16 +56,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setupActionBar() {
-        val constraints = Constraints.Builder().setRequiresCharging(false).build()
-
-        val pdfWorker : WorkRequest =
-            OneTimeWorkRequestBuilder<GlobalWorker>()
-                .setConstraints(constraints)
-                .build()
-
-        WorkManager
-            .getInstance(applicationContext)
-            .enqueue(pdfWorker)
+//        val constraints = Constraints.Builder().setRequiresCharging(false).build()
+//
+//        val pdfWorker : WorkRequest =
+//            OneTimeWorkRequestBuilder<GlobalWorker>()
+//                .setConstraints(constraints)
+//                .build()
+//
+//        WorkManager
+//            .getInstance(applicationContext)
+//            .enqueue(pdfWorker)
     }
     private fun insertData() {
         Log.d("AppDebug", "Load Json " + loadJSONFromAsset().toString())

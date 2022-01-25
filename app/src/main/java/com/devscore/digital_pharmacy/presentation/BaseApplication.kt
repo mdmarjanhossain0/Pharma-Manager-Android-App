@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.work.*
 import com.devscore.digital_pharmacy.business.datasource.cache.AppDatabase
+import com.devscore.digital_pharmacy.presentation.util.GlobalWorker
 import com.devscore.digital_pharmacy.presentation.util.SyncWorker
 import dagger.Provides
 import dagger.hilt.android.HiltAndroidApp
@@ -38,6 +39,17 @@ class BaseApplication : Application(), Configuration.Provider{
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
+        val constraints = Constraints.Builder().setRequiresCharging(false).build()
+
+        val pdfWorker : WorkRequest =
+            OneTimeWorkRequestBuilder<GlobalWorker>()
+                .setConstraints(constraints)
+                .build()
+
+        WorkManager
+            .getInstance(applicationContext)
+            .enqueue(pdfWorker)
 
 //        syncEngine()
     }

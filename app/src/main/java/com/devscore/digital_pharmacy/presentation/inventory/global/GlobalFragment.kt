@@ -246,6 +246,38 @@ class GlobalFragment : BaseInventoryFragment(),
                         Log.d(TAG, "GlobalFragment: attempting to load next page...")
                         viewModel.onTriggerEvent(GlobalEvents.NextPage)
                     }
+                    if (
+                        lastPosition == recyclerAdapter?.itemCount?.minus(2)
+                        && viewModel.state.value?.isLoading == false
+                        && viewModel.state.value?.isQueryExhausted == false
+                    ) {
+                        Log.d(TAG, "GlobalFragment: attempting to load next page...")
+                        viewModel.onTriggerEvent(GlobalEvents.NextPage)
+                    }
+                    if (
+                        lastPosition == recyclerAdapter?.itemCount?.minus(3)
+                        && viewModel.state.value?.isLoading == false
+                        && viewModel.state.value?.isQueryExhausted == false
+                    ) {
+                        Log.d(TAG, "GlobalFragment: attempting to load next page...")
+                        viewModel.onTriggerEvent(GlobalEvents.NextPage)
+                    }
+                    if (
+                        lastPosition == recyclerAdapter?.itemCount?.minus(4)
+                        && viewModel.state.value?.isLoading == false
+                        && viewModel.state.value?.isQueryExhausted == false
+                    ) {
+                        Log.d(TAG, "GlobalFragment: attempting to load next page...")
+                        viewModel.onTriggerEvent(GlobalEvents.NextPage)
+                    }
+                    if (
+                        lastPosition == recyclerAdapter?.itemCount?.minus(5)
+                        && viewModel.state.value?.isLoading == false
+                        && viewModel.state.value?.isQueryExhausted == false
+                    ) {
+                        Log.d(TAG, "GlobalFragment: attempting to load next page...")
+                        viewModel.onTriggerEvent(GlobalEvents.NextPage)
+                    }
                 }
             })
             adapter = recyclerAdapter

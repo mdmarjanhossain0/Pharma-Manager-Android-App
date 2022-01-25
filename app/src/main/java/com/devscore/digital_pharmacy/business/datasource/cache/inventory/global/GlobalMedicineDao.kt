@@ -5,8 +5,13 @@ import androidx.room.*
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryUtils
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.GlobalMedicineResponse
-import com.devscore.digital_pharmacy.business.domain.util.Constants.Companion.PAGINATION_PAGE_SIZE
+import androidx.lifecycle.LiveData
 
+
+
+
+
+val PAGINATION_PAGE_SIZE = 50
 @Dao
 interface GlobalMedicineDao {
 
@@ -93,6 +98,10 @@ interface GlobalMedicineDao {
 //        ordering: String,
         pageSize: Int = PAGINATION_PAGE_SIZE
     ): List<GlobalMedicineEntity>
+
+
+    @Query("SELECT COUNT(brand_name) FROM GlobalMedicine")
+    fun getRowCount(): Int?
 }
 
 

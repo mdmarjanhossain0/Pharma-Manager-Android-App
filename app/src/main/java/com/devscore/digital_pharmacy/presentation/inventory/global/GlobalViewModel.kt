@@ -9,7 +9,6 @@ import com.devscore.digital_pharmacy.business.domain.models.GlobalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.MedicineUnits
 import com.devscore.digital_pharmacy.business.domain.models.toAddMedicine
 import com.devscore.digital_pharmacy.business.domain.util.*
-import com.devscore.digital_pharmacy.business.domain.util.Constants.Companion.PAGINATION_PAGE_SIZE
 import com.devscore.digital_pharmacy.business.interactors.inventory.global.SearchGlobalMedicine
 import com.devscore.digital_pharmacy.business.interactors.inventory.local.AddMedicineInteractor
 import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddMedicineEvents
@@ -20,6 +19,9 @@ import kotlinx.coroutines.flow.onEach
 import java.util.*
 import javax.inject.Inject
 
+
+
+val PAGINATION_PAGE_SIZE = 50
 @HiltViewModel
 class GlobalViewModel
 @Inject
