@@ -1,31 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.main.dashboard.DashboardFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+
+
+
+
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/topLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="90dp"
             android:background="@color/colorPrimary"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
-
 
 
             <include
                 android:id="@+id/notification"
                 layout="@layout/dynamic_notification"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -38,7 +43,7 @@
                 android:id="@+id/sync"
                 layout="@layout/dynamic_sync"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_height="25dp"
                 android:layout_gravity="end"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
@@ -52,7 +57,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardId"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="80dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
@@ -60,7 +65,8 @@
             app:cardElevation="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            >
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,7 +79,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_sales"
+                    android:src="@drawable/ic_purchase"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -84,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="4dp"
                     android:text="Sales IN MARCH"
                     android:textColor="@color/colorPrimaryVariant"
                     android:textStyle="bold"
@@ -96,7 +102,7 @@
                     android:id="@+id/amountTvId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="Amount:"
                     app:layout_constraintStart_toStartOf="@+id/titleTvId"
                     app:layout_constraintTop_toBottomOf="@+id/titleTvId" />
@@ -149,182 +155,189 @@
 
 
         </com.google.android.material.card.MaterialCardView>
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardId"
-            android:orientation="vertical"
-            android:weightSum="9"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/cardId"
             >
+
+
             <LinearLayout
+                android:id="@+id/linear1"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="6"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginTop="5dp"
+                android:weightSum="2"
                 >
-                <GridLayout
+                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                    android:id="@+id/item1"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:alignmentMode="alignMargins"
-                    android:layout_gravity="center"
-                    android:columnCount="2"
-                    android:columnOrderPreserved="false"
-                    android:rowCount="3"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    app:layout_editor_absoluteX="0dp">
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:weightSum="15"
+                    >
+
+                    <ImageView
+                        android:id="@+id/purchaseImgId"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="13"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/ic_purchase"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Purchases"
+                        android:textColor="@color/colorPrimaryVariant"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
 
 
 
-                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_columnWeight="1"
-                        android:orientation="vertical"
-                        android:weightSum="15"
-                        >
+                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                    android:id="@+id/item2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:orientation="vertical"
+                    android:weightSum="15"
+                    android:layout_toRightOf="@+id/item1"
+                    >
+                    <ImageView
+                        android:id="@+id/salesImgId"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="13"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitCenter"
+                        android:background="@drawable/ic_sales"/>
 
-                        <ImageView
-                            android:id="@+id/purchaseImgId"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginRight="25dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="25dp"
-                            android:adjustViewBounds="true"
-                            android:layout_weight="13"
-                            android:scaleType="fitCenter"
-                            android:background="@drawable/ic_purchase"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Purchases"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:gravity="center"
-                            android:textColor="@color/colorPrimaryVariant"
-                            android:textStyle="bold"/>
-                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
-
-
-
-                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_columnWeight="1"
-                        android:weightSum="15"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/salesImgId"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginRight="25dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="25dp"
-                            android:adjustViewBounds="true"
-                            android:layout_weight="13"
-                            android:scaleType="fitCenter"
-                            android:background="@drawable/ic_sales"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Sales"
-                            android:textSize="14sp"
-                            android:layout_marginTop="8dp"
-                            android:textColor="@color/colorPrimaryVariant"
-                            android:weightSum="2"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
-
-
-
-
-                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_columnWeight="1"
-                        android:weightSum="15"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/inventoryImgId"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginRight="25dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="25dp"
-                            android:adjustViewBounds="true"
-                            android:layout_weight="13"
-                            android:scaleType="fitCenter"
-                            android:background="@drawable/ic_inventory"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="2"
-                            android:gravity="center"
-                            android:text="Inventory"
-                            android:textColor="@color/colorPrimaryVariant"
-                            android:textSize="14sp"
-                            android:layout_marginBottom="1dp"
-                            android:textStyle="bold" />
-                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
-
-
-
-                    <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_columnWeight="1"
-                        android:weightSum="15"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:id="@+id/shortlistImgId"
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:layout_gravity="center_horizontal"
-                            android:layout_marginLeft="25dp"
-                            android:layout_marginRight="25dp"
-                            android:layout_marginBottom="5dp"
-                            android:layout_marginTop="25dp"
-                            android:adjustViewBounds="true"
-                            android:layout_weight="13"
-                            android:scaleType="fitCenter"
-                            android:background="@drawable/ic_shortlist"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Short List"
-                            android:textSize="14sp"
-                            android:layout_weight="2"
-                            android:textColor="@color/colorPrimaryVariant"
-                            android:gravity="center"
-                            android:textStyle="bold"/>
-                    </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
-                </GridLayout>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Sales"
+                        android:textColor="@color/colorPrimaryVariant"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/linear2"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linear1"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                >
+
+                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                    android:id="@+id/item3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_below="@+id/item1"
+                    android:orientation="vertical"
+                    android:weightSum="15">
+
+                    <ImageView
+                        android:id="@+id/inventoryImgId"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="13"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/ic_inventory"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="1dp"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Inventory"
+                        android:textColor="@color/colorPrimaryVariant"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+
+
+                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+                    android:id="@+id/item4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1"
+                    android:layout_below="@+id/item2"
+                    android:layout_toRightOf="@+id/item3"
+                    android:orientation="vertical"
+                    android:weightSum="15">
+
+                    <ImageView
+                        android:id="@+id/shortlistImgId"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_weight="13"
+                        android:adjustViewBounds="true"
+                        android:background="@drawable/ic_shortlist"
+                        android:scaleType="fitCenter" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:gravity="center"
+                        android:text="Short List"
+                        android:textColor="@color/colorPrimaryVariant"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
+                android:minHeight="100dp"
+                android:layout_below="@+id/linear2"
+                android:layout_marginTop="5dp"
                 >
                 <GridLayout
                     android:layout_width="match_parent"
@@ -332,8 +345,8 @@
                     android:alignmentMode="alignMargins"
                     android:columnCount="3"
                     android:columnOrderPreserved="false"
-                    android:rowCount="3"
-                    android:layout_marginTop="25dp"
+                    android:rowCount="1"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
                     app:layout_editor_absoluteX="0dp">
@@ -347,10 +360,10 @@
                         android:layout_marginStart="25dp"
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="10dp"
-                        android:layout_marginBottom="5dp"
                         app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
+                        android:layout_marginBottom="1dp"
                         >
 
                         <LinearLayout
@@ -372,6 +385,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Customers"
                                 android:layout_gravity="center"
+                                android:textSize="12sp"
                                 android:textColor="@color/colorPrimaryVariant" />
 
 
@@ -387,9 +401,9 @@
                         android:layout_marginEnd="8dp"
                         app:cardCornerRadius="10dp"
                         app:cardElevation="5dp"
-                        android:layout_marginBottom="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
+                        android:layout_marginBottom="1dp"
                         >
 
                         <LinearLayout
@@ -411,6 +425,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Supplier"
+                                android:textSize="12sp"
                                 android:textColor="@color/colorPrimaryVariant" />
 
 
@@ -425,10 +440,10 @@
                         android:layout_height="0dp"
                         app:cardCornerRadius="10dp"
                         android:layout_marginRight="25dp"
-                        android:layout_marginBottom="5dp"
                         app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
+                        android:layout_marginBottom="1dp"
                         >
 
                         <LinearLayout
@@ -450,6 +465,7 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Cash Register"
+                                android:textSize="12sp"
                                 android:textColor="@color/colorPrimaryVariant" />
 
 
@@ -460,8 +476,8 @@
                 </GridLayout>
             </LinearLayout>
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

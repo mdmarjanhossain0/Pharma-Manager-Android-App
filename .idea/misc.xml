@@ -26,18 +26,22 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/drawable/right_outline.xml" value="0.19315068493150686" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/drawable/role_select_round.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-mdpi/fragment_dashboard.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-mdpi/fragment_dashboard1.xml" value="0.12894736842105264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xhdpi/fragment_dashboard.xml" value="0.33" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xhdpi/fragment_dashboard2.xml" value="0.12894736842105264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xxhdpi/fragment_dashboard.xml" value="0.2" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xxxhdpi/fragment_dashboard.xml" value="0.1911231884057971" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xxhdpi/fragment_dashboard3.xml" value="0.12894736842105264" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xxxhdpi/fragment_dashboard.xml" value="0.17" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout-xxxhdpi/fragment_dashboard4.xml" value="0.12894736842105264" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/activity_sales.xml" value="0.15462962962962962" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/activity_short_list.xml" value="0.17407407407407408" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dashboard.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dashboardtest.xml" value="0.14" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dashboard.xml" value="0.13" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dashboardtest.xml" value="0.18" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/dialog_unit_select.xml" value="0.14629629629629629" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_create_employee.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_customer_previous_orders.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_customers_list.xml" value="0.16540084388185655" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_dashboard.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_dashboard.xml" value="0.2" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_employee_update.xml" value="0.22" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_global.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_local.xml" value="0.25" />

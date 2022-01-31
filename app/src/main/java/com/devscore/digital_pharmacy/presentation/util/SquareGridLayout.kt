@@ -4,7 +4,6 @@ import android.view.ViewGroup.MarginLayoutParams
 
 import android.view.View.MeasureSpec
 
-import android.R
 import android.content.Context
 
 import android.content.res.TypedArray
@@ -12,6 +11,7 @@ import android.util.AttributeSet
 import android.view.View
 
 import android.view.ViewGroup
+import com.devscore.digital_pharmacy.R
 
 
 class SquareGridLayout : ViewGroup {

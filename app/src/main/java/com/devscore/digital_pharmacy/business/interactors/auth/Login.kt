@@ -49,7 +49,7 @@ class Login(
                 loginResponse.license_key,
                 loginResponse.address,
                 loginResponse.is_employee,
-                loginResponse.role
+                loginResponse.role,
             ).toEntity()
         )
 

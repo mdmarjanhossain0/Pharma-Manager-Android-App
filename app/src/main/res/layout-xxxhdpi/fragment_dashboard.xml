@@ -335,7 +335,8 @@
                     android:layout_marginTop="25dp"
                     android:layout_marginLeft="25dp"
                     android:layout_marginRight="25dp"
-                    app:layout_editor_absoluteX="0dp">
+                    app:layout_editor_absoluteX="0dp"
+                    >
 
 
 
