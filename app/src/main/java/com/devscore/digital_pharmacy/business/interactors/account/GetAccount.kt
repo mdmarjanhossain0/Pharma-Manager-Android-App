@@ -64,7 +64,8 @@ class GetAccount(
                     account.license_key,
                     account.address,
                     account.is_employee,
-                    account.role
+                    account.role,
+                    account.file
                 ).toEntity()
             )
 

@@ -1,6 +1,9 @@
 package com.devscore.digital_pharmacy.business.interactors.auth
 
+import android.app.Application
+import android.content.Context
 import android.util.Log
+import androidx.work.*
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDao
 import com.devscore.digital_pharmacy.business.datasource.cache.account.toEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
@@ -14,6 +17,9 @@ import com.devscore.digital_pharmacy.business.domain.util.DataState
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling
 import com.devscore.digital_pharmacy.business.domain.util.ErrorHandling.Companion.ERROR_SAVE_AUTH_TOKEN
 import com.devscore.digital_pharmacy.presentation.util.DataStoreKeys
+import com.devscore.digital_pharmacy.presentation.util.FileDownloadWorker
+import com.devscore.digital_pharmacy.presentation.util.SalesPdfWorker
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -24,6 +30,7 @@ class Login(
     private val accountDao: AccountDao,
     private val authTokenDao: AuthTokenDao,
     private val appDataStoreManager: AppDataStore,
+    private val context : Context
 ){
     fun execute(
         mobile: String,
@@ -32,6 +39,7 @@ class Login(
         emit(DataState.loading<AuthToken>())
         val loginResponse = service.login(mobile, password)
         Log.d("AppDebug", "Login " + loginResponse)
+        Log.d("AppDebug", "Login " + loginResponse.file)
         // Incorrect login credentials counts as a 200 response from server, so need to handle that
         if(loginResponse.errorMessage == ErrorHandling.INVALID_CREDENTIALS){
             throw Exception(ErrorHandling.INVALID_CREDENTIALS)
@@ -50,8 +58,25 @@ class Login(
                 loginResponse.address,
                 loginResponse.is_employee,
                 loginResponse.role,
+                loginResponse.file
             ).toEntity()
         )
+
+        val constraints = Constraints.Builder().setRequiresCharging(false).build()
+        val inputData = Data.Builder()
+            .putString("url", loginResponse.file)
+            .putBoolean("share", true)
+            .build()
+
+        val pdfWorker : WorkRequest =
+            OneTimeWorkRequestBuilder<FileDownloadWorker>()
+                .setConstraints(constraints)
+                .setInputData(inputData)
+                .build()
+
+        WorkManager
+            .getInstance(context)
+            .enqueue(pdfWorker)
 
         // cache the auth token
         val authToken = AuthToken(

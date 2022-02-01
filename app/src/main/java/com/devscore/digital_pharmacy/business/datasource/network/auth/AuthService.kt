@@ -5,6 +5,7 @@ import com.devscore.digital_pharmacy.business.datasource.network.auth.network_re
 import com.devscore.digital_pharmacy.business.datasource.network.auth.network_responses.RegistrationResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface AuthService {
@@ -70,5 +71,7 @@ interface AuthService {
         val quantity : Int,
         val medicine_id : Int
     )
-
+    @Streaming
+    @GET
+    suspend fun downloadFile(@Url fileUrl: String): ResponseBody
 }

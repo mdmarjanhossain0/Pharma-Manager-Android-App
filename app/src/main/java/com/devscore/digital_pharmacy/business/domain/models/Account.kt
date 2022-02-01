@@ -10,7 +10,8 @@ data class Account(
     val license_key : String?,
     val address : String,
     val is_employee : Int,
-    val role : String
+    val role : String,
+    val file : String?
 )
 
 

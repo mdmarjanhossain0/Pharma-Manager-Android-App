@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.di.auth
 
+import android.content.Context
 import com.devscore.digital_pharmacy.business.datasource.cache.account.AccountDao
 import com.devscore.digital_pharmacy.business.datasource.cache.auth.AuthTokenDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
@@ -12,6 +13,7 @@ import com.devscore.digital_pharmacy.business.interactors.session.Logout
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.FlowPreview
 import retrofit2.Retrofit
@@ -49,12 +51,14 @@ object AuthModule{
         accountDao: AccountDao,
         authTokenDao: AuthTokenDao,
         appDataStoreManager: AppDataStore,
+        @ApplicationContext context : Context
     ): Login {
         return Login(
             service,
             accountDao,
             authTokenDao,
-            appDataStoreManager
+            appDataStoreManager,
+            context
         )
     }
 

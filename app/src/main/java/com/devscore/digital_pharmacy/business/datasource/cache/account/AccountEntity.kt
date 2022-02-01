@@ -40,7 +40,10 @@ data class AccountEntity(
     var is_employee : Int,
 
     @ColumnInfo(name = "role")
-    var role : String
+    var role : String,
+
+    @ColumnInfo(name = "file")
+    var file : String?
 )
 
 fun AccountEntity.toAccount(): Account {
@@ -54,7 +57,8 @@ fun AccountEntity.toAccount(): Account {
         license_key = license_key,
         address = address,
         is_employee = is_employee,
-        role = role
+        role = role,
+        file = file
     )
 }
 
@@ -69,6 +73,7 @@ fun Account.toEntity(): AccountEntity {
         license_key = license_key,
         address = address,
         is_employee = is_employee,
-        role = role
+        role = role,
+        file = file
     )
 }

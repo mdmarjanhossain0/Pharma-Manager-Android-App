@@ -82,7 +82,8 @@ class AccountUpdate(
             registerResponse.license_key,
             registerResponse.address,
             registerResponse.is_employee,
-            registerResponse.role
+            registerResponse.role,
+            registerResponse.file
         )
         accountDao.insertAndReplace(
             account.toEntity()

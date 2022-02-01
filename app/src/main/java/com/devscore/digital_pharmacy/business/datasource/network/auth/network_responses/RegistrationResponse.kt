@@ -45,5 +45,9 @@ class RegistrationResponse(
 
 
     @SerializedName("role")
-    var role : String
+    var role : String,
+
+
+    @SerializedName("file")
+    var file : String?
 )
