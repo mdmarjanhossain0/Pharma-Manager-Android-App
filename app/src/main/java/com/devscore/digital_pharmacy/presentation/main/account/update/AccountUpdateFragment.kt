@@ -125,6 +125,10 @@ class AccountUpdateFragment : BaseMainFragment() {
                 cropActivityResultLauncher.launch(null)
             }
         }
+
+        backImage.setOnClickListener {
+            (activity as MainActivity).onBackPressed()
+        }
     }
     private fun update() {
         var username : String = ""

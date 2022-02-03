@@ -5,8 +5,9 @@
     android:id="@+id/motionView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
     android:orientation="vertical"
+    android:background="@drawable/box_outline"
+    android:layout_marginBottom="5dp"
     app:layoutDescription="@xml/item_sales_list_scene">
 
     <androidx.constraintlayout.widget.ConstraintLayout

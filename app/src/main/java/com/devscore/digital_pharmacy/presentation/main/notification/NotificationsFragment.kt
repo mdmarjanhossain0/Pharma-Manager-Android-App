@@ -65,6 +65,10 @@ class NotificationsFragment : BaseMainFragment(){
             findNavController().popBackStack()
             Log.d(TAG, "Fragment On Back Press Callback call")
         }
+
+        backImage.setOnClickListener {
+            (activity as MainActivity).onBackPressed()
+        }
     }
 
     private fun subscribeObservers(){

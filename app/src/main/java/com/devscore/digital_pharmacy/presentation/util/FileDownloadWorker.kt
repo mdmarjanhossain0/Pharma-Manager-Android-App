@@ -11,11 +11,18 @@ import com.devscore.digital_pharmacy.business.datasource.cache.customer.Customer
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.LocalMedicineDao
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toLocalMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toLocalMedicineUnitEntity
+import com.devscore.digital_pharmacy.business.datasource.cache.purchases.PurchasesDao
+import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesDao
 import com.devscore.digital_pharmacy.business.datasource.cache.shortlist.ShortListDao
 import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
 import com.devscore.digital_pharmacy.business.datasource.network.auth.AuthService
+import com.devscore.digital_pharmacy.business.datasource.network.purchases.PurchasesOrderDto
+import com.devscore.digital_pharmacy.business.datasource.network.purchases.toPurchasesOder
+import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesOrderDto
+import com.devscore.digital_pharmacy.business.datasource.network.sales.toSalesOrder
 import com.devscore.digital_pharmacy.business.domain.models.*
+import com.google.gson.Gson
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.*
@@ -42,7 +49,9 @@ constructor(
     val localMedicineDao: LocalMedicineDao,
     val customerDao: CustomerDao,
     val supplierDao: SupplierDao,
-    val shortListDao: ShortListDao
+    val shortListDao: ShortListDao,
+    val salesDao : SalesDao,
+    val purchasesDao: PurchasesDao
 ) : CoroutineWorker(context, parameters) {
 
 
@@ -177,12 +186,19 @@ constructor(
                 total_balance = data.getString("total_balance").toFloat(),
                 due_balance = data.getString("due_balance").toFloat()
             )
-
-
-
-
-
             customerDao.insertCustomer(customer.toCustomerEntity())
+
+
+            val sales = jsonObject.getJSONArray("sales")
+            for (i in 0 until sales.length()) {
+                val sale : SalesOrderDto = Gson().fromJson(sales.getJSONObject(i).toString(), SalesOrderDto::class.java)
+                salesDao.insertSalesOder(sale.toSalesOrder().toSalesOrderEntity())
+            }
+            val purchases = jsonObject.getJSONArray("purchases")
+            for (i in 0 until purchases.length()) {
+                val purchase : PurchasesOrderDto = Gson().fromJson(purchases.getJSONObject(i).toString(), PurchasesOrderDto::class.java)
+                purchasesDao.insertPurchasesOrder(purchase.toPurchasesOder().toPurchasesOrderEntity())
+            }
         }
 
 

@@ -46,7 +46,6 @@ import javax.inject.Inject
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers.io
-import kotlinx.android.synthetic.main.fragment_global.*
 import kotlinx.android.synthetic.main.fragment_local.globalFragmentBrandNameAction
 import kotlinx.android.synthetic.main.fragment_local.globalFragmentCompanyNameAction
 import kotlinx.android.synthetic.main.fragment_local.globalFragmentGenericAction

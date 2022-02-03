@@ -369,7 +369,7 @@ class GlobalFragment : BaseInventoryFragment(),
     fun bouncingSearch() {
         val searchQueryObservable = Observable.create(object : ObservableOnSubscribe<String> {
             override fun subscribe(emitter: ObservableEmitter<String>) {
-                globalFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                     override fun onQueryTextChange(newText: String): Boolean {
                         if (!emitter.isDisposed) {
                             emitter.onNext(newText)
