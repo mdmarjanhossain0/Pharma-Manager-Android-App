@@ -6,18 +6,18 @@ import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.t
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.toLocalMedicineUnitEntity
 import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesDao
 import com.devscore.digital_pharmacy.business.datasource.cache.sales.toSalesOder
+import com.devscore.digital_pharmacy.business.datasource.network.ExtractHTTPException
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.toLocalMedicine
 import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesApiService
 import com.devscore.digital_pharmacy.business.datasource.network.sales.toSalesOrder
-import com.devscore.digital_pharmacy.business.domain.models.AuthToken
-import com.devscore.digital_pharmacy.business.domain.models.SalesOrder
-import com.devscore.digital_pharmacy.business.domain.models.toSalesOrderEntity
-import com.devscore.digital_pharmacy.business.domain.models.toSalesOrderMedicinesEntity
+import com.devscore.digital_pharmacy.business.domain.models.*
 import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
 
 class SearchSalesOder(
     private val service : SalesApiService,
@@ -39,7 +39,7 @@ class SearchSalesOder(
         }
 
 
-        if (status == 0) {
+        /*if (status == 0) {
             val success = cache.searchGenerateOrderWithMedicine(
                 page = page
             ).map { it.toSalesOder() }
@@ -48,6 +48,27 @@ class SearchSalesOder(
             ).map {
                 it.toSalesOder()
             }
+            emit(DataState.data(response = null, data = marge(success, failure)))
+        }
+        else {
+            val success = cache.searchCompleteOrderWithMedicine(
+                query = query,
+                status = status,
+                page = page
+            ).map { it.toSalesOder() }
+            emit(DataState.data(response = null, data = success))
+        }*/
+
+
+        if (status == 0) {
+            val success = cache.searchGenerateOrderWithMedicine(
+                page = page
+            ).map { it.toSalesOder() }
+
+            val failure = cache.searchFailureSalesOderWithMedicine().map {
+                it.toSalesOder()
+            }
+            Log.d(TAG, "Sales Failure " + failure.size + " " + failure.toString())
             emit(DataState.data(response = null, data = marge(success, failure)))
         }
         else {
@@ -102,6 +123,18 @@ class SearchSalesOder(
 //            }
         }catch (e: Exception){
             e.printStackTrace()
+            when (e) {
+                is HttpException -> {
+                    when (e.code()) {
+                        401 ->{
+                            Log.d(TAG, "401 Unauthorized " + e.response()?.errorBody().toString())
+                            emit(DataState.loading<List<SalesOrder>>(isLoading = false))
+                            ExtractHTTPException.getInstance().unauthorized()
+                            return@flow
+                        }
+                    }
+                }
+            }
             emit(
                 DataState.error<List<SalesOrder>>(
                     response = Response(

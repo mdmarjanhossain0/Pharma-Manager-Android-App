@@ -36,11 +36,6 @@ class SearchReport(
         if(authToken == null){
             throw Exception(ErrorHandling.ERROR_AUTH_TOKEN_INVALID)
         }
-
-        try{
-//            if (reportResponse.error == "Your are not owner") {
-//                throw Exception("Your are not owner")
-//            }
             Log.d(TAG, "Call Api Section")
             Log.d(TAG, query?.toLowerCase() + " " + start + " " + end)
             val reportResponse = service.searchReport(
@@ -68,21 +63,6 @@ class SearchReport(
                 it.toReport()
             }
             emit(DataState.data(response = null, data = report))
-
-        }catch (e: Exception){
-            e.printStackTrace()
-            print(e.message)
-            print(e.localizedMessage)
-            emit(
-                DataState.error<List<Report>>(
-                    response = Response(
-                        message = e.message,
-                        uiComponentType = UIComponentType.None(),
-                        messageType = MessageType.Error()
-                    )
-                )
-            )
-        }
     }.catch { e ->
         emit(handleUseCaseException(e))
     }

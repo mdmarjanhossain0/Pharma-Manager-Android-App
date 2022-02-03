@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
+import com.devscore.digital_pharmacy.business.datasource.network.ExtractHTTPException
 import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.util.StateMessage
 import com.devscore.digital_pharmacy.business.domain.util.SuccessHandling.Companion.RESPONSE_CHECK_PREVIOUS_AUTH_USER_DONE
@@ -43,6 +44,10 @@ constructor(
                 onTriggerEvent(SessionEvents.CheckPreviousAuthUser(email))
             }?: onFinishCheckingPrevAuthUser()
         }
+
+
+
+        ExtractHTTPException.setInstance(this)
     }
 
     fun onTriggerEvent(event: SessionEvents){

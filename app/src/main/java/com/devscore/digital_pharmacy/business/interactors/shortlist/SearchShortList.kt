@@ -3,6 +3,7 @@ package com.devscore.digital_pharmacy.business.interactors.shortlist
 import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
 import com.devscore.digital_pharmacy.business.datasource.cache.shortlist.ShortListDao
+import com.devscore.digital_pharmacy.business.datasource.network.ExtractHTTPException
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.shortlist.ShortListApiService
 import com.devscore.digital_pharmacy.business.datasource.network.shortlist.network_response.toShortList
@@ -11,6 +12,7 @@ import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
 
 class SearchShortList (
     private val service : ShortListApiService,
@@ -64,6 +66,18 @@ class SearchShortList (
             }
         }catch (e: Exception){
             e.printStackTrace()
+            when (e) {
+                is HttpException -> {
+                    when (e.code()) {
+                        401 ->{
+                            Log.d(TAG, "401 Unauthorized " + e.response()?.errorBody().toString())
+                            emit(DataState.loading<List<ShortList>>(isLoading = false))
+                            ExtractHTTPException.getInstance().unauthorized()
+                            return@flow
+                        }
+                    }
+                }
+            }
             emit(
                 DataState.error<List<ShortList>>(
                     response = Response(

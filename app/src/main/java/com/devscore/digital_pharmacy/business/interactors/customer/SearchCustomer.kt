@@ -3,16 +3,20 @@ package com.devscore.digital_pharmacy.business.interactors.customer
 import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.CustomerDao
 import com.devscore.digital_pharmacy.business.datasource.cache.customer.toCustomer
+import com.devscore.digital_pharmacy.business.datasource.network.ExtractHTTPException
 import com.devscore.digital_pharmacy.business.datasource.network.customer.CustomerApiService
 import com.devscore.digital_pharmacy.business.datasource.network.customer.network_response.toCustomer
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.models.Customer
+import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.toCustomerEntity
 import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
 
 class SearchCustomer (
     private val service : CustomerApiService,
@@ -66,15 +70,44 @@ class SearchCustomer (
             }
         }catch (e: Exception){
             e.printStackTrace()
-            emit(
-                DataState.error<List<Customer>>(
-                    response = Response(
-                        message = "Unable to update the cache.",
-                        uiComponentType = UIComponentType.None(),
-                        messageType = MessageType.Error()
+            when (e) {
+                is HttpException -> {
+                    when (e.code()) {
+                        401 ->{
+                            Log.d(TAG, "401 Unauthorized " + e.response()?.errorBody().toString())
+                            emit(DataState.loading<List<Customer>>(isLoading = false))
+                            ExtractHTTPException.getInstance().unauthorized()
+                            return@flow
+                        }
+                    }
+                }
+
+
+                is IOException -> {
+                    Log.d(TAG, "IOException exception")
+                    emit(
+                        DataState.error<List<Customer>>(
+                            response = Response(
+                                message = "Unable to update the cache.",
+                                uiComponentType = UIComponentType.None(),
+                                messageType = MessageType.Error()
+                            )
+                        )
                     )
-                )
-            )
+                }
+                else -> {
+                    Log.d(TAG, "Unknown exception")
+                    emit(
+                        DataState.error<List<Customer>>(
+                            response = Response(
+                                message = "Unable to update the cache.",
+                                uiComponentType = UIComponentType.None(),
+                                messageType = MessageType.Error()
+                            )
+                        )
+                    )
+                }
+            }
         }
 
         val successList = cache.searchAllCustomer(

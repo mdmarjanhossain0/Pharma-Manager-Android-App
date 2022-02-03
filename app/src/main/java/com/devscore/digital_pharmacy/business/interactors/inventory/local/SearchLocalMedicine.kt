@@ -2,6 +2,7 @@ package com.devscore.digital_pharmacy.business.interactors.inventory.local
 
 import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
+import com.devscore.digital_pharmacy.business.datasource.network.ExtractHTTPException
 
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
@@ -9,10 +10,13 @@ import com.devscore.digital_pharmacy.business.datasource.network.inventory.searc
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.toLocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
+import com.devscore.digital_pharmacy.business.domain.models.SalesDetailsMonth
 import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
 
 class SearchLocalMedicine(
     private val service: InventoryApiService,
@@ -32,7 +36,7 @@ class SearchLocalMedicine(
             throw Exception(ErrorHandling.ERROR_AUTH_TOKEN_INVALID)
         }
 
-        val succes = cache.searchLocalMedicine(
+        val success = cache.searchLocalMedicine(
             query = query,
             action = action,
             page = page
@@ -43,8 +47,7 @@ class SearchLocalMedicine(
         ).map {
             it.toLocalMedicine()
         }
-        emit(DataState.data(response = null, data = marge(succes, failure)))
-//        emit(DataState.loading<List<LocalMedicine>>())
+        emit(DataState.data(response = null, data = marge(success, failure)))
 
         try{
             Log.d(TAG, "Call Api Section")
@@ -71,15 +74,52 @@ class SearchLocalMedicine(
             }
         }catch (e: Exception){
             e.printStackTrace()
-            emit(
-                DataState.error<List<LocalMedicine>>(
-                    response = Response(
-                        message = "Unable to update the cache for network exception.",
-                        uiComponentType = UIComponentType.None(),
-                        messageType = MessageType.Error()
+            when (e) {
+                is HttpException -> {
+                    when (e.code()) {
+                        401 ->{
+                            Log.d(TAG, "401 Unauthorized " + e.response()?.errorBody().toString())
+                            emit(
+                                DataState.error<List<LocalMedicine>>(
+                                    response = Response(
+                                        message = "Session Expired",
+                                        uiComponentType = UIComponentType.Dialog(),
+                                        messageType = MessageType.Error()
+                                    )
+                                )
+                            )
+                            ExtractHTTPException.getInstance().unauthorized()
+                            return@flow
+                        }
+                    }
+                }
+
+
+                is IOException -> {
+                    Log.d(TAG, "IOException exception")
+                    emit(
+                        DataState.error<List<LocalMedicine>>(
+                            response = Response(
+                                message = "Unable to update the cache for network exception.",
+                                uiComponentType = UIComponentType.None(),
+                                messageType = MessageType.Error()
+                            )
+                        )
                     )
-                )
-            )
+                }
+                else -> {
+                    Log.d(TAG, "Unknown exception")
+                    emit(
+                        DataState.error<List<LocalMedicine>>(
+                            response = Response(
+                                message = "Unable to update the cache for network exception.",
+                                uiComponentType = UIComponentType.None(),
+                                messageType = MessageType.Error()
+                            )
+                        )
+                    )
+                }
+            }
         }
 
         val localMedicine = cache.searchLocalMedicine(

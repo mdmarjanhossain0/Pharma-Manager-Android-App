@@ -3,6 +3,7 @@ package com.devscore.digital_pharmacy.business.interactors.supplier
 import android.util.Log
 import com.devscore.digital_pharmacy.business.datasource.cache.supplier.SupplierDao
 import com.devscore.digital_pharmacy.business.datasource.cache.supplier.toSupplier
+import com.devscore.digital_pharmacy.business.datasource.network.ExtractHTTPException
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.supplier.SupplierApiService
 import com.devscore.digital_pharmacy.business.datasource.network.supplier.toSupplier
@@ -14,6 +15,8 @@ import com.devscore.digital_pharmacy.business.domain.util.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import retrofit2.HttpException
+import java.io.IOException
 
 class SearchSupplier (
     private val service : SupplierApiService,
@@ -70,6 +73,18 @@ class SearchSupplier (
             }
         }catch (e: Exception){
             e.printStackTrace()
+            when (e) {
+                is HttpException -> {
+                    when (e.code()) {
+                        401 ->{
+                            Log.d(TAG, "401 Unauthorized " + e.response()?.errorBody().toString())
+                            emit(DataState.loading<List<Supplier>>(isLoading = false))
+                            ExtractHTTPException.getInstance().unauthorized()
+                            return@flow
+                        }
+                    }
+                }
+            }
             emit(
                 DataState.error<List<Supplier>>(
                     response = Response(
