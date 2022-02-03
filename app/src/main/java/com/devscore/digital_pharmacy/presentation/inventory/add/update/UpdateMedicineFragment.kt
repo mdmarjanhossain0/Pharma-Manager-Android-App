@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -64,7 +65,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class UpdateMedicineFragment : BaseInventoryFragment(), UnitListAdapter.Interaction, SelectUnitAdapter.Interaction {
+class UpdateMedicineFragment : BaseInventoryFragment(), UnitListAdapter.Interaction, SelectUnitAdapter.Interaction, Callback {
 
     private val viewModel: UpdateMedicineViewModel by viewModels()
     private var recyclerListAdapter : UnitListAdapter? = null
@@ -278,6 +279,7 @@ class UpdateMedicineFragment : BaseInventoryFragment(), UnitListAdapter.Interact
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -603,6 +605,10 @@ class UpdateMedicineFragment : BaseInventoryFragment(), UnitListAdapter.Interact
         viewModel.onTriggerEvent(UpdateMedicineEvents.UpdateAction(""))
         bottomSheetDialog?.dismiss()
         bottomSheetDialog = null
+    }
+
+    override fun done() {
+        findNavController().popBackStack()
     }
 
 }

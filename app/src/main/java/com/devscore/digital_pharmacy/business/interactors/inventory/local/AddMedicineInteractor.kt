@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
+import com.devscore.digital_pharmacy.business.datasource.network.GenericResponse
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.toLocalMedicine
@@ -12,7 +13,9 @@ import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.toLocalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.*
+import com.devscore.digital_pharmacy.business.interactors.account.TAG
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
@@ -20,6 +23,7 @@ import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.HttpException
+import java.io.IOException
 
 class AddMedicineInteractor(
     private val service: InventoryApiService,
@@ -106,62 +110,84 @@ class AddMedicineInteractor(
             }catch (e: Exception){
                 e.printStackTrace()
             }
+            val stateMedicine = medicine.toLocalMedicine()
+
+            emit(
+                DataState.data(response = Response(
+                    message = "Successfully Uploaded.",
+                    uiComponentType = UIComponentType.Toast(),
+                    messageType = MessageType.Success()
+                ), data = stateMedicine))
 
         }catch (e: Exception){
             e.printStackTrace()
             Log.d(TAG, "Exception " + e.toString())
 
-            try{
-                var failureMedicine = medicine.toLocalMedicine()
-                val room_id = cache.insertFailureMedicine(failureMedicine.toFailureMedicine())
-                Log.d(TAG, "Room id " + room_id.toString())
-                failureMedicine = failureMedicine.copy(
-                    room_medicine_id = room_id
-                )
-                for (unit in failureMedicine.toFailureMedicineUnitEntity()) {
-                    Log.d(TAG, "Medicine Unit " + unit.toString())
-                    val newUnit = unit.copy(
-                        room_id = null
+            when (e) {
+                is HttpException -> {
+                    val body = e.response()?.errorBody()?.string()!!
+                    Log.d(com.devscore.digital_pharmacy.business.interactors.account.TAG, body)
+                    val gson = GsonBuilder().create()
+                    val errorEntity : GenericResponse = Gson().fromJson(body, GenericResponse::class.java)
+                    Log.d(TAG, errorEntity.toString() + " ")
+                    emit(
+                        DataState.error<LocalMedicine>(
+                            response = Response(
+                                message = errorEntity.errorMessage,
+                                uiComponentType = UIComponentType.Dialog(),
+                                messageType = MessageType.Error()
+                            )
+                        )
                     )
-                    val unitId = cache.insertFailureMedicineUnit(newUnit)
-                    Log.d(TAG, "Unit id " + unitId)
                 }
-            }catch (e: Exception){
-                Log.d(TAG, "Room Exception Enter Exception is Exception " + e.toString())
-                e.printStackTrace()
-            }
-//            val constraints = Constraints.Builder().setRequiresCharging(false).setRequiredNetworkType(NetworkType.CONNECTED).build()
-//            val syncWorkRequest : WorkRequest =
-//                OneTimeWorkRequestBuilder<UploadWorker>()
-//                    .setConstraints(constraints)
-//                    .build()
-//
-//            WorkManager
-//                .getInstance(context)
-//                .enqueue(syncWorkRequest)
 
 
-            emit(
-                DataState.error<LocalMedicine>(
-                    response = Response(
-                        message = "Unable to upload medicine. Please careful and don't uninstall or log out",
-                        uiComponentType = UIComponentType.Dialog(),
-                        messageType = MessageType.Error()
+                is IOException -> {
+                    try{
+                        var failureMedicine = medicine.toLocalMedicine()
+                        val room_id = cache.insertFailureMedicine(failureMedicine.toFailureMedicine())
+                        Log.d(TAG, "Room id " + room_id.toString())
+                        failureMedicine = failureMedicine.copy(
+                            room_medicine_id = room_id
+                        )
+                        for (unit in failureMedicine.toFailureMedicineUnitEntity()) {
+                            Log.d(TAG, "Medicine Unit " + unit.toString())
+                            val newUnit = unit.copy(
+                                room_id = null
+                            )
+                            val unitId = cache.insertFailureMedicineUnit(newUnit)
+                            Log.d(TAG, "Unit id " + unitId)
+                        }
+                    }catch (e: Exception){
+                        Log.d(TAG, "Room Exception Enter Exception is Exception " + e.toString())
+                        e.printStackTrace()
+                    }
+
+                    emit(
+                        DataState.error<LocalMedicine>(
+                            response = Response(
+                                message = "Unable to upload medicine. Please careful and don't uninstall or log out",
+                                uiComponentType = UIComponentType.Dialog(),
+                                messageType = MessageType.Error()
+                            )
+                        )
                     )
-                )
-            )
-            return@flow
+                    Log.d(TAG, "IOException excepiton")
+                }
+                else -> {
+                    Log.d(TAG, "Unknown excepiton")
+                    emit(
+                        DataState.error<LocalMedicine>(
+                            response = Response(
+                                message = e.message,
+                                uiComponentType = UIComponentType.Dialog(),
+                                messageType = MessageType.Error()
+                            )
+                        )
+                    )
+                }
+            }
         }
-
-
-        val stateMedicine = medicine.toLocalMedicine()
-
-        emit(
-            DataState.data(response = Response(
-                message = "Successfully Uploaded.",
-                uiComponentType = UIComponentType.Dialog(),
-                messageType = MessageType.Success()
-            ), data = stateMedicine))
     }.catch { e ->
         emit(handleUseCaseException(e))
     }
@@ -171,9 +197,8 @@ class AddMedicineInteractor(
 fun <T> handleUseCaseException(e: Throwable): DataState<T> {
     e.printStackTrace()
     when (e) {
-
         is HttpException -> { // Retrofit exception
-            Log.d("AppDebug", "Retrofit Exception Code " + e.code())
+            extractHttpExceptions(e)
             val errorResponse = convertErrorBody(e)
             return DataState.error<T>(
                 response = Response(
@@ -183,8 +208,20 @@ fun <T> handleUseCaseException(e: Throwable): DataState<T> {
                 )
             )
         }
+
+
+        is IOException -> {
+            Log.d(TAG, "IOException excepiton")
+            return DataState.error<T>(
+                response = Response(
+                    message = e.message,
+                    uiComponentType = UIComponentType.Dialog(),
+                    messageType = MessageType.Error()
+                )
+            )
+        }
         else -> {
-            Log.d("AppDebug", "Exception Code " + e.localizedMessage)
+            Log.d(TAG, "Unknown excepiton hffhsdlfhsdlfsdhlfjsdlfsdhflsdfjlfjlfjslfjsdlfj")
             return DataState.error<T>(
                 response = Response(
                     message = e.message,
@@ -196,11 +233,39 @@ fun <T> handleUseCaseException(e: Throwable): DataState<T> {
     }
 }
 
+
+
 private fun convertErrorBody(throwable: HttpException): String? {
     return try {
         throwable.response()?.errorBody()?.string()
     } catch (exception: java.lang.Exception) {
         ErrorHandling.UNKNOWN_ERROR
+    }
+}
+
+
+
+
+private fun extractHttpExceptions(ex: HttpException){
+    val body = ex.response()?.errorBody()?.string()!!
+    Log.d(TAG, body)
+    val gson = GsonBuilder().create()
+    val errorEntity : GenericResponse = Gson().fromJson(body, GenericResponse::class.java)
+    Log.d(TAG, errorEntity.toString() + " ")
+    when (ex.code()) {
+        400 ->
+            Log.d(TAG, "400 Bad Request " + ex.response()?.errorBody().toString())
+        500 ->
+            Log.d(TAG, "500 Bad Request " + ex.response()?.errorBody().toString())
+        401 ->
+            Log.d(TAG, "401 Bad Request " + ex.response()?.errorBody().toString())
+
+        404 ->
+            Log.d(TAG, "404 Bad Request " + ex.response()?.errorBody().toString())
+
+        else ->
+            Log.d(TAG, "else Bad Request " + ex.response()?.errorBody().toString())
+
     }
 }
 

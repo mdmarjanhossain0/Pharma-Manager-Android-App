@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.afollestad.materialdialogs.MaterialDialog
@@ -26,10 +27,7 @@ import com.devscore.digital_pharmacy.business.domain.models.*
 import com.devscore.digital_pharmacy.business.domain.util.MedicineProperties
 import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
 import com.devscore.digital_pharmacy.presentation.inventory.BaseInventoryFragment
-import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddMedicineEvents
-import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddMedicineViewModel
-import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.SelectUnitAdapter
-import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.UnitListAdapter
+import com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.*
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import com.devscore.digital_pharmacy.presentation.util.setDivider
@@ -42,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_add_product_sub_medicine.*
 import java.util.*
 
 
-class InventoryAddProductFragment : BaseInventoryFragment(), UnitListAdapter.Interaction, SelectUnitAdapter.Interaction {
+class InventoryAddProductFragment : BaseInventoryFragment(), UnitListAdapter.Interaction, SelectUnitAdapter.Interaction, Callback {
 
     private val viewModel: AddMedicineViewModel by viewModels()
     private var recyclerListAdapter : UnitListAdapter? = null
@@ -240,6 +238,7 @@ class InventoryAddProductFragment : BaseInventoryFragment(), UnitListAdapter.Int
     }
 
     private fun subscribeObservers(){
+        viewModel.submit(this)
         viewModel.state.observe(viewLifecycleOwner, { state ->
 
             uiCommunicationListener.displayProgressBar(state.isLoading)
@@ -544,6 +543,10 @@ class InventoryAddProductFragment : BaseInventoryFragment(), UnitListAdapter.Int
         viewModel.onTriggerEvent(AddMedicineEvents.UpdateAction(""))
         bottomSheetDialog?.dismiss()
         bottomSheetDialog = null
+    }
+
+    override fun done() {
+        findNavController().popBackStack()
     }
 
 }

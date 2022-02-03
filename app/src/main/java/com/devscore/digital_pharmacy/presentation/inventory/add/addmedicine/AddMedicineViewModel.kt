@@ -32,6 +32,11 @@ constructor(
 
     val state: MutableLiveData<AddMedicineState> = MutableLiveData(AddMedicineState())
 
+    private lateinit var callback: Callback
+    fun submit(callback: Callback) {
+        this.callback = callback
+    }
+
     init {
         addInitialUnits()
     }
@@ -234,14 +239,6 @@ constructor(
             )
         }
 
-
-
-
-
-
-
-
-
         Log.d(TAG, "Medicine In AddViewModel" + state.value?.medicine?.toAddMedicine())
         state.value?.let { state ->
             addMedicineInteractor.execute(
@@ -254,6 +251,7 @@ constructor(
 
                 dataState.data?.let { medicine ->
                     this.state.value = state.copy(medicine = medicine)
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -264,4 +262,8 @@ constructor(
         }
     }
 
+}
+
+interface Callback {
+    fun done()
 }

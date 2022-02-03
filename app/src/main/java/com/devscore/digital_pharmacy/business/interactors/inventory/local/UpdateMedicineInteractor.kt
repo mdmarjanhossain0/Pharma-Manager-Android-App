@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.work.*
 import com.devscore.digital_pharmacy.business.datasource.cache.inventory.local.*
+import com.devscore.digital_pharmacy.business.datasource.network.GenericResponse
 import com.devscore.digital_pharmacy.business.datasource.network.handleUseCaseException
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.InventoryApiService
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.network_responses.toLocalMedicine
@@ -12,13 +13,17 @@ import com.devscore.digital_pharmacy.business.domain.models.AuthToken
 import com.devscore.digital_pharmacy.business.domain.models.LocalMedicine
 import com.devscore.digital_pharmacy.business.domain.models.toLocalMedicine
 import com.devscore.digital_pharmacy.business.domain.util.*
+import com.devscore.digital_pharmacy.business.interactors.account.TAG
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.HttpException
+import java.io.IOException
 
 class UpdateMedicineInteractor(
     private val service: InventoryApiService,
@@ -93,41 +98,104 @@ class UpdateMedicineInteractor(
                 units = units
             ).toLocalMedicine()
 
-
-            try{
-                cache.insertLocalMedicine(medicineResponse.toLocalMedicineEntity())
-                for (unit in medicineResponse.toLocalMedicineUnitEntity()) {
-                    cache.insertLocalMedicineUnit(unit)
-                }
-            }catch (e: Exception){
-                e.printStackTrace()
+            cache.insertLocalMedicine(medicineResponse.toLocalMedicineEntity())
+            for (unit in medicineResponse.toLocalMedicineUnitEntity()) {
+                cache.insertLocalMedicineUnit(unit)
             }
+            emit(
+                DataState.data(response = Response(
+                    message = "Successfully Uploaded.",
+                    uiComponentType = UIComponentType.Toast(),
+                    messageType = MessageType.Success()
+                ), data = medicineResponse))
+
 
         }
         catch (e: Exception){
             e.printStackTrace()
-            emit(
-                DataState.error<LocalMedicine>(
-                    response = Response(
-                        message = "Can't update without internet",
-                        uiComponentType = UIComponentType.Dialog(),
-                        messageType = MessageType.Error()
+
+
+            when (e) {
+                is HttpException -> {
+                    when (e.code()) {
+                        400 ->
+                            Log.d(TAG, "400 Bad Request " + e.response()?.errorBody().toString())
+                        500 ->
+                            Log.d(TAG, "500 Bad Request " + e.response()?.errorBody().toString())
+                        401 ->
+                            Log.d(TAG, "401 Bad Request " + e.response()?.errorBody().toString())
+
+                        404 -> {
+                            cache.deleteLocalMedicine(id)
+                            Log.d(TAG, "404 Bad Request " + e.response()?.errorBody().toString())
+                            emit(
+                                DataState.error<LocalMedicine>(
+                                    response = Response(
+                                        message = "Not found",
+                                        uiComponentType = UIComponentType.Dialog(),
+                                        messageType = MessageType.Error()
+                                    )
+                                )
+                            )
+                        }
+
+                        else ->
+                            Log.d(TAG, "else Bad Request " + e.response()?.errorBody().toString())
+
+                    }
+                }
+
+
+                is IOException -> {
+                    Log.d(TAG, "IOException excepiton")
+                    emit(
+                        DataState.error<LocalMedicine>(
+                            response = Response(
+                                message = "Can't update without internet",
+                                uiComponentType = UIComponentType.Dialog(),
+                                messageType = MessageType.Error()
+                            )
+                        )
                     )
-                )
-            )
-            return@flow
+                }
+                else -> {
+                    Log.d(TAG, "Unknown excepiton")
+                    emit(
+                        DataState.error<LocalMedicine>(
+                            response = Response(
+                                message = e.message,
+                                uiComponentType = UIComponentType.Dialog(),
+                                messageType = MessageType.Error()
+                            )
+                        )
+                    )
+                }
+            }
         }
-
-
-        val stateMedicine = medicine.toLocalMedicine()
-
-        emit(
-            DataState.data(response = Response(
-            message = "Successfully Uploaded.",
-            uiComponentType = UIComponentType.Dialog(),
-            messageType = MessageType.Success()
-        ), data = stateMedicine))
     }.catch { e ->
         emit(handleUseCaseException(e))
+    }
+}
+
+
+private fun extractHttpExceptions(ex: HttpException){
+    val body = ex.response()?.errorBody()?.string()!!
+    Log.d(TAG, body)
+    val errorEntity : GenericResponse = Gson().fromJson(body, GenericResponse::class.java)
+    Log.d(TAG, errorEntity.toString() + " ")
+    when (ex.code()) {
+        400 ->
+            Log.d(TAG, "400 Bad Request " + ex.response()?.errorBody().toString())
+        500 ->
+            Log.d(TAG, "500 Bad Request " + ex.response()?.errorBody().toString())
+        401 ->
+            Log.d(TAG, "401 Bad Request " + ex.response()?.errorBody().toString())
+
+        404 ->
+            Log.d(TAG, "404 Bad Request " + ex.response()?.errorBody().toString())
+
+        else ->
+            Log.d(TAG, "else Bad Request " + ex.response()?.errorBody().toString())
+
     }
 }

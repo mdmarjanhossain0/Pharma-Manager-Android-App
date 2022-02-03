@@ -31,6 +31,13 @@ constructor(
 
     val state: MutableLiveData<UpdateMedicineState> = MutableLiveData(UpdateMedicineState())
 
+
+    private lateinit var callback: Callback
+
+    fun submit(callback: Callback) {
+        this.callback = callback
+    }
+
     init {
     }
 
@@ -214,6 +221,7 @@ constructor(
 
                 dataState.data?.let { medicine ->
                     this.state.value = state.copy(medicine = medicine)
+                    callback.done()
                 }
 
                 dataState.stateMessage?.let { stateMessage ->
@@ -224,4 +232,14 @@ constructor(
         }
     }
 
+}
+
+
+
+
+
+
+
+interface Callback {
+    fun done()
 }
