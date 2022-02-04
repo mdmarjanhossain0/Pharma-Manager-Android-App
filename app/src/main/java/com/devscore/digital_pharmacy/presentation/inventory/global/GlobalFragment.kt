@@ -78,6 +78,11 @@ class GlobalFragment : BaseInventoryFragment(),
 
     private fun initUIClick() {
 
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onTriggerEvent(GlobalEvents.NewMedicineSearch)
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         globalFragmentBrandNameAction.setOnClickListener {
             if (viewModel.state.value?.action.equals(InventoryUtils.BRAND_NAME)!!) {
                 viewModel.onTriggerEvent(GlobalEvents.SetSearchSelection(""))

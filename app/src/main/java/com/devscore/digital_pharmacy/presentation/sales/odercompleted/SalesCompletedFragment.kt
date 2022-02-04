@@ -69,6 +69,11 @@ class SalesCompletedFragment : BaseSalesFragment(),
     }
 
     private fun initUIClick() {
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onTriggerEvent(SalesCompletedEvents.SearchOrders)
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         newSalesOrder.setOnClickListener {
             (activity as SalesActivity).navigateSalesOrderToInventoryFragment()
         }

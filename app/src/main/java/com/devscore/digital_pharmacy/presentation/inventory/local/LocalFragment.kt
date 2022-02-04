@@ -222,6 +222,12 @@ class LocalFragment : BaseInventoryFragment(),
 
     private fun initUIClick() {
 
+        swipeRefreshLayout.setOnRefreshListener {
+            Log.d(TAG, "refresh callback")
+            viewModel.onTriggerEvent(LocalMedicineEvents.NewLocalMedicineSearch)
+            swipeRefreshLayout.isRefreshing = false
+        }
+
 
 /*        CoroutineScope(IO).launch {
             val result = inventoryApiService.addMedicine(

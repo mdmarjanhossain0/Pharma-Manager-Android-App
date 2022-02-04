@@ -24,10 +24,10 @@ import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardState
 import com.devscore.digital_pharmacy.presentation.sales.card.SalesCardViewModel
 import com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnEvents
 import com.devscore.digital_pharmacy.presentation.sales.salesreturn.SalesReturnViewModel
+import com.devscore.digital_pharmacy.presentation.util.SwipeRevealLayout
 import com.devscore.digital_pharmacy.presentation.util.TopSpacingItemDecoration
 import com.devscore.digital_pharmacy.presentation.util.processQueue
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_local.*
 import kotlinx.android.synthetic.main.fragment_sales_orders.*
 import kotlinx.android.synthetic.main.inventory_details_dialog.*
 
@@ -61,6 +61,10 @@ class SalesOrdersFragment : BaseSalesFragment(),
     }
 
     private fun initUIClick() {
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onTriggerEvent(SalesOrderListEvents.SearchOrders)
+            swipeRefreshLayout.isRefreshing = false
+        }
 
 //        localFragmentSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 //            override fun onQueryTextChange(newText: String): Boolean {

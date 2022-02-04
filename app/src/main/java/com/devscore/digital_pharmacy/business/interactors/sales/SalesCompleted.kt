@@ -48,8 +48,6 @@ class SalesCompleted(
             Log.d(TAG, result.toString())
 
             val order = result
-
-
             try{
                 Log.d(TAG, "Data " + order.toString())
                 cache.deleteSalesOder(pk = order.pk!!)

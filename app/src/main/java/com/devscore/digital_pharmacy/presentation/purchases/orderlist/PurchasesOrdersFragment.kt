@@ -50,6 +50,10 @@ class PurchasesOrdersFragment : BasePurchasesFragment(),
     }
 
     private fun initUIClick() {
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onTriggerEvent(PurchasesOrderListEvents.SearchNewOrder)
+            swipeRefreshLayout.isRefreshing = false
+        }
         generateNewPurchasesOrder.setOnClickListener {
             (activity as PurchasesActivity).navigatePurchasesGenerateToPurchasesInventoryFragment()
         }

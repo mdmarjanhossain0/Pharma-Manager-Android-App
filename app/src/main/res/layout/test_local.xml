@@ -6,11 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardCornerRadius="5dp"
-    android:background="?android:attr/selectableItemBackground"
-    android:foreground="?android:attr/selectableItemBackground"
-    android:clickable="true"
-    app:cardElevation="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
 
 
 
@@ -47,7 +44,7 @@
             android:layout_marginLeft="5dp"
             >
             <TextView
-                android:id="@+id/globalBrandNameTV"
+                android:id="@+id/localBrandNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
@@ -61,7 +58,7 @@
                 />
 
             <TextView
-                android:id="@+id/globalManufactureName"
+                android:id="@+id/localCompanyNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="200dp"
@@ -73,7 +70,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/localBrandNameTV" />
 
             <TextView
-                android:id="@+id/globalCompanyNameTV"
+                android:id="@+id/localMedicineManufactureNameTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxWidth="200dp"
@@ -88,7 +85,7 @@
                 >
 
                 <TextView
-                    android:id="@+id/globalMRPTV"
+                    android:id="@+id/localMRPTV"
                     android:layout_width="wrap_content"
                     android:layout_height="22dp"
                     android:layout_marginTop="3dp"
@@ -97,7 +94,7 @@
                     android:textColor="@color/speech_red"
                     android:textStyle="bold" />
                 <TextView
-                    android:id="@+id/globalPPTV"
+                    android:id="@+id/localPPTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
@@ -128,14 +125,12 @@
                 android:padding="5dp"
                 >
                 <ImageView
-                    android:id="@+id/cartImgId"
+                    android:id="@+id/historyImgId"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:src="@drawable/ic_cart"
-                    android:layout_weight="3"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:foreground="?android:attr/selectableItemBackground"
                     android:clickable="true"
+                    android:layout_weight="3"
                     />
                 <TextView
                     android:id="@+id/shortListId"

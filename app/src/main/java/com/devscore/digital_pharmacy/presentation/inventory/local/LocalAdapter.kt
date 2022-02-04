@@ -231,7 +231,8 @@ constructor(
             }
             itemView.localCompanyNameTV.setText(item.generic)
             if (item.mrp != null) {
-                itemView.localMRPTV.setText("MRP ৳ "+ item.mrp.toString())
+                itemView.localMRPTV.setText("MRP : ৳ "+ item.mrp.toString())
+                itemView.localPPTV.setText("PP : ৳ "+ item.purchase_price.toString())
             }
             else {
                 itemView.localMRPTV.setText("MRP ৳ ...")

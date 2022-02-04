@@ -35,7 +35,6 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_purchase_generated.*
 import kotlinx.android.synthetic.main.fragment_purchase_generated.searchBarLayout
 import kotlinx.android.synthetic.main.fragment_purchase_generated.searchViewId
-import kotlinx.android.synthetic.main.fragment_sales_orders.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,6 +72,12 @@ class PurchaseCompletedFragment : BasePurchasesFragment(),
     }
 
     private fun initUIClick() {
+
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onTriggerEvent(PurchasesOrderCompletedEvents.SearchNewOrder)
+            swipeRefreshLayout.isRefreshing = false
+        }
+
         generateNewPurchasesOrder.setOnClickListener {
             (activity as PurchasesActivity).navigatePurchasesGenerateToPurchasesInventoryFragment()
         }

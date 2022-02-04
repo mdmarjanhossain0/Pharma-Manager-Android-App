@@ -209,7 +209,8 @@ constructor(
             itemView.globalBrandNameTV.setText(item.brand_name)
             itemView.globalCompanyNameTV.setText(item.generic)
             if (item.mrp != null) {
-                itemView.globalMRPTV.setText("MRP ৳ "+ item.mrp.toString())
+                itemView.globalMRPTV.setText("MRP : ৳ "+ item.mrp.toString())
+                itemView.globalPPTV.setText("PP : ৳ "+ item.purchases_price.toString())
             }
             else {
                 itemView.globalMRPTV.setText("MRP ৳ ...")

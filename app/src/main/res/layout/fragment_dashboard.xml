@@ -37,7 +37,11 @@
                 android:src="@drawable/ic_notifications"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                />
 
             <include
                 android:id="@+id/sync"
@@ -50,7 +54,11 @@
                 android:src="@drawable/ic_sync"
                 app:layout_constraintEnd_toStartOf="@id/notification"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,7 +87,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_purchase"
+                    android:src="@drawable/ic_sales"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -191,8 +199,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/ic_purchase"
-                        android:scaleType="fitCenter" />
+                        android:src="@drawable/ic_purchase"
+                        android:scaleType="fitCenter"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -229,7 +241,11 @@
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:background="@drawable/ic_sales"/>
+                        android:src="@drawable/ic_sales"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -274,8 +290,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/ic_inventory"
-                        android:scaleType="fitCenter" />
+                        android:src="@drawable/ic_inventory"
+                        android:scaleType="fitCenter"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -312,8 +332,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/ic_shortlist"
-                        android:scaleType="fitCenter" />
+                        android:src="@drawable/ic_shortlist"
+                        android:scaleType="fitCenter"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -364,6 +388,9 @@
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
                         android:layout_marginBottom="1dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         >
 
                         <LinearLayout
@@ -404,6 +431,9 @@
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
                         android:layout_marginBottom="1dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         >
 
                         <LinearLayout
@@ -444,6 +474,9 @@
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
                         android:layout_marginBottom="1dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         >
 
                         <LinearLayout

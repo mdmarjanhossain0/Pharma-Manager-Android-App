@@ -37,7 +37,11 @@
                 android:src="@drawable/ic_notifications"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                />
 
             <include
                 android:id="@+id/sync"
@@ -50,7 +54,11 @@
                 android:src="@drawable/ic_sync"
                 app:layout_constraintEnd_toStartOf="@id/notification"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white" />
+                app:tint="@color/white"
+                android:background="?android:attr/selectableItemBackground"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -79,7 +87,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_purchase"
+                    android:src="@drawable/ic_sales"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -191,8 +199,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/ic_purchase"
-                        android:scaleType="fitCenter" />
+                        android:src="@drawable/ic_purchase"
+                        android:scaleType="fitCenter"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -229,7 +241,11 @@
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
                         android:scaleType="fitCenter"
-                        android:background="@drawable/ic_sales"/>
+                        android:src="@drawable/ic_sales"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -274,8 +290,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/ic_inventory"
-                        android:scaleType="fitCenter" />
+                        android:src="@drawable/ic_inventory"
+                        android:scaleType="fitCenter"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -312,8 +332,12 @@
                         android:layout_marginBottom="5dp"
                         android:layout_weight="13"
                         android:adjustViewBounds="true"
-                        android:background="@drawable/ic_shortlist"
-                        android:scaleType="fitCenter" />
+                        android:src="@drawable/ic_shortlist"
+                        android:scaleType="fitCenter"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -328,45 +352,42 @@
             </LinearLayout>
 
 
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:minHeight="100dp"
                 android:layout_below="@+id/linear2"
                 android:layout_marginTop="5dp"
-                >
+                android:layout_marginBottom="5dp"
+                android:minHeight="100dp">
+
                 <GridLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginBottom="1dp"
                     android:alignmentMode="alignMargins"
                     android:columnCount="3"
                     android:columnOrderPreserved="false"
                     android:rowCount="1"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    app:layout_editor_absoluteX="0dp"
-                    android:layout_marginBottom="1dp"
-                    >
-
+                    app:layout_editor_absoluteX="0dp">
 
 
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/customerCardId"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="1dp"
-                        >
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp">
 
                         <LinearLayout
                             android:id="@+id/customer_id"
@@ -385,10 +406,10 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Customers"
                                 android:layout_gravity="center"
-                                android:textSize="12sp"
-                                android:textColor="@color/colorPrimaryVariant" />
+                                android:text="Customers"
+                                android:textColor="@color/colorPrimaryVariant"
+                                android:textSize="12sp" />
 
 
                         </LinearLayout>
@@ -400,13 +421,15 @@
                         android:id="@+id/SupplierCardId"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
+                        android:layout_marginEnd="8dp"
                         android:layout_marginBottom="1dp"
-                        >
+                        android:background="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp">
 
                         <LinearLayout
                             android:id="@+id/supplier_id"
@@ -427,8 +450,8 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Supplier"
-                                android:textSize="12sp"
-                                android:textColor="@color/colorPrimaryVariant" />
+                                android:textColor="@color/colorPrimaryVariant"
+                                android:textSize="12sp" />
 
 
                         </LinearLayout>
@@ -440,12 +463,15 @@
                         android:id="@+id/cashRegCardId"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
-                        app:cardCornerRadius="10dp"
-                        android:layout_marginRight="25dp"
-                        app:cardElevation="5dp"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
+                        android:layout_marginRight="25dp"
                         android:layout_marginBottom="1dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
                         >
 
                         <LinearLayout
@@ -467,8 +493,8 @@
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
                                 android:text="Cash Register"
-                                android:textSize="12sp"
-                                android:textColor="@color/colorPrimaryVariant" />
+                                android:textColor="@color/colorPrimaryVariant"
+                                android:textSize="12sp" />
 
 
                         </LinearLayout>
