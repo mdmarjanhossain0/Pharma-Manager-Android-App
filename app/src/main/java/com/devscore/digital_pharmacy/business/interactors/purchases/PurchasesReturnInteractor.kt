@@ -36,7 +36,23 @@ class PurchasesReturnInteractor (
             createPurchasesReturn
         ).toPurchasesReturn()
 
-        /*try{
+
+        emit(
+            DataState.data(response = Response(
+                message = "Successfully Uploaded.",
+                uiComponentType = UIComponentType.Toast(),
+                messageType = MessageType.Success()
+            ), data = purchasesOrder))
+    }.catch { e ->
+        emit(handleUseCaseException(e))
+    }
+}
+
+
+
+
+
+/*try{
             Log.d(TAG, "Call Api Section")
             val salesOder = service.createReturnOrder(
                 "Token ${authToken.token}",
@@ -64,15 +80,3 @@ class PurchasesReturnInteractor (
                 ), data = createSalesReturn.toSalesReturn()))
             return@flow
         }*/
-
-
-        emit(
-            DataState.data(response = Response(
-                message = "Successfully Uploaded.",
-                uiComponentType = UIComponentType.Toast(),
-                messageType = MessageType.Success()
-            ), data = purchasesOrder))
-    }.catch { e ->
-        emit(handleUseCaseException(e))
-    }
-}

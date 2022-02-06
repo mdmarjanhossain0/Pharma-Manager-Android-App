@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response
 
+import com.devscore.digital_pharmacy.business.datasource.cache.purchases.PurchasesOrderMedicineEntity
 import com.devscore.digital_pharmacy.business.domain.models.PurchasesOrderMedicine
 import com.google.gson.annotations.SerializedName
 
@@ -19,6 +20,22 @@ data class PurchasesOderItemDto (
 
 fun PurchasesOderItemDto.toPurchasesOderMedicine() : PurchasesOrderMedicine {
     return PurchasesOrderMedicine(
+        pk = pk,
+        unit = unit,
+        quantity = quantity,
+        mrp = mrp,
+        purchase_price = purchase_price,
+        local_medicine = local_medicine,
+        brand_name = brand_name,
+        unit_name = unit_name,
+        amount = amount
+    )
+}
+
+
+fun PurchasesOrderMedicine.toPurchasesOderMedicineEntity(oderPk : Int) : PurchasesOrderMedicineEntity {
+    return PurchasesOrderMedicineEntity(
+        purchases_order = oderPk,
         pk = pk,
         unit = unit,
         quantity = quantity,

@@ -18,8 +18,14 @@ import com.devscore.digital_pharmacy.business.datasource.cache.supplier.Supplier
 import com.devscore.digital_pharmacy.business.datasource.datastore.AppDataStore
 import com.devscore.digital_pharmacy.business.datasource.network.auth.AuthService
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.PurchasesOrderDto
+import com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response.PurchasesOderItemDto
+import com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response.toPurchasesOderMedicine
+import com.devscore.digital_pharmacy.business.datasource.network.purchases.network_response.toPurchasesOderMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.network.purchases.toPurchasesOder
 import com.devscore.digital_pharmacy.business.datasource.network.sales.SalesOrderDto
+import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.SalesOrderItemDto
+import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.toSalesOderEntity
+import com.devscore.digital_pharmacy.business.datasource.network.sales.network_response.toSalesOrderMedicine
 import com.devscore.digital_pharmacy.business.datasource.network.sales.toSalesOrder
 import com.devscore.digital_pharmacy.business.domain.models.*
 import com.google.gson.Gson
@@ -187,29 +193,28 @@ constructor(
                 due_balance = data.getString("due_balance").toFloat()
             )
             customerDao.insertCustomer(customer.toCustomerEntity())
-
-
-            val sales = jsonObject.getJSONArray("sales")
-            for (i in 0 until sales.length()) {
-                val sale : SalesOrderDto = Gson().fromJson(sales.getJSONObject(i).toString(), SalesOrderDto::class.java)
-                salesDao.insertSalesOder(sale.toSalesOrder().toSalesOrderEntity())
-            }
-            val purchases = jsonObject.getJSONArray("purchases")
-            for (i in 0 until purchases.length()) {
-                val purchase : PurchasesOrderDto = Gson().fromJson(purchases.getJSONObject(i).toString(), PurchasesOrderDto::class.java)
-                purchasesDao.insertPurchasesOrder(purchase.toPurchasesOder().toPurchasesOrderEntity())
-            }
         }
 
-
-
-
-
-
-
-
-
-
+        val sales = jsonObject.getJSONArray("sales")
+        for (i in 0 until sales.length()) {
+            val sale : SalesOrderDto = Gson().fromJson(sales.getJSONObject(i).toString(), SalesOrderDto::class.java)
+            salesDao.insertSalesOder(sale.toSalesOrder().toSalesOrderEntity())
+            val salesOrderMedicinesJson = sales.getJSONObject(i).getJSONArray("sales_oder_medicines")
+            for (j in 0 until salesOrderMedicinesJson.length()) {
+                val salesOrderMedicine = Gson().fromJson(salesOrderMedicinesJson.getJSONObject(j).toString(), SalesOrderItemDto::class.java)
+                salesDao.insertSaleOderMedicine(salesOrderMedicine.toSalesOrderMedicine().toSalesOderEntity(sale.pk))
+            }
+        }
+        val purchases = jsonObject.getJSONArray("purchases")
+        for (i in 0 until purchases.length()) {
+            val purchase : PurchasesOrderDto = Gson().fromJson(purchases.getJSONObject(i).toString(), PurchasesOrderDto::class.java)
+            purchasesDao.insertPurchasesOrder(purchase.toPurchasesOder().toPurchasesOrderEntity())
+            val purchasesOderMedicineJson = purchases.getJSONObject(i).getJSONArray("purchases_order_medicines")
+            for (j in 0 until purchasesOderMedicineJson.length()) {
+                val purchasesOrderMedicine = Gson().fromJson(purchasesOderMedicineJson.getJSONObject(j).toString(), PurchasesOderItemDto::class.java)
+                purchasesDao.insertPurchasesOrderMedicine(purchasesOrderMedicine.toPurchasesOderMedicine().toPurchasesOderMedicineEntity(purchase.pk))
+            }
+        }
 
         val suppliers : JSONArray = jsonObject.getJSONArray("vendor")
         for (j in 0 until suppliers.length()) {

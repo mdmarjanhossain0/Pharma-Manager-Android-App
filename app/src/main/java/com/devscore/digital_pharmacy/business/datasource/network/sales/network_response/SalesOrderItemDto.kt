@@ -1,5 +1,6 @@
 package com.devscore.digital_pharmacy.business.datasource.network.sales.network_response
 
+import com.devscore.digital_pharmacy.business.datasource.cache.sales.SalesOrderMedicineEntity
 import com.devscore.digital_pharmacy.business.datasource.network.inventory.LocalMedicineDto
 import com.devscore.digital_pharmacy.business.domain.models.SalesOrderMedicine
 import com.google.gson.annotations.SerializedName
@@ -20,6 +21,21 @@ data class SalesOrderItemDto (
 
 fun SalesOrderItemDto.toSalesOrderMedicine() : SalesOrderMedicine {
     return SalesOrderMedicine(
+        pk = pk,
+        unit = unit,
+        quantity = quantity,
+        mrp = mrp,
+        local_medicine = local_medicine,
+        brand_name = brand_name,
+        unit_name = unit_name,
+        amount = amount
+    )
+}
+
+
+fun SalesOrderMedicine.toSalesOderEntity(oderPk : Int) : SalesOrderMedicineEntity {
+    return SalesOrderMedicineEntity(
+        sales_order = oderPk,
         pk = pk,
         unit = unit,
         quantity = quantity,

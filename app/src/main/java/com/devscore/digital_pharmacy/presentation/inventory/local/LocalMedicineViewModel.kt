@@ -63,6 +63,7 @@ constructor(
 
             is LocalMedicineEvents.SetSearchSelection -> {
                 selectQuery(event.action)
+                search()
             }
 
             is LocalMedicineEvents.UpdateQuery -> {

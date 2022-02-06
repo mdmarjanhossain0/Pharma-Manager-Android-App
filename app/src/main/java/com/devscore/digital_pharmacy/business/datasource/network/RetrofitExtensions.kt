@@ -41,7 +41,7 @@ fun <T> handleUseCaseException(e: Throwable): DataState<T> {
     }
 }
 
-private fun convertErrorBody(throwable: HttpException): String? {
+fun convertErrorBody(throwable: HttpException): String? {
     return try {
         throwable.response()?.errorBody()?.string()
     } catch (exception: Exception) {
