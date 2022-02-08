@@ -56,6 +56,7 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_register.xml" value="0.16203703703703703" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_sales_cart.xml" value="0.14629629629629629" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_sales_details.xml" value="0.22" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_sales_inventory.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_sales_orders.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_sales_pay_now.xml" value="0.33" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/fragment_update_medicine.xml" value="0.20416666666666666" />
@@ -66,7 +67,8 @@
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_local.xml" value="0.25" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_notification.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_notification_list.xml" value="0.22" />
-        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_purchase_short_list.xml" value="0.16540084388185655" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_purchase_short_list.xml" value="0.25" />
+        <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_sales_inventory.xml" value="0.1675213675213675" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_sales_list.xml" value="0.11851851851851852" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_select_unit.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Android_Digital_Pharmacy2/app/src/main/res/layout/item_sub_sales_list.xml" value="0.20416666666666666" />

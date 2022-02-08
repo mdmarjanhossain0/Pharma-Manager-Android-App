@@ -211,7 +211,7 @@ constructor(
             itemView.salesInventoryBrandName.setText(item.brand_name)
             itemView.salesInventoryCompanyName.setText(item.generic)
             itemView.salesInventoryManufacture.setText(item.manufacture)
-            itemView.salesInventoryMRP.setText("MRP ৳ "+ item.mrp.toString())
+            itemView.salesInventoryMRP.setText("MRP :৳ "+ item.mrp.toString())
 
 
 
@@ -239,6 +239,10 @@ constructor(
 
             itemView.deleteShortList.visibility = View.VISIBLE
             itemView.deleteShortList.setOnClickListener {
+                interaction?.onItemDeleteSelected(adapterPosition, item)
+            }
+
+            itemView.deleteShortListIcon.setOnClickListener {
                 interaction?.onItemDeleteSelected(adapterPosition, item)
             }
 

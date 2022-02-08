@@ -73,6 +73,7 @@ class ExtractHTTPException(val sessionManager: SessionManager) {
                 Log.d(TAG, "500 Internal Server Error " + e.response()?.errorBody().toString())
             401 ->{
                 Log.d(TAG, "401 Unauthorized " + e.response()?.errorBody().toString())
+                unauthorized()
                 return DataState.error<T>(
                     response = Response(
                         message = errorEntity.errorMessage,
@@ -80,7 +81,6 @@ class ExtractHTTPException(val sessionManager: SessionManager) {
                         messageType = MessageType.Error()
                     )
                 )
-                unauthorized()
             }
 
             404 ->

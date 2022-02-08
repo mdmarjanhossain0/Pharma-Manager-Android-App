@@ -47,9 +47,9 @@
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:id="@+id/swipeRefreshLayout"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBarLayout"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -65,16 +65,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchBarLayout"
             tools:listitem="@layout/item_sales_orders" />
-
-        <ImageView
-            android:id="@+id/newSalesOrder"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_marginRight="35dp"
-            android:layout_marginBottom="35dp"
-            android:src="@drawable/ic_sales"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
@@ -142,6 +132,17 @@
 
         </androidx.cardview.widget.CardView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+    <ImageView
+        android:id="@+id/newSalesOrder"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="35dp"
+        android:src="@drawable/ic_sales"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
