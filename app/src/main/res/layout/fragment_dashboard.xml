@@ -1,86 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.main.dashboard.DashboardFragment">
-
-
-
-
-
-
-    <RelativeLayout
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.devscore.digital_pharmacy.presentation.main.dashboard.DashboardFragment">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:id="@+id/topLayoutId"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:background="@color/colorPrimary"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent">
+            android:padding="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end">
 
+                <include
+                    android:id="@+id/sync"
+                    layout="@layout/dynamic_sync"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_sync"
+                    app:layout_constraintEnd_toStartOf="@id/notification"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    />
 
-            <include
-                android:id="@+id/notification"
-                layout="@layout/dynamic_notification"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_notifications"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white"
-                android:background="?android:attr/selectableItemBackground"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                />
+                <include
+                    android:id="@+id/notification"
+                    layout="@layout/dynamic_notification"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_notifications"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/white"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    />
 
-            <include
-                android:id="@+id/sync"
-                layout="@layout/dynamic_sync"
-                android:layout_width="30dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_sync"
-                app:layout_constraintEnd_toStartOf="@id/notification"
-                app:layout_constraintTop_toTopOf="parent"
-                app:tint="@color/white"
-                android:background="?android:attr/selectableItemBackground"
-                android:foreground="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                />
+            </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardId"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="60dp"
             android:layout_marginEnd="24dp"
             app:cardCornerRadius="10dp"
-            app:cardElevation="5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            >
+            app:cardElevation="5dp">
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <RelativeLayout
                 android:id="@+id/header_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/pollImgId"
@@ -88,22 +82,19 @@
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
                     android:src="@drawable/ic_sales"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_centerVertical="true"/>
 
 
                 <TextView
                     android:id="@+id/titleTvId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="4dp"
                     android:text="Sales IN MARCH"
                     android:textColor="@color/colorPrimaryVariant"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@+id/pollImgId"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_toEndOf="@+id/pollImgId"/>
 
 
                 <TextView
@@ -111,406 +102,346 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
+                    android:layout_marginStart="10dp"
                     android:text="Amount:"
-                    app:layout_constraintStart_toStartOf="@+id/titleTvId"
-                    app:layout_constraintTop_toBottomOf="@+id/titleTvId" />
+                    android:layout_below="@+id/titleTvId"
+                    android:layout_toEndOf="@+id/pollImgId"/>
 
                 <TextView
                     android:id="@+id/amountValueTvId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="$1066,"
                     android:textColor="@color/colorPrimaryVariant"
-                    app:layout_constraintBottom_toBottomOf="@+id/amountTvId"
-                    app:layout_constraintStart_toEndOf="@+id/amountTvId"
-                    app:layout_constraintTop_toTopOf="@+id/amountTvId" />
+                    android:layout_below="@+id/titleTvId"
+                    android:layout_toEndOf="@+id/amountTvId"/>
 
                 <TextView
                     android:id="@+id/dueTvId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
                     android:layout_marginStart="8dp"
                     android:text="Due:"
-                    app:layout_constraintBottom_toBottomOf="@+id/amountValueTvId"
-                    app:layout_constraintStart_toEndOf="@+id/amountValueTvId"
-                    app:layout_constraintTop_toTopOf="@+id/amountValueTvId" />
+                    android:layout_below="@+id/titleTvId"
+                    android:layout_toEndOf="@+id/amountValueTvId"/>
 
                 <TextView
                     android:id="@+id/dueValueTvId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
                     android:text="$234"
                     android:textColor="@color/colorPrimaryVariant"
-                    app:layout_constraintBottom_toBottomOf="@+id/dueTvId"
-                    app:layout_constraintStart_toEndOf="@+id/dueTvId"
-                    app:layout_constraintTop_toTopOf="@+id/dueTvId" />
+                    android:layout_below="@+id/titleTvId"
+                    android:layout_toEndOf="@+id/dueTvId"/>
 
                 <TextView
                     android:id="@+id/itemCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="10dp"
                     android:text="Quantity : 21"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/amountTvId"
-                    app:layout_constraintTop_toBottomOf="@+id/amountTvId" />
+                    android:layout_below="@+id/amountTvId"
+                    android:layout_toEndOf="@+id/pollImgId"/>
 
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </RelativeLayout>
 
 
         </com.google.android.material.card.MaterialCardView>
-        <RelativeLayout
+
+        <LinearLayout
+            android:id="@+id/linear1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/cardId"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
 
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-            <LinearLayout
-                android:id="@+id/linear1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:weightSum="2"
-                >
-                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                    android:id="@+id/item1"
+                <ImageView
+                    android:id="@+id/purchaseImgId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_purchase"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Purchases"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/purchaseImgId"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/salesImgId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_sales"
+                    android:scaleType="fitCenter"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Sales"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/salesImgId"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="2">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/inventoryImgId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_inventory"
+                    android:scaleType="fitCenter"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Inventory"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/inventoryImgId"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/shortlistImgId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_shortlist"
+                    android:scaleType="fitCenter"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
+                    tools:ignore="ContentDescription"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="Short List"
+                    android:textColor="@color/colorPrimaryVariant"
+                    android:textSize="14sp"
+                    android:layout_marginTop="4dp"
+                    android:layout_below="@+id/shortlistImgId"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alignmentMode="alignMargins"
+                android:columnCount="3"
+                android:columnOrderPreserved="false"
+                android:rowCount="1"
+                app:layout_editor_absoluteX="0dp">
+
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/customerCardId"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:weightSum="15"
+                    android:layout_margin="8dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     >
 
-                    <ImageView
-                        android:id="@+id/purchaseImgId"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="13"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_purchase"
-                        android:scaleType="fitCenter"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        />
-
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/customer_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="Purchases"
-                        android:textColor="@color/colorPrimaryVariant"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/customer_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_customers" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Customers"
+                            android:layout_gravity="center"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimaryVariant" />
 
 
+                    </LinearLayout>
 
-                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                    android:id="@+id/item2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/SupplierCardId"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:orientation="vertical"
-                    android:weightSum="15"
-                    android:layout_toRightOf="@+id/item1"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true"
                     >
-                    <ImageView
-                        android:id="@+id/salesImgId"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="13"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_sales"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        />
 
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/supplier_id"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="Sales"
-                        android:textColor="@color/colorPrimaryVariant"
-                        android:textSize="14sp"
-                        android:textStyle="bold"/>
-                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
-            </LinearLayout>
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/linear2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/linear1"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:layout_marginTop="15dp"
-                >
+                        <ImageView
+                            android:id="@+id/supplier_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_supplier" />
 
-                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                    android:id="@+id/item3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="Supplier"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimaryVariant" />
+
+
+                    </LinearLayout>
+
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/cashRegCardId"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:cardCornerRadius="10dp"
+                    android:layout_margin="8dp"
+                    app:cardElevation="5dp"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
-                    android:layout_below="@+id/item1"
-                    android:orientation="vertical"
-                    android:weightSum="15">
+                    android:background="?android:attr/selectableItemBackground"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
-                    <ImageView
-                        android:id="@+id/inventoryImgId"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="13"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_inventory"
-                        android:scaleType="fitCenter"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        />
-
-                    <TextView
+                    <LinearLayout
+                        android:id="@+id/dashBoardCashRegister"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="1dp"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="Inventory"
-                        android:textColor="@color/colorPrimaryVariant"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+                        android:layout_gravity="center"
+                        android:layout_margin="5dp"
+                        android:orientation="vertical">
 
-
-                <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
-                    android:id="@+id/item4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_rowWeight="1"
-                    android:layout_columnWeight="1"
-                    android:layout_below="@+id/item2"
-                    android:layout_toRightOf="@+id/item3"
-                    android:orientation="vertical"
-                    android:weightSum="15">
-
-                    <ImageView
-                        android:id="@+id/shortlistImgId"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginLeft="25dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginRight="25dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="13"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/ic_shortlist"
-                        android:scaleType="fitCenter"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:text="Short List"
-                        android:textColor="@color/colorPrimaryVariant"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
-                </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
-            </LinearLayout>
-
-
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:minHeight="100dp"
-                android:layout_below="@+id/linear2"
-                android:layout_marginTop="5dp"
-                >
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:alignmentMode="alignMargins"
-                    android:columnCount="3"
-                    android:columnOrderPreserved="false"
-                    android:rowCount="1"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
-                    app:layout_editor_absoluteX="0dp">
-
-
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/customerCardId"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginStart="25dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:layout_marginBottom="1dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        >
-
-                        <LinearLayout
-                            android:id="@+id/customer_id"
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/cash_register_img"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:orientation="vertical">
+                            android:src="@drawable/ic_cash_reg" />
 
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_customers" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Customers"
-                                android:layout_gravity="center"
-                                android:textSize="12sp"
-                                android:textColor="@color/colorPrimaryVariant" />
-
-
-                        </LinearLayout>
-
-
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/SupplierCardId"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="5dp"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:layout_marginBottom="1dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        >
-
-                        <LinearLayout
-                            android:id="@+id/supplier_id"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_supplier" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Supplier"
-                                android:textSize="12sp"
-                                android:textColor="@color/colorPrimaryVariant" />
+                            android:text="Cash Register"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimaryVariant" />
 
 
-                        </LinearLayout>
+                    </LinearLayout>
 
 
-                    </com.google.android.material.card.MaterialCardView>
+                </com.google.android.material.card.MaterialCardView>
+            </GridLayout>
+        </LinearLayout>
 
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/cashRegCardId"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        app:cardCornerRadius="10dp"
-                        android:layout_marginRight="25dp"
-                        app:cardElevation="5dp"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:layout_marginBottom="1dp"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:foreground="?android:attr/selectableItemBackground"
-                        android:clickable="true"
-                        >
-
-                        <LinearLayout
-                            android:id="@+id/dashBoardCashRegister"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_margin="5dp"
-                            android:orientation="vertical">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_cash_reg" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="Cash Register"
-                                android:textSize="12sp"
-                                android:textColor="@color/colorPrimaryVariant" />
-
-
-                        </LinearLayout>
-
-
-                    </com.google.android.material.card.MaterialCardView>
-                </GridLayout>
-            </LinearLayout>
-
-        </RelativeLayout>
-    </RelativeLayout>
-
-
+    </LinearLayout>
 </ScrollView>

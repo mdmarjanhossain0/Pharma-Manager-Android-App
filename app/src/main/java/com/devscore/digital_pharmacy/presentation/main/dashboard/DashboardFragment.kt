@@ -1,20 +1,16 @@
 package com.devscore.digital_pharmacy.presentation.main.dashboard
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.devscore.digital_pharmacy.R
-import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
-import com.devscore.digital_pharmacy.business.domain.util.SuccessHandling.Companion.SYNC_FINISH
 import com.devscore.digital_pharmacy.presentation.cashregister.CashRegisterActivity
 import com.devscore.digital_pharmacy.presentation.customer.CustomerActivity
 import com.devscore.digital_pharmacy.presentation.inventory.InventoryActivity
@@ -24,12 +20,25 @@ import com.devscore.digital_pharmacy.presentation.purchases.PurchasesActivity
 import com.devscore.digital_pharmacy.presentation.sales.SalesActivity
 import com.devscore.digital_pharmacy.presentation.shortlist.ShortListActivity
 import com.devscore.digital_pharmacy.presentation.supplier.SupplierActivity
-import com.devscore.digital_pharmacy.presentation.util.DateTime
-import com.devscore.digital_pharmacy.presentation.util.processQueue
 import kotlinx.android.synthetic.main.dynamic_notification.*
 import kotlinx.android.synthetic.main.dynamic_sync.*
 import kotlinx.android.synthetic.main.fragment_dashboard.*
+
+
+import android.util.DisplayMetrics
+import android.util.Log
+import android.view.Window
+import android.widget.LinearLayout
+import android.widget.RelativeLayout
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import com.devscore.digital_pharmacy.business.domain.util.StateMessageCallback
+import com.devscore.digital_pharmacy.business.domain.util.SuccessHandling.Companion.SYNC_FINISH
+import com.devscore.digital_pharmacy.presentation.util.DateTime
+import com.devscore.digital_pharmacy.presentation.util.processQueue
+import com.google.android.material.card.MaterialCardView
 import java.util.*
+import java.util.concurrent.atomic.AtomicInteger
 
 
 class DashboardFragment : BaseMainFragment() {
@@ -48,6 +57,15 @@ class DashboardFragment : BaseMainFragment() {
     var receive : Int = 0
     var payment : Int = 0
     var toast : Boolean = false
+
+    lateinit var topLayout: RelativeLayout
+    lateinit var reportCard: MaterialCardView
+    lateinit var linearLayout1: LinearLayout
+    lateinit var linearLayout2:LinearLayout
+    lateinit var linearLayout3:LinearLayout
+    lateinit var customerView: ImageView
+    lateinit var supplierView:ImageView
+    lateinit var cashRegister:ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +89,7 @@ class DashboardFragment : BaseMainFragment() {
 
         initUIClick()
         subscribeObserver()
+        setLayoutSize()
     }
 
     private fun subscribeObserver() {
@@ -338,5 +357,147 @@ class DashboardFragment : BaseMainFragment() {
     override fun onResume() {
         super.onResume()
         viewModel.onTriggerEvent(DashBoardEvents.GetMonthSalesTotalReport)
+    }
+
+
+    fun setLayoutSize() {
+        topLayout = view?.findViewById(R.id.topLayoutId) as RelativeLayout
+        reportCard = view?.findViewById(R.id.cardId) as MaterialCardView
+        linearLayout1 = view?.findViewById(R.id.linear1) as LinearLayout
+        linearLayout2 = view?.findViewById(R.id.linear2) as LinearLayout
+        linearLayout3 = view?.findViewById(R.id.linear3) as LinearLayout
+        customerView = view?.findViewById(R.id.customer_img) as ImageView
+        supplierView = view?.findViewById(R.id.supplier_img) as ImageView
+        cashRegister = view?.findViewById(R.id.cash_register_img) as ImageView
+// Get the layout id
+        val layoutHeight = AtomicInteger()
+        topLayout!!.post(Runnable {
+            val rect = Rect()
+            val win: Window = activity?.getWindow()!! // Get the Window
+            win.getDecorView().getWindowVisibleDisplayFrame(rect)
+
+            // Get the height of Status Bar
+            val statusBarHeight: Int = rect.top
+
+            // Get the height occupied by the decoration contents
+            val contentViewTop: Int = win.findViewById<View>(Window.ID_ANDROID_CONTENT).getTop()
+
+            // Calculate titleBarHeight by deducting statusBarHeight from contentViewTop
+            val titleBarHeight = contentViewTop - statusBarHeight
+
+            // By now we got the height of titleBar & statusBar
+            // Now lets get the screen size
+            val metrics = DisplayMetrics()
+            activity?.getWindowManager()?.getDefaultDisplay()?.getMetrics(metrics)
+            val screenHeight = metrics.heightPixels
+            val screenWidth = metrics.widthPixels
+
+            // Now calculate the height that our layout can be set
+            // If you know that your application doesn't have statusBar added, then don't add here also. Same applies to application bar also
+            layoutHeight.set(screenHeight - (titleBarHeight + statusBarHeight))
+
+            // Lastly, set the height of the layout
+            val rootParams = topLayout.getLayoutParams() as LinearLayout.LayoutParams
+            rootParams.height = Math.round(layoutHeight.get() * 0.15).toInt()
+            topLayout.setLayoutParams(rootParams)
+
+            //set the top margin of the report Card
+            val cardViewParams = LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            reportCard.setLayoutParams(cardViewParams)
+            val cardViewMarginParams = reportCard.getLayoutParams() as ViewGroup.MarginLayoutParams
+            cardViewMarginParams.setMargins(
+                Math.round(screenWidth * 0.05).toInt(),
+                (-Math.round(layoutHeight.get() * 0.055)).toInt(),
+                Math.round(screenWidth * 0.05).toInt(), 0
+            )
+            reportCard.requestLayout()
+
+            //set the margins of linearLayout1
+            val linear1params = linearLayout1.getLayoutParams() as LinearLayout.LayoutParams
+            linear1params.setMargins(
+                Math.round(screenWidth * 0.05).toInt(),
+                Math.round(layoutHeight.get() * 0.05).toInt(),
+                Math.round(screenWidth * 0.05).toInt(), 0
+            )
+            linearLayout1.setLayoutParams(linear1params)
+
+            //set the margins of linearLayout2
+            val linear2params = linearLayout2.getLayoutParams() as LinearLayout.LayoutParams
+            linear2params.setMargins(
+                Math.round(screenWidth * 0.05).toInt(),
+                Math.round(layoutHeight.get() * 0.05).toInt(),
+                Math.round(screenWidth * 0.05).toInt(), 0
+            )
+            linearLayout2.setLayoutParams(linear2params)
+
+            //set the height of linearLayout3
+            val linear3params = linearLayout3.getLayoutParams() as LinearLayout.LayoutParams
+            linear3params.height = Math.round(layoutHeight.get() * 0.18).toInt()
+            linear3params.setMargins(
+                0,
+                Math.round(layoutHeight.get() * 0.08).toInt(), 0,
+                Math.round(layoutHeight.get() * 0.05).toInt()
+            )
+            linearLayout3.setLayoutParams(linear3params)
+
+            //set the width and height of 3 images of linearLayout3
+            val customerparams = customerView.getLayoutParams() as LinearLayout.LayoutParams
+            customerparams.height = Math.round(layoutHeight.get() * 0.05).toInt()
+            customerparams.width = Math.round(screenWidth * 0.15).toInt()
+            customerView.setLayoutParams(customerparams)
+            customerView.requestLayout()
+            val supplierparams = supplierView.getLayoutParams() as LinearLayout.LayoutParams
+            supplierparams.height = Math.round(layoutHeight.get() * 0.05).toInt()
+            supplierparams.width = Math.round(screenWidth * 0.15).toInt()
+            supplierView.setLayoutParams(supplierparams)
+            supplierView.requestLayout()
+            val cashRegisterparams = cashRegister.getLayoutParams() as LinearLayout.LayoutParams
+            cashRegisterparams.height = Math.round(layoutHeight.get() * 0.05).toInt()
+            cashRegisterparams.width = Math.round(screenWidth * 0.15).toInt()
+            cashRegister.setLayoutParams(cashRegisterparams)
+            cashRegister.requestLayout()
+        })
+    }
+
+    fun getScreenHeight(): Int {
+        val layoutHeight = AtomicInteger()
+        val rect = Rect()
+        val win: Window = activity?.getWindow()!! // Get the Window
+        win.getDecorView().getWindowVisibleDisplayFrame(rect)
+
+        // Get the height of Status Bar
+        val statusBarHeight: Int = rect.top
+
+        // Get the height occupied by the decoration contents
+        val contentViewTop: Int = win.findViewById<View>(Window.ID_ANDROID_CONTENT).getTop()
+
+        // Calculate titleBarHeight by deducting statusBarHeight from contentViewTop
+        val titleBarHeight = contentViewTop - statusBarHeight
+
+        // By now we got the height of titleBar & statusBar
+        // Now lets get the screen size
+        val metrics = DisplayMetrics()
+        activity?.getWindowManager()?.getDefaultDisplay()?.getMetrics(metrics)
+        val screenHeight = metrics.heightPixels
+
+        // Now calculate the height that our layout can be set
+        // If you know that your application doesn't have statusBar added, then don't add here also. Same applies to application bar also
+        layoutHeight.set(screenHeight - (titleBarHeight + statusBarHeight))
+        return layoutHeight.get()
+    }
+
+    fun getScreenWidth(): Int {
+        val rect = Rect()
+        val win: Window = activity?.getWindow()!! // Get the Window
+        win.getDecorView().getWindowVisibleDisplayFrame(rect)
+
+
+        // Now lets get the screen size
+        val metrics = DisplayMetrics()
+        activity?.getWindowManager()?.getDefaultDisplay()?.getMetrics(metrics)
+        return metrics.widthPixels
     }
 }
