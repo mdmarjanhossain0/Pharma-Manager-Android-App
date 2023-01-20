@@ -14,6 +14,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.fragment.app.viewModels
 import com.appbytes.pharma_manager.R
+import com.appbytes.pharma_manager.business.domain.util.Constants.Companion.PRIVACY_POLIC
 import com.appbytes.pharma_manager.business.domain.util.StateMessageCallback
 import com.appbytes.pharma_manager.presentation.auth.AuthActivity
 import com.appbytes.pharma_manager.presentation.auth.BaseAuthFragment
@@ -92,7 +93,7 @@ class RegisterFragment : BaseAuthFragment(), RegisterCallback {
 
         tcTvId.setOnClickListener {
             val browserIntent = Intent(Intent.ACTION_VIEW)
-            browserIntent.data = Uri.parse("http://www.google.com")
+            browserIntent.data = Uri.parse(PRIVACY_POLIC)
             startActivity(browserIntent)
         }
     }

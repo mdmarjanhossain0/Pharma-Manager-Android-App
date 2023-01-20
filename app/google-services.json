@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "823247572906",
+    "project_id": "pharma-manager-f7cca",
+    "storage_bucket": "pharma-manager-f7cca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823247572906:android:61cecb5bdb49d0072fe5d3",
+        "android_client_info": {
+          "package_name": "com.appbytes.pharma_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823247572906-p4hui2ede7n0khph0fnb37rv7softd83.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmPVy-eT0ZGoPNw8f-wsZ1EBCTKN6gRkA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823247572906-p4hui2ede7n0khph0fnb37rv7softd83.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
