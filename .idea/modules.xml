@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Digital_Pharmacy.iml" filepath="$PROJECT_DIR$/.idea/modules/Digital_Pharmacy.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Digital_Pharmacy.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Digital_Pharmacy.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Pharma_Manager.iml" filepath="$PROJECT_DIR$/.idea/modules/Pharma_Manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Pharma_Manager.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Pharma_Manager.app.iml" />
     </modules>
   </component>
 </project>
