@@ -7,11 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".presentation.inventory.local.LocalFragment">
 
-
-
-
-
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -181,7 +176,7 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/localRvId"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -191,18 +186,16 @@
                 android:layout_marginLeft="5dp"
                 app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
                 />
-
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/localFragmentFloatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginEnd="45dp"
+                android:layout_marginBottom="120dp"
                 android:clickable="true"
                 android:src="@drawable/ic_plus"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:visibility="gone"
                 app:tint="@color/white" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

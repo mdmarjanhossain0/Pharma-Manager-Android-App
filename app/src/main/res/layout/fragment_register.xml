@@ -152,7 +152,9 @@
                 android:textColor="@color/colorPrimaryVariant"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/shopNameET" />
+                app:layout_constraintTop_toBottomOf="@+id/shopNameET"
+                android:visibility="gone"
+                />
 
             <EditText
                 android:id="@+id/pharmacyNumberEtvId"
@@ -163,7 +165,9 @@
                 android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pharmacyNumberTvId" />
+                app:layout_constraintTop_toBottomOf="@+id/pharmacyNumberTvId"
+                android:visibility="gone"
+                />
 
 
             <TextView
@@ -223,7 +227,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/emailEtvId"
-                android:visibility="gone"
                 />
 
 
@@ -239,13 +242,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/passwordTv"
                 app:passwordToggleEnabled="true"
                 android:background="@color/white"
-                android:visibility="gone"
                 >
                 <EditText
                     android:id="@+id/passwordEt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:inputType="textPassword"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -267,7 +268,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passwordEtv"
-                android:visibility="gone"
                 />
 
 
@@ -278,19 +278,16 @@
                 android:id="@+id/password2Etv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/password2Tv"
                 app:passwordToggleEnabled="true"
                 android:background="@color/white"
-                android:visibility="gone"
                 >
                 <EditText
                     android:id="@+id/password2Et"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
@@ -359,6 +356,7 @@
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="10dp"
                 android:text="@string/terms_and_condition"
+                android:autoLink="web"
                 app:layout_constraintBottom_toBottomOf="@id/regCheckBokId"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/regCheckBokId"

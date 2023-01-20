@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/shortListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.shortlist.shortlist.ShortListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.shortlist.shortlist.ShortListFragment"
         android:label="fragment_short_list"
         tools:layout="@layout/fragment_short_list" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/shortListSalesCartFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.shortlist.salescart.ShortListCartFragment"
+        android:name="com.appbytes.pharma_manager.presentation.shortlist.salescart.ShortListCartFragment"
         android:label="fragment_short_list_sales_cart"
         tools:layout="@layout/fragment_short_list_sales_cart" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/shortListPayFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.shortlist.salespay.ShortListPayFragment"
+        android:name="com.appbytes.pharma_manager.presentation.shortlist.salespay.ShortListPayFragment"
         android:label="fragment_short_list_pay"
         tools:layout="@layout/fragment_short_list_pay" >
         <action
@@ -49,20 +49,20 @@
     </fragment>
     <fragment
         android:id="@+id/shortListAddFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.shortlist.add.ShortListAddFragment"
+        android:name="com.appbytes.pharma_manager.presentation.shortlist.add.ShortListAddFragment"
         android:label="fragment_short_list_add"
         tools:layout="@layout/fragment_short_list_add" />
     <fragment
         android:id="@+id/shortListCustomerListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.shortlist.customerlist.ShortListSupplierListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.shortlist.customerlist.ShortListSupplierListFragment"
         android:label="fragment_short_list_customer_list"
         tools:layout="@layout/fragment_short_list_customer_list" />
     <fragment
         android:id="@+id/purchasesSupplierListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
         android:label="PurchasesSupplierListFragment" />
     <fragment
         android:id="@+id/purchasesCreateSupplierFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.shortlist.PurchasesCreateSupplierFragment"
+        android:name="com.appbytes.pharma_manager.presentation.shortlist.PurchasesCreateSupplierFragment"
         android:label="PurchasesCreateSupplierFragment" />
 </navigation>

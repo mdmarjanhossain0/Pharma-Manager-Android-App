@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.dashboard.DashboardFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.dashboard.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationsFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.notification.NotificationsFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.notification.NotificationsFragment"
         android:label="fragment_notifications"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

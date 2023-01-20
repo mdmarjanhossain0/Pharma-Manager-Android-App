@@ -8,7 +8,7 @@
     android:orientation="vertical"
     >
 
-    <com.devscore.digital_pharmacy.presentation.util.HorizontalDottedProgress
+    <com.appbytes.pharma_manager.presentation.util.HorizontalDottedProgress
         android:id="@+id/loading_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

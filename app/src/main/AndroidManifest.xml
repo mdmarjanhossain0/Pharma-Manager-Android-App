@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.devscore.digital_pharmacy">
+    package="com.appbytes.pharma_manager">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".presentation.BaseApplication"
+        android:name="com.appbytes.pharma_manager.presentation.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -19,82 +19,82 @@
         android:theme="@style/Theme.DigitalPharmacy"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".presentation.shortlist.ShortListActivity"
+            android:name="com.appbytes.pharma_manager.presentation.shortlist.ShortListActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".account.SettingsActivity"
+            android:name="com.appbytes.pharma_manager.account.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".account.EditUserActivity"
+            android:name="com.appbytes.pharma_manager.account.EditUserActivity"
             android:exported="false" />
         <activity
-            android:name=".account.UsersActivity"
+            android:name="com.appbytes.pharma_manager.account.UsersActivity"
             android:exported="false" />
         <activity
-            android:name=".account.AddUserActivity"
+            android:name="com.appbytes.pharma_manager.account.AddUserActivity"
             android:exported="false"
             android:label="@string/title_activity_add_user"
             android:theme="@style/Theme.DigitalPharmacy.NoActionBar" />
         <activity
-            android:name=".CashRecordActivity"
+            android:name="com.appbytes.pharma_manager.CashRecordActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.cashregister.CashRegisterActivity"
+            android:name="com.appbytes.pharma_manager.presentation.cashregister.CashRegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.purchases.PurchasesActivity"
+            android:name="com.appbytes.pharma_manager.presentation.purchases.PurchasesActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".presentation.sales.SalesActivity"
+            android:name="com.appbytes.pharma_manager.presentation.sales.SalesActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".presentation.customer.CustomerActivity"
+            android:name="com.appbytes.pharma_manager.presentation.customer.CustomerActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".presentation.supplier.SupplierActivity"
+            android:name="com.appbytes.pharma_manager.presentation.supplier.SupplierActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".presentation.inventory.InventoryActivity"
+            android:name="com.appbytes.pharma_manager.presentation.inventory.InventoryActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".presentation.auth.AuthActivity"
+            android:name="com.appbytes.pharma_manager.presentation.auth.AuthActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".inventory.ContainerActivity"
+            android:name="com.appbytes.pharma_manager.inventory.ContainerActivity"
             android:exported="true" />
         <activity
-            android:name=".register.VerifyActivity"
+            android:name="com.appbytes.pharma_manager.register.VerifyActivity"
             android:exported="true" />
         <activity
-            android:name=".register.WelcomeActivity"
+            android:name="com.appbytes.pharma_manager.register.WelcomeActivity"
             android:exported="true" />
         <activity
-            android:name=".register.LoginActivity"
+            android:name="com.appbytes.pharma_manager.register.LoginActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.appbytes.pharma_manager.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             />
         <activity
-            android:name=".register.RegisterActivity"
+            android:name="com.appbytes.pharma_manager.register.RegisterActivity"
             android:exported="true" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.appbytes.pharma_manager.presentation.splash.SplashActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             >
@@ -117,7 +117,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.devscore.digital_pharmacy.fileprovider"
+            android:authorities="com.appbytes.pharma_manager.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

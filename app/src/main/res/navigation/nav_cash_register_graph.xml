@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cashVendorFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.cashregister.CashVendorFragment"
+        android:name="com.appbytes.pharma_manager.presentation.cashregister.CashVendorFragment"
         android:label="fragment_cash_vendor"
         tools:layout="@layout/fragment_cash_vendor" >
         <action
@@ -19,11 +19,11 @@
     </fragment>
     <fragment
         android:id="@+id/salesCustomerListFragment2"
-        android:name="com.devscore.digital_pharmacy.presentation.cashregister.customerlist.CashRegisterCustomerListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.cashregister.customerlist.CashRegisterCustomerListFragment"
         android:label="SalesCustomerListFragment" />
     <fragment
         android:id="@+id/cashRegisterSupplierListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.cashregister.supplierlist.CashRegisterSupplierListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.cashregister.supplierlist.CashRegisterSupplierListFragment"
         android:label="fragment_cash_register_supplier_list"
         tools:layout="@layout/fragment_cash_register_supplier_list" />
 </navigation>

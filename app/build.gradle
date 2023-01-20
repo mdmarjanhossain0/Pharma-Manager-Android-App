@@ -6,12 +6,12 @@ apply plugin: "androidx.navigation.safeargs"
 apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdk 31
+    compileSdk 33
 
     defaultConfig {
-        applicationId "com.devscore.digital_pharmacy"
+        applicationId "com.appbytes.pharma_manager"
         minSdk 21
-        targetSdk 30
+        targetSdk 32
         versionCode 1
         versionName "1.0"
 

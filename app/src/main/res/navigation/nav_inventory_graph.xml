@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/inventoryFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.InventoryFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.InventoryFragment"
         android:label="fragment_inventory"
         tools:layout="@layout/fragment_inventory" >
         <action
@@ -38,37 +38,37 @@
     </fragment>
     <fragment
         android:id="@+id/globalFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.global.GlobalFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.global.GlobalFragment"
         android:label="fragment_global"
         tools:layout="@layout/fragment_global" />
     <fragment
         android:id="@+id/localFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.local.LocalFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.local.LocalFragment"
         android:label="fragment_local"
         tools:layout="@layout/fragment_local" />
     <fragment
         android:id="@+id/return1Fragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.inventoryreturn.InventoryReturnFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.inventoryreturn.InventoryReturnFragment"
         android:label="fragment_return1"
         tools:layout="@layout/fragment_return1" />
     <fragment
         android:id="@+id/addProductSubMedicineFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.addmedicine.AddProductSubMedicineFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.add.addmedicine.AddProductSubMedicineFragment"
         android:label="fragment_add_product_sub_medicine"
         tools:layout="@layout/fragment_add_product_sub_medicine" />
     <fragment
         android:id="@+id/addProductSubNonMedicineFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.addnonmedicine.AddProductSubNonMedicineFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.add.addnonmedicine.AddProductSubNonMedicineFragment"
         android:label="fragment_add_product_sub_non_medicine"
         tools:layout="@layout/fragment_add_product_sub_non_medicine" />
     <fragment
         android:id="@+id/inventoryProductDetailsEditFragment"
-        android:name="com.devscore.digital_pharmacy.inventory.InventoryProductDetailsEditFragment"
+        android:name="com.appbytes.pharma_manager.inventory.InventoryProductDetailsEditFragment"
         android:label="fragment_inventory_product_details_edit"
         tools:layout="@layout/fragment_inventory_product_details_edit" />
     <fragment
         android:id="@+id/inventoryAddProductFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.InventoryAddProductFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.add.InventoryAddProductFragment"
         android:label="fragment_inventory_add_product"
         tools:layout="@layout/fragment_inventory_add_product" >
         <argument
@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/dispensingFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.dispensing.DispensingFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.dispensing.DispensingFragment"
         android:label="fragment_dispensing"
         tools:layout="@layout/fragment_dispensing" >
         <argument
@@ -87,6 +87,6 @@
     </fragment>
     <fragment
         android:id="@+id/updateMedicineFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.inventory.add.update.UpdateMedicineFragment"
+        android:name="com.appbytes.pharma_manager.presentation.inventory.add.update.UpdateMedicineFragment"
         android:label="UpdateMedicineFragment" />
 </navigation>

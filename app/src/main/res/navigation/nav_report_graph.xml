@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/salesReportFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.report.SalesReportFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.report.SalesReportFragment"
         android:label="fragment_sales_report"
         tools:layout="@layout/fragment_sales_report" />
 </navigation>

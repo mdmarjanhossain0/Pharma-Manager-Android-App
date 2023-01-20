@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Digital Pharmacy</string>
+    <string name="app_name">Pharma Manager</string>
     <string name="terms_and_condition">Agree to <font color="#2866B9">Terms &amp; Conditions</font></string>
 
     <string name="password_reset_email_sent">Password reset email sent</string>

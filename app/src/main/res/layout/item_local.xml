@@ -24,7 +24,7 @@
         android:weightSum="20"
         >
 
-        <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+        <com.appbytes.pharma_manager.presentation.util.SquareLinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
@@ -37,7 +37,7 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/paracetamol"
                 />
-        </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+        </com.appbytes.pharma_manager.presentation.util.SquareLinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -68,7 +68,6 @@
                 android:text="manufacture"
                 android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimaryVariant"
-                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="@+id/localBrandNameTV"
                 app:layout_constraintTop_toBottomOf="@+id/localBrandNameTV" />
 
@@ -124,7 +123,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             >
-            <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+            <com.appbytes.pharma_manager.presentation.util.SquareLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -153,9 +152,9 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     />
-            </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+            </com.appbytes.pharma_manager.presentation.util.SquareLinearLayout>
 
-            <com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout
+            <com.appbytes.pharma_manager.presentation.util.SquareLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
@@ -182,7 +181,7 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     />
-            </com.devscore.digital_pharmacy.presentation.util.SquareLinearLayout>
+            </com.appbytes.pharma_manager.presentation.util.SquareLinearLayout>
         </LinearLayout>
     </LinearLayout>
 

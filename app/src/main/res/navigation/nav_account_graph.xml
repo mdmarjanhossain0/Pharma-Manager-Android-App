@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.account.profie.AccountFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.account.profie.AccountFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/employeeListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.account.employee.EmployeeListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.account.employee.EmployeeListFragment"
         android:label="fragment_employee_list"
         tools:layout="@layout/fragment_employee_list" >
         <action
@@ -31,15 +31,15 @@
     </fragment>
     <fragment
         android:id="@+id/createEmployeeFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.account.createemployee.CreateEmployeeFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.account.createemployee.CreateEmployeeFragment"
         android:label="fragment_create_employee"
         tools:layout="@layout/fragment_create_employee" />
     <fragment
         android:id="@+id/accountUpdateFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.account.update.AccountUpdateFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.account.update.AccountUpdateFragment"
         android:label="AccountUpdateFragment" />
     <fragment
         android:id="@+id/employeeUpdateFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.main.account.updateemployee.EmployeeUpdateFragment"
+        android:name="com.appbytes.pharma_manager.presentation.main.account.updateemployee.EmployeeUpdateFragment"
         android:label="EmployeeUpdateFragment" />
 </navigation>

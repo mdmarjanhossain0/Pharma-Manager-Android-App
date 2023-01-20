@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/purchaseFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.PurchaseFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.PurchaseFragment"
         android:label="fragment_purchase"
         tools:layout="@layout/fragment_purchase" >
         <action
@@ -25,17 +25,17 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesOrdersFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.orderlist.PurchasesOrdersFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.orderlist.PurchasesOrdersFragment"
         android:label="fragment_purchase_generated"
         tools:layout="@layout/fragment_purchase_generated" />
     <fragment
         android:id="@+id/purchaseCompletedFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.ordercompleted.PurchaseCompletedFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.ordercompleted.PurchaseCompletedFragment"
         android:label="fragment_purchase_completed"
         tools:layout="@layout/fragment_purchase_completed" />
     <fragment
         android:id="@+id/purchasesInventoryFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.purchasesinventory.PurchasesInventoryFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.purchasesinventory.PurchasesInventoryFragment"
         android:label="fragment_purchases_inventory"
         tools:layout="@layout/fragment_purchases_inventory" >
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesCartFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.cart.PurchasesCartFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.cart.PurchasesCartFragment"
         android:label="fragment_purchase_new_order"
         tools:layout="@layout/fragment_purchase_new_order" >
         <action
@@ -59,7 +59,7 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesPaymentFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.payment.PurchasesPaymentFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.payment.PurchasesPaymentFragment"
         android:label="fragment_purchases_payment"
         tools:layout="@layout/fragment_purchases_payment" >
         <action
@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesSuplierListFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.supplierlist.PurchasesSupplierListFragment"
         android:label="fragment_purchases_suplier_list"
         tools:layout="@layout/fragment_purchases_suplier_list" >
         <action
@@ -86,12 +86,12 @@
     </fragment>
     <fragment
         android:id="@+id/createSupplierFragment2"
-        android:name="com.devscore.digital_pharmacy.presentation.supplier.createsupplier.CreateSupplierFragment"
+        android:name="com.appbytes.pharma_manager.presentation.supplier.createsupplier.CreateSupplierFragment"
         android:label="fragment_create_supplier"
         tools:layout="@layout/fragment_create_supplier" />
     <fragment
         android:id="@+id/purchasesReturnFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.purchasesreturn.PurchasesReturnFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.purchasesreturn.PurchasesReturnFragment"
         android:label="fragment_purchases_return"
         tools:layout="@layout/fragment_purchases_return" >
         <action
@@ -100,7 +100,7 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesReturnPayFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.returnpayment.PurchasesReturnPayFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.returnpayment.PurchasesReturnPayFragment"
         android:label="fragment_purchases_return_pay"
         tools:layout="@layout/fragment_purchases_return_pay" >
         <action
@@ -112,7 +112,7 @@
     </fragment>
     <fragment
         android:id="@+id/purchasesOrderDetailsFragment"
-        android:name="com.devscore.digital_pharmacy.presentation.purchases.details.PurchasesOrderDetailsFragment"
+        android:name="com.appbytes.pharma_manager.presentation.purchases.details.PurchasesOrderDetailsFragment"
         android:label="fragment_purchases_order_details"
         tools:layout="@layout/fragment_purchases_order_details" >
         <action

@@ -18,10 +18,9 @@
 
             <ImageView
                 android:id="@+id/logoImgId"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginStart="24dp"
-                android:src="@drawable/ic_logo_white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/pharma_manager_logo_tranparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -33,12 +32,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:gravity="center"
-                android:text="DIGITAL"
+                android:text="Pharma"
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/logoImgId" />
+                app:layout_constraintTop_toBottomOf="@+id/logoImgId"
+                android:visibility="gone"
+                />
 
             <TextView
                 android:id="@+id/appNameTv2Id"
@@ -46,12 +47,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
-                android:text="PHARMACY"
+                android:text="Manager"
                 android:textColor="@color/white"
                 android:textSize="32sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/appNameTv1Id" />
+                app:layout_constraintTop_toBottomOf="@+id/appNameTv1Id"
+                android:visibility="gone"
+                />
 
 
             <ImageView
@@ -70,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="100dp"
-                android:text="From CharBindu"
+                android:text="From AppBytes"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
